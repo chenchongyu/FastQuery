@@ -1,0 +1,65 @@
+<resources>
+    <string-array name="national">
+        <item>汉族</item>
+        <item>维吾尔族族</item>
+        <item>蒙古族</item>
+        <item>朝鲜族</item>
+        <item>壮族</item>
+        <item>满族</item>
+        <item>藏族</item>
+        <item>回族</item>
+        <item>苗族</item>
+        <item>彝族</item>
+    </string-array>
+
+    <!-- 设置input button是否圆角 -->
+    <string name="corners">true</string>
+    <!-- end -->
+    <string name="app_name">快查</string>
+    <string name="back">返回</string>
+    <string name="login_btn">登     录</string>
+    <string name="regit_btn">注     册</string>
+    <string name="password">密码</string>
+    <string name="name">姓名:</string>
+    <string name="mobile">手机号:</string>
+    <string name="email">邮箱:</string>
+    <string name="save">保存</string>
+    <string name="edit">编辑</string>
+    <string name="finish">完成</string>
+    <string name="menu_settings">设置</string>
+
+    <!-- 提示信息 -->
+    <string name="message_invalid_username_password">错误的用户名或密码</string>
+    <string name="message_server_unavailable">无法连接到服务器</string>
+    <string name="unrecoverable_error">发生未知异常,连接失败</string>
+    <string name="login_success">登陆成功</string>
+
+    <string name="loading">拼命加载中...</string>
+    <string name="update_at">更新于</string>
+    <string name="dialog_title">提示</string>
+    <!-- 网络和内存卡提示 -->
+    <string name="close">关闭</string>
+    <string name="exit">退出</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+
+    <!-- 数据库和文件路径 -->
+    <string name="dir">/eim</string>
+    <string name="app_dir">/app</string>
+    <string name="db_dir">/database</string>
+    <string name="img_dir">/img</string>
+
+    <!-- 页面信息 -->
+    <string name="telphone">手机号</string>
+    <string name="username">用户名</string>
+    <string name="card_info">请输入身份证号</string>
+    <string name="username_empty_info">用户名不能为空</string>
+    <string name="telphone_empty_info">手机号不能为空</string>
+    <string name="telphone_error_info">手机号格式错误</string>
+    <string name="password_info">请输入密码</string>
+    <string name="password_error_info">密码不能为空</string>
+    <string name="search">搜索：</string>
+
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+
+</resources>

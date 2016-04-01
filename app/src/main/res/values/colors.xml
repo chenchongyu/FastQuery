@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--  bootstrap 样式按钮  -->
+    <color name="btn_primary">#428bca</color>
+    <color name="btn_success">#449d44</color>
+    <color name="btn_info">#31b0d5</color>
+    <color name="btn_warn">#ec971f</color>
+    <color name="btn_danger">#c9302c</color>
+    <color name="btn_gray">#efefef</color>
+    <color name="btn_dark_gray">#adadad</color>
+
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+</resources>
