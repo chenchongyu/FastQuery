@@ -5,55 +5,56 @@
     android:background="#fff"
     android:padding="20dp"
     android:orientation="vertical" >
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView android:id="@+id/v_weather_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icon_sunshine"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+        <TextView android:id="@+id/v_weather_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="晴"
+            android:textSize="20sp"/>
+        <TextView android:id="@+id/v_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="20~30"/>
+        <TextView android:id="@+id/v_pm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/v_temperature"
+            android:textStyle="bold"
+            android:text="pm2.5:100"
+            />
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText android:id="@+id/v_no"
+        <TextView android:id="@+id/v_city"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:layout_marginRight="5dp"
-            android:hint="输入快递单号"
-            android:text="350464466872"
-            />
-        <Button android:id="@+id/v_query"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:background="@color/btn_success"
-            android:textColor="@android:color/white"
             android:layout_weight="1"
-            android:text="查询"
-            android:textSize="18sp"
-            />
-        <ImageView android:id="@+id/v_scan"
-            android:layout_width="wrap_content"
+            android:text="北京"/>
+
+        <TextView android:id="@+id/v_date"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/icon_scan"
-            />
+            android:text="04/01 星期五"/>
     </LinearLayout>
 
-    <LinearLayout
+    <GridView android:id="@+id/v_table"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp">
-        <ImageView android:id="@+id/v_logo"
-            android:layout_width="35dp"
-            android:layout_height="35dp" />
-        <TextView android:id="@+id/v_result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            />
-    </LinearLayout>
+        android:layout_height="wrap_content"></GridView>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/v_infos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:scrollbars="vertical"
-        />
 </LinearLayout>

@@ -32,7 +32,7 @@ import com.zxing.camera.CameraManager;
 import com.zxing.camera.PlanarYUVLuminanceSource;
 
 import net.runningcode.R;
-import net.runningcode.activity.CaptureActivity;
+import net.runningcode.express.CaptureActivity;
 
 import java.util.Hashtable;
 

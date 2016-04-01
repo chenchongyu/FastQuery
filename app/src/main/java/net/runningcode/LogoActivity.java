@@ -1,11 +1,9 @@
-package net.runningcode.activity;
+package net.runningcode;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import net.runningcode.BasicActivity;
-import net.runningcode.R;
 import net.runningcode.constant.Constants;
 import net.runningcode.utils.SPUtils;
 

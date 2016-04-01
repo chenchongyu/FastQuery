@@ -1,4 +1,4 @@
-package net.runningcode.adapter;
+package net.runningcode.express;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

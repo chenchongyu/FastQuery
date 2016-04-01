@@ -1,4 +1,4 @@
-package net.runningcode.activity;
+package net.runningcode.express;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,6 @@ import com.yolanda.nohttp.Response;
 
 import net.runningcode.BasicActivity;
 import net.runningcode.R;
-import net.runningcode.adapter.ExpressListAdapter;
 import net.runningcode.constant.URLConstant;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
@@ -31,7 +30,7 @@ import net.runningcode.utils.L;
 /**
  * Created by Administrator on 2016/1/15.
  */
-public class IndexActivity extends BasicActivity implements View.OnClickListener, HttpListener<JSON> {
+public class ExpressActivity extends BasicActivity implements View.OnClickListener, HttpListener<JSON> {
     private static final int SCANNIN_GREQUEST_CODE = 1;
     private EditText vExpressNo;
     private TextView vResult;
@@ -128,7 +127,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
 
     @Override
     public int getContentViewID() {
-        return R.layout.activity_index;
+        return R.layout.activity_express;
     }
 
 

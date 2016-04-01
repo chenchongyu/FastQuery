@@ -20,7 +20,7 @@
         android:name=".RunningCodeApplication"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.LogoActivity"
+            android:name=".LogoActivity"
              >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +28,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.IndexActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.CaptureActivity" android:screenOrientation="portrait" />
+        <activity android:name=".IndexActivity" android:screenOrientation="portrait" />
+        <activity android:name=".express.ExpressActivity" android:screenOrientation="portrait" />
+        <activity android:name=".express.CaptureActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

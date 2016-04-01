@@ -30,7 +30,7 @@ import com.google.zxing.Result;
 import com.zxing.view.ViewfinderResultPointCallback;
 
 import net.runningcode.R;
-import net.runningcode.activity.CaptureActivity;
+import net.runningcode.express.CaptureActivity;
 
 import java.util.Vector;
 

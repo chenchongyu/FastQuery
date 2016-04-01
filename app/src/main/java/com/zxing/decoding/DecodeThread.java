@@ -23,7 +23,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
 
-import net.runningcode.activity.CaptureActivity;
+import net.runningcode.express.CaptureActivity;
 
 import java.util.Hashtable;
 import java.util.Vector;
