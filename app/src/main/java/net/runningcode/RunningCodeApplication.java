@@ -64,6 +64,7 @@ public class RunningCodeApplication extends Application {
         Logger.setTag("NoHttpSample");
         Logger.setDebug(true);// 开始NoHttp的调试模式, 这样就能看到请求过程和日志
         CRASH_LOG = PathUtil.getInstance().getCacheRootPath("log") + "/rc_crash.log";
+//        AutoLayoutConifg.getInstance().useDeviceSize();
 //        RcExceptionHandler handler = new RcExceptionHandler();
 //        Thread.setDefaultUncaughtExceptionHandler(handler);
 //        Thread.currentThread().setUncaughtExceptionHandler(handler);

@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.zhy.autolayout.AutoLayoutActivity;
 
 
-public abstract class BasicActivity extends AppCompatActivity {
+public abstract class BasicActivity extends AutoLayoutActivity {
 	public static final String ACTION_EXIT = RunningCodeApplication.getInstance().getPackageName() + ".EXIT";
 	public TextView baseTitle;//返回
 	public LinearLayout baseHome;

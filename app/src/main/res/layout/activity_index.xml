@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:padding="20dp"
-    android:orientation="vertical" >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView android:id="@+id/v_weather_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/icon_sunshine"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
-        <TextView android:id="@+id/v_weather_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="晴"
-            android:textSize="20sp"/>
-        <TextView android:id="@+id/v_temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="20~30"/>
-        <TextView android:id="@+id/v_pm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/v_temperature"
-            android:textStyle="bold"
-            android:text="pm2.5:100"
-            />
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
+    android:padding="20px"
+    >
+    <ImageView android:id="@+id/v_weather_icon"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:src="@drawable/icon_sunshine"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
+    <TextView android:id="@+id/v_weather_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView android:id="@+id/v_city"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="北京"/>
+        android:layout_alignTop="@+id/v_weather_icon"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="晴"
+        android:textSize="40px"
+        android:layout_above="@+id/v_date" />
+    <TextView android:id="@+id/v_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:textSize="40px"
+        android:text="20~30"/>
 
-        <TextView android:id="@+id/v_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="04/01 星期五"/>
-    </LinearLayout>
+    <TextView android:id="@+id/v_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/v_weather_icon"
+        android:gravity="center"
+        android:paddingLeft="20px"
+        android:text="北京"
+        />
+    <TextView android:id="@+id/v_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="04/01 星期五"
+        android:layout_below="@+id/v_temperature"
+        android:layout_alignRight="@+id/v_temperature"
+        android:layout_alignEnd="@+id/v_temperature" />
+
 
     <GridView android:id="@+id/v_table"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></GridView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:paddingTop="10px"
+        android:paddingBottom="10px"
+        android:numColumns="4"
+        android:background="@color/btn_gray"
+        android:layout_below="@+id/v_city"></GridView>
 
-</LinearLayout>
+
+</RelativeLayout>

@@ -15,3 +15,14 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn org.apache.**
+-dontwarn android.**
+-dontwarn android.support.v4.**
+-dontwarn com.alibaba.fastjson.**
+-dontwarn java.nio.file.Files
+-dontwarn java.nio.file.Path
+-dontwarn java.nio.file.OpenOption
+
+-keep class com.amap.api.location.**{*;}
+-keep class com.amap.api.fence.**{*;}
+-keep class com.autonavi.aps.amapapi.model.**{*;}
