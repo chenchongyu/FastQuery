@@ -26,7 +26,9 @@ import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.RestRequest;
 import com.yolanda.nohttp.StringRequest;
 
+import net.runningcode.constant.Constants;
 import net.runningcode.constant.URLConstant;
+import net.runningcode.utils.L;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +45,7 @@ public class FastJsonRequest extends RestRequest<JSON> {
     public FastJsonRequest(String url) {
         super(url);
         what = URLConstant.getWhat(url);
+        addHeader("apikey", Constants.BAIDU_API_KEY);
     }
 
     public FastJsonRequest(String url, RequestMethod requestMethod) {
@@ -53,9 +56,9 @@ public class FastJsonRequest extends RestRequest<JSON> {
     @Override
     public JSON parseResponse(String url, Headers responseHeaders, byte[] responseBody) {
         String result = StringRequest.parseResponseString(url, responseHeaders, responseBody);
-
+        L.i("result:"+result);
         JSON jsonObject = null;
-        if (!TextUtils.isEmpty(result)) {
+        if (!TextUtils.isEmpty(result) && !"[]".equals(result)) {
             if (result.startsWith("[{")){
                 jsonObject = JSONArray.parseArray(result);
             }else

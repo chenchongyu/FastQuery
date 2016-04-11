@@ -27,7 +27,7 @@ import com.yolanda.nohttp.Response;
  *
  * @author YOLANDA
  */
-public class HttpResponseListener<T> implements OnResponseListener<T> {
+class HttpResponseListener<T> implements OnResponseListener<T> {
 
     /**
      * Dialog

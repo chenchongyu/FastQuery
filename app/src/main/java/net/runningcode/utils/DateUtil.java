@@ -101,62 +101,26 @@ public class DateUtil {
 				+ ":" + c.get(Calendar.SECOND);
 	}
 
-	/**
-	 * ��õ�ǰ���ڵ��ַ��ʽ
-	 * 
-	 * @param format
-	 * @return
-	 */
+
 	public static String getCurDateStr(String format) {
 		Calendar c = Calendar.getInstance();
 		return date2Str(c, format);
 	}
 
-	// ��ʽ����
 	public static String getMillon(long time) {
-
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time);
 
 	}
-
-	// ��ʽ����
 	public static String getDay(long time) {
 
 		return new SimpleDateFormat("yyyy-MM-dd").format(time);
 
 	}
 
-	// ��ʽ������
 	public static String getSMillon(long time) {
 
 		return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS").format(time);
 
-	}
-	
-	/**
-	 * ��ʽ��ʱ��
-	 * 
-	 * @param formatTime
-	 * @return
-	 */
-	public static String formatTime(String formatTime) {
-		try {
-			Date date = null;
-			try {
-				SimpleDateFormat df = new SimpleDateFormat(
-						"yyyy-MM-dd-HH-mm-ss");
-				date = df.parse(formatTime);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return customDate(date.getTime());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "";
 	}
 
 	private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -165,41 +129,7 @@ public class DateUtil {
 	private final static SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm");
 	private final static SimpleDateFormat dateFormat3 = new SimpleDateFormat("MM月dd日");
 
-	public static String customDate(long million) {
-		StringBuffer dateString = new StringBuffer("");
-		Date startDate = new Date(million);
 
-		Date now = new Date();
-		if (startDate.getTime() < now.getTime()) {
-			int calBetweenDay = 0;
-			try {
-				calBetweenDay = daysBetween(startDate, now);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-
-			if (calBetweenDay == 0) {
-				dateString.append("���� ").append(dateFormat2.format(startDate));
-			} else if (calBetweenDay == 1) {
-				dateString.append("���� ").append(dateFormat2.format(startDate));
-			} else if (calBetweenDay == 2) {
-				dateString.append("ǰ�� ").append(dateFormat2.format(startDate));
-			} else if (calBetweenDay > 2 && calBetweenDay <= 7) {
-				dateString.append(calBetweenDay + "��ǰ "
-						+ dateFormat2.format(startDate));
-			} else if (calBetweenDay > 7
-					&& now.getYear() == startDate.getYear()) {
-				dateString.append(dateFormat3.format(startDate)).append(" ")
-						.append(dateFormat2.format(startDate));
-			} else {
-				dateString.append(dateFormat1.format(startDate));
-			}
-		} else {
-			dateString.append(dateFormat1.format(startDate));
-		}
-
-		return dateString.toString();
-	}
 	
 	public static int daysBetween(Date smdate, Date bdate)
 			throws ParseException {
@@ -234,6 +164,14 @@ public class DateUtil {
 		return new Timestamp(System.currentTimeMillis());
 	}
 
+	/**
+	 * 获取当前日期和星期
+	 * 格式：04/23 星期二
+	 * @return
+	 */
+	public static String getCurrentMDE(){
+		return new SimpleDateFormat("MM/dd EEEE").format(System.currentTimeMillis());
+	}
 	/**
 	 * 获取当前时间的字符串
 	 * 
@@ -674,6 +612,21 @@ public class DateUtil {
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(new Date());
 		return cal1.get(Calendar.DAY_OF_WEEK);
+	}
+
+	public static String getWeekStr(){
+		StringBuilder week = new StringBuilder("星期");
+		int day = getMonOfWeek();
+
+		switch (day){
+			case 2:return week.append("一").toString();
+			case 3:return week.append("二").toString();
+			case 4:return week.append("三").toString();
+			case 5:return week.append("四").toString();
+			case 6:return week.append("五").toString();
+			case 7:return week.append("六").toString();
+			default:return week.append("日").toString();
+		}
 	}
 
 	public static void main(String[] args) {

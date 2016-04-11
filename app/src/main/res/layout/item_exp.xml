@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="28px"
+    android:paddingBottom="28px"
+    android:background="@drawable/ripple_gray"
+    android:drawableRight="@drawable/icon_up_arrow"
+    android:textSize="24px"
+    android:textColor="@color/text_gray"
+    android:text="快递查询"/>

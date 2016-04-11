@@ -3,51 +3,110 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:padding="20dp"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout android:id="@+id/reveal_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="45px"
         android:orientation="horizontal">
-        <EditText android:id="@+id/v_no"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:layout_marginRight="5dp"
-            android:hint="输入快递单号"
-            android:text="350464466872"
-            />
-        <Button android:id="@+id/v_query"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:background="@color/btn_success"
-            android:textColor="@android:color/white"
-            android:layout_weight="1"
-            android:text="查询"
-            android:textSize="18sp"
-            />
         <ImageView android:id="@+id/v_scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="58px"
             android:src="@drawable/icon_scan"
             />
-    </LinearLayout>
+        <EditText android:id="@+id/v_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24px"
+            android:hint="请输入快递单号"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimaryGreen"
+            android:textSize="28px"
+            android:text="350464466871"
+            android:background="@drawable/bg_no_border"
+            android:textCursorDrawable="@null"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/v_scan"
+            android:layout_marginStart="22px" />
+        <ImageView android:id="@+id/v_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24px"
+            android:src="@drawable/icon_clear"
+            android:layout_toStartOf="@+id/view"
+            android:visibility="gone"
+            />
+        <View
+            android:layout_width="1px"
+            android:layout_height="30px"
+            android:layout_marginRight="24px"
+            android:layout_toStartOf="@+id/v_query"
+            android:background="#cdccd1"
+            android:id="@+id/view"
+            android:visibility="gone"/>
+        <ImageView android:id="@+id/v_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:src="@drawable/icon_query"
+            android:layout_alignBottom="@+id/v_clear"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="22dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp">
-        <ImageView android:id="@+id/v_logo"
-            android:layout_width="35dp"
-            android:layout_height="35dp" />
-        <TextView android:id="@+id/v_result"
+        <ListView
+            android:id="@+id/v_nos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
+            android:layout_below="@id/v_no"
+            android:layout_alignLeft="@id/v_no"
+            android:layout_alignRight="@id/v_query"
+            android:divider="@color/bg_gray_dark"
+            android:dividerHeight="3px"
+            android:visibility="gone"
+            ></ListView>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:layout_marginLeft="128px"
+        android:layout_marginRight="36px"
+        android:background="@color/bg_gray_dark"/>
+
+    <RelativeLayout
+        android:id="@+id/v_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="32px"
+        android:paddingTop="34px"
+        android:paddingBottom="34px"
+        android:layout_marginTop="24px"
+        android:background="#f2f2f2"
+        android:visibility="gone"
+        >
+        <ImageView android:id="@+id/v_logo"
+            android:layout_width="84px"
+            android:layout_height="84px"
+            android:layout_marginRight="40px"/>
+        <TextView android:id="@+id/v_express_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/v_logo"
+            android:textColor="@color/black"
+            android:textSize="36px"
             />
-    </LinearLayout>
+        <TextView android:id="@+id/v_express_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/v_logo"
+            android:layout_below="@id/v_express_name"
+            android:layout_marginTop="26px"
+            android:textColor="@color/black"
+            android:textSize="36px"
+            />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/v_infos"

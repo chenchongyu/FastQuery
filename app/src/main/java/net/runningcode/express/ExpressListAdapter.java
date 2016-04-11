@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -35,11 +36,17 @@ public class ExpressListAdapter extends RecyclerView.Adapter<ExpressListAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         JSONObject item = (JSONObject)list.get(position);
         if (position == 0){
-            holder.vNew.setVisibility(View.VISIBLE);
-            holder.vTime.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
-            holder.vDesc.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+            holder.vTime.setTextColor(context.getResources().getColor(R.color.express_red));
+            holder.vDesc.setTextColor(context.getResources().getColor(R.color.express_red));
+            holder.vUpLine.setVisibility(View.INVISIBLE);
+            holder.vDownLine.setVisibility(View.VISIBLE);
+            holder.vType.setImageResource(R.drawable.icon_right);
         }else{
-            holder.vNew.setVisibility(View.INVISIBLE);
+            if (position == list.size() -1){
+                holder.vUpLine.setVisibility(View.VISIBLE);
+                holder.vDownLine.setVisibility(View.INVISIBLE);
+            }
+            holder.vType.setImageResource(R.drawable.icon_time);
             holder.vTime.setTextColor(context.getResources().getColor(R.color.black_de));
             holder.vDesc.setTextColor(context.getResources().getColor(R.color.black_de));
         }
@@ -57,12 +64,17 @@ public class ExpressListAdapter extends RecyclerView.Adapter<ExpressListAdapter.
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView vNew,vTime,vDesc;
+        public TextView vTime,vDesc;
+        public ImageView vType;
+        public View vUpLine,vDownLine;
         public ViewHolder(View v) {
             super(v);
-            vNew = (TextView) v.findViewById(R.id.v_new);
             vTime = (TextView) v.findViewById(R.id.v_time);
             vDesc = (TextView) v.findViewById(R.id.v_desc);
+            vType = (ImageView) v.findViewById(R.id.v_type);
+            vUpLine = v.findViewById(R.id.v_line_up);
+            vDownLine = v.findViewById(R.id.v_line_down);
+
         }
     }
 

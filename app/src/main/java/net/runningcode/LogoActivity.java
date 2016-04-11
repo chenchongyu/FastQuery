@@ -15,7 +15,7 @@ public class LogoActivity extends BasicActivity{
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        String isLogin = SPUtils.getString(this, Constants.KEY_USER_NAME,"");
+        String isLogin = SPUtils.getInstance(null).getString(Constants.KEY_USER_NAME,"");
         if (TextUtils.isEmpty(isLogin)){
             startActivity(new Intent(this,IndexActivity.class));
         }

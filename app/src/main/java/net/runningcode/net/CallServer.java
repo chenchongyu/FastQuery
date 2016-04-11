@@ -18,7 +18,6 @@ package net.runningcode.net;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.Request;
 import com.yolanda.nohttp.RequestQueue;
@@ -83,14 +82,13 @@ public class CallServer {
      * 添加一个FastJson请求到请求队列
      *
      * @param context   context用来实例化dialog
-     * @param what      用来标志请求, 当多个请求使用同一个{@link HttpListener}时, 在回调方法中会返回这个what
      * @param request   请求对象
      * @param callback  结果回调对象
      * @param canCancel 是否允许用户取消请求
      * @param isLoading 是否显示dialog
      */
     public <T> void add(Context context, FastJsonRequest request, HttpListener<JSON> callback, boolean canCancel, boolean isLoading) {
-        requestQueue.add(request.what, request, new HttpResponseListener<JSON>(context, request, callback, canCancel, isLoading));
+        requestQueue.add(request.what, request, new HttpResponseListener(context, request, callback, canCancel, isLoading));
     }
 
     /**

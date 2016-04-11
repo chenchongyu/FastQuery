@@ -9,11 +9,6 @@ import android.os.StatFs;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 
 import java.io.File;
@@ -198,61 +193,6 @@ public class CommonUtil {
 		return (int) (pxValue / scale + 0.5f);
 	}
 
-	public interface OnAnimationFinishListener{
-		void onFinished();
-	}
-
-	public static TranslateAnimation getTranslateAnimation(float x,float toX,float y,float toY, final OnAnimationFinishListener animationFinishListener){
-		TranslateAnimation translateAnimation = new TranslateAnimation(x,toX,y,toY);
-		translateAnimation.setDuration(800);
-		translateAnimation.setFillAfter(true);
-		translateAnimation.setInterpolator(new AccelerateInterpolator());
-		translateAnimation.setAnimationListener(new Animation.AnimationListener() {
-			@Override
-			public void onAnimationStart(Animation animation) {
-			}
-
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				animationFinishListener.onFinished();
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-			}
-		});
-		return translateAnimation;
-	}
-
-	public static AnimationSet getParabolaAnimation(float x,float toX,float y,float toY, final OnAnimationFinishListener animationFinishListener){
-		AnimationSet set=new AnimationSet(false);
-		TranslateAnimation translateAnimationX=new TranslateAnimation(x, toX, 0, 0);
-		translateAnimationX.setInterpolator(new LinearInterpolator());
-
-		TranslateAnimation translateAnimationY=new TranslateAnimation(0, 0, y, toY);
-		translateAnimationY.setInterpolator(new AccelerateInterpolator());
-
-		set.addAnimation(translateAnimationY);
-		set.addAnimation(translateAnimationX);
-		set.setDuration(500);
-		set.setAnimationListener(new Animation.AnimationListener() {
-			@Override
-			public void onAnimationStart(Animation animation) {
-			}
-
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				animationFinishListener.onFinished();
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-			}
-		});
-
-		return set;
-	}
-
 	public static String getLocalIpAddress() {
 		try {
 			for (Enumeration en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
@@ -270,6 +210,10 @@ public class CommonUtil {
 			Log.e("here", ex.toString());
 		}
 		return null;
+	}
+
+	public static boolean isPhoneNum(String num) {
+		return num.matches("^(13|15|18)\\d{9}$");
 	}
 }
 

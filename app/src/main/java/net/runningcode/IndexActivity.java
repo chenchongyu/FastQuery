@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -21,12 +20,12 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.yolanda.nohttp.Response;
 
-import net.runningcode.constant.Constants;
 import net.runningcode.constant.URLConstant;
 import net.runningcode.express.ExpressActivity;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
+import net.runningcode.phone.PhoneActivity;
 import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DateUtil;
 import net.runningcode.utils.DialogUtils;
@@ -40,10 +39,9 @@ import java.util.List;
  */
 public class IndexActivity extends BasicActivity implements View.OnClickListener, HttpListener<JSON>,
         AdapterView.OnItemClickListener,AMapLocationListener {
-    private TextView vWeather,vTemperature,vPm,vCity,vDate;
-    private ImageView vIcon;
+    private TextView vWeather,vTemperature,vCity,vDate;
+    private ImageView vWeatherIcon,vWeatherBg;
     private GridView vTable;
-    private JSONArray coms;
     private SparseArray<String> map;
     private List<Integer> list;
     ItemsAdapter adapter ;
@@ -60,39 +58,39 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         initView();
     }
 
-    @Override
-    protected boolean showActionbar() {
-        return true;
-    }
-
     private void initView() {
+        toolbar.setNavigationIcon(null);
+
         vWeather = $(R.id.v_weather_text);
-        vIcon = $(R.id.v_weather_icon);
+        vWeatherIcon = $(R.id.v_weather_icon);
         vTemperature = $(R.id.v_temperature);
-//        vPm = $(R.id.v_pm);
+        vWeatherBg = $(R.id.v_weather_bg);
         vCity = $(R.id.v_city);
         vDate = $(R.id.v_date);
         vTable = $(R.id.v_table);
         vTable.setOnItemClickListener(this);
 
+        setTitle(R.string.app_name);
         initData();
-//        setActionBarColor(R.color.colorPrimary);
+//        setToolBarColor(R.color.colorPrimary);
 //        setStatusBarColor(R.color.colorPrimaryDark);
     }
 
     private void initData() {
         initPosition();
 
-        vDate.setText(DateUtil.getCurDateStr());
+        vDate.setText(DateUtil.getCurrentMDE());
         map = new SparseArray<>();
-        map.put(R.drawable.icon_express,"快递查询");
-        map.put(R.drawable.icon_car,"汽车摇号");
+        map.put(R.drawable.icon_phone,"手机归属地");
         map.put(R.drawable.icon_ip,"IP查询");
+        map.put(R.drawable.icon_weather,"天气预报");
+        map.put(R.drawable.icon_express,"快递查询");
 
-        list = new ArrayList<>(3);
-        list.add(R.drawable.icon_express);
-        list.add(R.drawable.icon_car);
+        list = new ArrayList<>(4);
+        list.add(R.drawable.icon_phone);
         list.add(R.drawable.icon_ip);
+        list.add(R.drawable.icon_weather);
+        list.add(R.drawable.icon_express);
 
         adapter = new ItemsAdapter(list);
         vTable.setAdapter(adapter);
@@ -128,14 +126,12 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     private void getIp() {
         L.i("IP:"+CommonUtil.getLocalIpAddress());
         FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_IP_INFO);
-        request.addHeader("apikey", Constants.BAIDU_API_KEY);
         request.add("ip", CommonUtil.getLocalIpAddress());
         CallServer.getRequestInstance().add(this, request, this, true, true);
     }
 
     private void getWeather() {
         FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_WEATHER);
-        request.addHeader("apikey", Constants.BAIDU_API_KEY);
         request.add("cityname", city);
 
         CallServer.getRequestInstance().add(this, request, this, true, true);
@@ -194,7 +190,10 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         int icon = list.get(position);
         switch (icon){
             case R.drawable.icon_express:
-                startActivity(new Intent(this, ExpressActivity.class));
+                startActivity(new Intent(this, ExpressActivity.class),view);
+                break;
+            case R.drawable.icon_phone:
+                startActivity(new Intent(this, PhoneActivity.class),view);
                 break;
             case R.drawable.icon_ip:
                 startActivity(new Intent(this, ExpressActivity.class));

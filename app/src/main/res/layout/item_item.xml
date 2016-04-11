@@ -4,14 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@drawable/ripple_gray"
+    android:paddingTop="20px"
+    android:paddingBottom="18px"
     >
     <ImageView android:id="@+id/v_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/icon_express"/>
     <TextView
         android:id="@+id/v_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="24px"
+        android:textSize="24px"
+        android:textColor="@color/text_gray"
         android:text="快递查询"/>
 </LinearLayout>
