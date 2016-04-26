@@ -5,15 +5,12 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Process;
 import android.text.TextUtils;
 
 import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 
-import net.runningcode.dao.DaoMaster;
-import net.runningcode.dao.DaoSession;
 import net.runningcode.utils.DateUtil;
 import net.runningcode.utils.L;
 import net.runningcode.utils.PathUtil;
@@ -27,7 +24,7 @@ public class RunningCodeApplication extends Application {
     private static String CRASH_LOG = "";
     private static RunningCodeApplication sInstance;
     private boolean mRunInServiceProcess = false;
-    private DaoSession daoSession;
+
 
     public static RunningCodeApplication getInstance(){
         return sInstance;
@@ -68,28 +65,12 @@ public class RunningCodeApplication extends Application {
         Logger.setTag("NoHttpSample");
         Logger.setDebug(true);// 开始NoHttp的调试模式, 这样就能看到请求过程和日志
         CRASH_LOG = PathUtil.getInstance().getCacheRootPath("log") + "/rc_crash.log";
-        initDb();
 //        AutoLayoutConifg.getInstance().useDeviceSize();
 //        RcExceptionHandler handler = new RcExceptionHandler();
 //        Thread.setDefaultUncaughtExceptionHandler(handler);
 //        Thread.currentThread().setUncaughtExceptionHandler(handler);
     }
 
-    private void initDb() {
-        DaoMaster.OpenHelper openHelper = new DaoMaster.OpenHelper(this, "quick-query", null) {
-            @Override
-            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-            }
-        };
-
-        DaoMaster daoMaster = new DaoMaster(openHelper.getWritableDatabase());
-        daoSession = daoMaster.newSession();
-    }
-
-    public DaoSession getDaoSession(){
-        return daoSession;
-    }
 
     @Override
     public void onTerminate() {

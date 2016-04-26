@@ -7,9 +7,12 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.os.StatFs;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import net.runningcode.R;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -97,13 +100,7 @@ public class CommonUtil {
 		                .getSystemService(Context.TELEPHONY_SERVICE);
 		     return tm.getDeviceId();
 		}
-		
-		 public static int getDepth(String path) {
-		        if (path == null) {
-		            return 0;
-		        }
-		        return Math.max(0, path.split("/").length - 1);
-		    }
+
 		 public static boolean hideInputMethod(Context context, View view) {
 	        if (context == null || view == null) {
 	            return false;
@@ -214,6 +211,31 @@ public class CommonUtil {
 
 	public static boolean isPhoneNum(String num) {
 		return num.matches("^(13|15|18)\\d{9}$");
+	}
+
+	public static int getDrawbleByWeather(String weather){
+		if (TextUtils.equals(weather,"阴")){
+			return R.drawable.icon_overcast;
+		}else if (TextUtils.equals(weather,"小雨")){
+			return R.drawable.icon_rain_light;
+		}if (TextUtils.equals(weather,"中雨")){
+			return R.drawable.icon_rain_moderate;
+		}if (TextUtils.equals(weather,"大雨")){
+			return R.drawable.icon_rain_heavy;
+		}if (weather.contains("雪")){
+			return R.drawable.icon_snow;
+		}else
+			return R.drawable.icon_sunny;
+	}
+
+	public static int getDrawbleByPhone(String supplier){
+		if (TextUtils.equals(supplier,"联通")){
+			return R.drawable.icon_unicom;
+		}else if (TextUtils.equals(supplier,"电信")){
+			return R.drawable.icon_telecom;
+		}else {
+			return R.drawable.icon_mobile;
+		}
 	}
 }
 

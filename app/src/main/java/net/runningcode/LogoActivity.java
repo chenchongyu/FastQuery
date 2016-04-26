@@ -2,10 +2,9 @@ package net.runningcode;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 
-import net.runningcode.constant.Constants;
-import net.runningcode.utils.SPUtils;
+import net.runningcode.utils.L;
+import net.runningcode.utils.ThreadPool;
 
 /**
  * Created by Administrator on 2016/1/15.
@@ -15,11 +14,27 @@ public class LogoActivity extends BasicActivity{
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        String isLogin = SPUtils.getInstance(null).getString(Constants.KEY_USER_NAME,"");
-        if (TextUtils.isEmpty(isLogin)){
-            startActivity(new Intent(this,IndexActivity.class));
-        }
-        finish();
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                L.i("from logo to Index.");
+//                startActivity(new Intent(LogoActivity.this,IndexActivity.class));
+////                finish();
+//            }
+//        },3000);
+        ThreadPool.submitDelay(new Runnable() {
+            @Override
+            public void run() {
+                L.i("from logo to Index in ThreadPool.");
+                startActivity(new Intent(LogoActivity.this,IndexActivity.class));
+                finish();
+            }
+        },3);
+
+//        startActivity(new Intent(this,IndexActivity.class));
+//        finish();
+
     }
 
     @Override

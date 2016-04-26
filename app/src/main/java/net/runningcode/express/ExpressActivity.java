@@ -26,9 +26,9 @@ import com.yolanda.nohttp.Response;
 
 import net.runningcode.BasicActivity;
 import net.runningcode.R;
-import net.runningcode.RunningCodeApplication;
 import net.runningcode.bean.Express;
 import net.runningcode.constant.URLConstant;
+import net.runningcode.dao.Dao;
 import net.runningcode.dao.ExpressDao;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
@@ -68,7 +68,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         initView();
     }
     private void initView() {
-        dao = RunningCodeApplication.getInstance().getDaoSession().getExpressDao();
+        dao = Dao.getInstance().getExpressDao();
 
         shareTarget.setBackgroundResource(R.drawable.icon_express);
         shareTarget.setVisibility(View.VISIBLE);

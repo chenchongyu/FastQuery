@@ -170,8 +170,13 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
                     return;
                 }
                 JSONObject weather = result.getJSONObject("retData");
-                vTemperature.setText(weather.getString("l_tmp")+"~"+weather.getString("h_tmp"));
-                vWeather.setText(weather.getString("weather"));
+                final String du = getString(R.string.du);
+                final String text = weather.getString("l_tmp") + du + "c" + "~" + weather.getString("h_tmp") + du + "c";
+                vTemperature.setText(text);
+                final String weatherString = weather.getString("weather");
+                vWeather.setText(weatherString);
+                int drawble = CommonUtil.getDrawbleByWeather(weatherString);
+                vWeatherIcon.setImageResource(drawble);
                 break;
             case URLConstant.API_GET_IP_WHAT:
                 getWeather();
@@ -196,8 +201,8 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
                 startActivity(new Intent(this, PhoneActivity.class),view);
                 break;
             case R.drawable.icon_ip:
-                startActivity(new Intent(this, ExpressActivity.class));
-                break;
+//                startActivity(new Intent(this, ExpressActivity.class));
+//                break;
             default:
                 DialogUtils.showShortToast(this,"敬请期待");
                 break;

@@ -2,9 +2,11 @@ package net.runningcode.phone;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,6 +50,16 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
         vQuery = $(R.id.v_query);
 
         vQuery.setOnClickListener(this);
+        vPhone.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    queryNo();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     protected void setupWindowAnimations() {
@@ -88,7 +100,9 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
         vPhoneNo.setText(data.getString("phone"));
         String s = TextUtils.equals(data.getString("province"),data.getString("city"))?data.getString("city")
                 :data.getString("province")+data.getString("city");
-        vResult.setText(s+data.getString("supplier"));
+        final String supplier = data.getString("supplier");
+        vResult.setText(s+ supplier);
+        vIcon.setImageResource(CommonUtil.getDrawbleByPhone(supplier));
     }
 
     @Override

@@ -110,7 +110,6 @@ public class PathUtil {
         }
         return Math.max(0, path.split("/").length - 1);
     }
-    
     /**
 	 * * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) * *
 	 * 

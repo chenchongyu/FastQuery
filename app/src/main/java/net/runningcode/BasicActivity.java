@@ -104,9 +104,9 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 
 	@Override
 	public void setContentView(View view) {
-		LinearLayout root = (LinearLayout) findViewById(R.id.v_root);
+		ViewGroup root = (ViewGroup) findViewById(R.id.v_root);
 		if(root == null) return;
-		root.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+		root.addView(view,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 	}
 
 	/***
@@ -252,10 +252,10 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 
 	@Override
 	public void startActivity(Intent intent) {
-//		super.startActivity(intent);
-		final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, true);
-		ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
-		startActivity(intent, transitionActivityOptions.toBundle());
+		super.startActivity(intent);
+//		final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, true);
+//		ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
+//		startActivity(intent, transitionActivityOptions.toBundle());
 	}
 
 	public void startActivity(Intent intent,View view) {
