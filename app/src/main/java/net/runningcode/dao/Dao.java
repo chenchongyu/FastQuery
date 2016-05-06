@@ -1,39 +1,41 @@
 package net.runningcode.dao;
 
-import android.database.sqlite.SQLiteDatabase;
-
-import net.runningcode.RunningCodeApplication;
 import net.runningcode.utils.L;
 
+import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
+
 /**
- * Created by Administrator on 2016/4/12.
+ * Created by Administrator on 2016/5/4.
  */
 public class Dao {
-    private DaoSession daoSession;
-    private Dao(){
-        initDb();
-    }
-    private static class SingletonHolder{
-        private static final Dao INSTANCE = new Dao();
-    }
-
-
-    public static DaoSession getInstance(){
-        return SingletonHolder.INSTANCE.daoSession;
-    }
-
-    private void initDb() {
-        if (daoSession == null){
-            L.i("initDb");
-        }
-        DaoMaster.OpenHelper openHelper = new DaoMaster.OpenHelper(RunningCodeApplication.getInstance(), "quick-query", null) {
+    public static void saveAsync(final RealmObject express){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
-            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+            public void execute(Realm realm) {
+                realm.copyToRealm(express);
             }
-        };
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                L.e("保存错误："+error);
+            }
+        });
+    }
 
-        DaoMaster daoMaster = new DaoMaster(openHelper.getWritableDatabase());
-        daoSession = daoMaster.newSession();
+    public RealmObject save(RealmObject exp){
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        RealmObject express = realm.copyToRealm(exp);
+        realm.commitTransaction();
+        return express;
+    }
+
+    public static RealmResults getAllList(Class cls){
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults list = realm.where(cls).findAll();
+        return list;
     }
 }

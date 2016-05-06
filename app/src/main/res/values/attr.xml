@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr format="dimension" name="actionBarHeight" />
+
+    <declare-styleable name="CircleTextView">
+        <attr name="border_width" format="dimension"/>
+        <attr name="radius" format="integer"/>
+        <attr name="text" format="string"/>
+        <attr name="border_color" format="color|reference"/>
+        <attr name="text_size" format="dimension"/>
+        <attr name="text_color" format="color|reference"/>
+    </declare-styleable>
 </resources>

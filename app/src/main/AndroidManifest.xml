@@ -22,7 +22,8 @@
     <!--用于读取手机当前的状态-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
     <!--写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission  android:name="android.permission.CALL_PHONE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -48,6 +49,8 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".phone.PhoneActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".lottery.LotteryActivity" android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".express.CaptureActivity" android:screenOrientation="portrait" />
 
         <service android:name="com.amap.api.location.APSService"></service>

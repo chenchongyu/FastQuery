@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingLeft="30px"
+              android:paddingRight="30px"
+        >
+
+    <RadioGroup android:id="@+id/v_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:orientation="horizontal">
+
+        <Button android:id="@+id/v_ssq"
+                     style="@style/LotteryRadio"
+                     android:text="@string/lottery_ssq"
+            />
+        <Button android:id="@+id/v_dlt"
+                     style="@style/LotteryRadio"
+                     android:background="@color/btn_warn"
+                     android:text="@string/lottery_dlt"/>
+        <Button android:id="@+id/v_fc3d"
+                     style="@style/LotteryRadio"
+                     android:background="@color/btn_info"
+                     android:text="@string/lottery_fc3d"/>
+    </RadioGroup>
+
+    <TextView android:id="@+id/v_result_lable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:paddingTop="30px"
+        android:paddingBottom="30px"
+        android:gravity="center"
+        android:textSize="35px"
+        />
+
+
+    <LinearLayout android:id="@+id/v_result"
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:padding="20px"
+        >
+    </LinearLayout>
+</LinearLayout>

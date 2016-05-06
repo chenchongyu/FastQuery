@@ -1,6 +1,8 @@
 package net.runningcode.express;
 
 import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,9 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,7 +32,6 @@ import net.runningcode.R;
 import net.runningcode.bean.Express;
 import net.runningcode.constant.URLConstant;
 import net.runningcode.dao.Dao;
-import net.runningcode.dao.ExpressDao;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
@@ -40,6 +42,9 @@ import net.runningcode.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by Administrator on 2016/1/15.
@@ -57,8 +62,6 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
     public JSONArray list;
     public String expNo;
     private RelativeLayout rootView,vResult;
-    private Interpolator interpolator;
-    private ExpressDao dao;
     private List<Express> noList;
     private ExpNoAdapter noAdapter;
 
@@ -68,8 +71,6 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         initView();
     }
     private void initView() {
-        dao = Dao.getInstance().getExpressDao();
-
         shareTarget.setBackgroundResource(R.drawable.icon_express);
         shareTarget.setVisibility(View.VISIBLE);
 
@@ -77,6 +78,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         vResult = $(R.id.v_result);
         vExpressName = $(R.id.v_express_name);
         vExpressTel = $(R.id.v_express_tel);
+        vExpressTel.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
 
         list = new JSONArray();
         noList = new ArrayList<>();
@@ -98,6 +100,16 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         vExpressNo = $(R.id.v_no);
         vQuery = $(R.id.v_query);
 
+        vExpressNo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    querByNO();
+                    return true;
+                }
+                return false;
+            }
+        });
         vExpressNo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -116,6 +128,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         });
         vQuery.setOnClickListener(this);
         vScan.setOnClickListener(this);
+        vExpressTel.setOnClickListener(this);
 
         dialog = new WaitDialog(this);
 
@@ -126,11 +139,12 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
             vNos.setVisibility(View.GONE);
             return;
         }
-        List tmp = dao.queryBuilder().where(ExpressDao.Properties.ExpNo.like(s+"%")).list();
+        RealmResults<Express> tmp = Realm.getDefaultInstance().where(Express.class).contains("expNo",s).findAll();
+//        List tmp = dao.queryBuilder().where(ExpressDao.Properties.ExpNo.like(s+"%")).list();
         if (tmp.size() > 0){
             noList.clear();
             noList.addAll(tmp);
-            adapter.notifyDataSetChanged();
+            noAdapter.notifyDataSetChanged();
 
             vNos.setVisibility(View.VISIBLE);
         }else {
@@ -173,13 +187,24 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.v_query:
-                querByNO(vExpressNo.getText().toString());
+                querByNO();
                 break;
             case R.id.v_scan:
                 scanQRCode();
                 break;
+            case R.id.v_express_tel:
+                callExp();
+                break;
         }
 
+    }
+
+    private void callExp() {
+        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_CALL);//直接拨打电话
+        intent.setAction(Intent.ACTION_DIAL);//跳转到拨打电话界面
+        intent.setData(Uri.parse("tel:"+vExpressTel.getText().toString()));
+        startActivity(intent);
     }
 
     private void scanQRCode() {
@@ -189,9 +214,11 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
     }
 
-    private void querByNO(String num) {
+    private void querByNO() {
+        String num = vExpressNo.getText().toString();
         try {
-            dao.insert(new Express(num));
+            Express express = new Express(num);
+            Dao.saveAsync(express);
         }catch (Exception e){
 
         }
@@ -211,7 +238,8 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
                 if(resultCode == RESULT_OK){
                     Bundle bundle = data.getExtras();
                     L.i(bundle.getString("result"));
-                    querByNO(bundle.getString("result"));
+                    vExpressNo.setText(bundle.getString("result"));
+                    querByNO();
                     //显示扫描到的内容
 //                    mTextView.setText(bundle.getString("result"));
                     //显示
@@ -287,7 +315,8 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         CommonUtil.hideInputMethod(this,vExpressNo);
         final String expNo = noList.get(position).getExpNo();
         vExpressNo.setText(expNo);
-        querByNO(expNo);
+        querByNO();
+        vNos.setVisibility(View.GONE);
     }
 
     @Override

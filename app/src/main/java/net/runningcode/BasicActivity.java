@@ -17,6 +17,7 @@ import android.transition.TransitionInflater;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 	public TextView baseActionBtn;//actionbar右上角按按钮
 	protected Toolbar toolbar;
 	protected View shareTarget;
+	protected Interpolator interpolator;
 
 //	private SystemBarTintManager tintManager;
 

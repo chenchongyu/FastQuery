@@ -21,16 +21,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="24px"
-            android:hint="请输入快递单号"
+            android:hint="请输入快递单号1"
             android:gravity="center_vertical"
             android:textColor="@color/colorPrimaryGreen"
             android:textSize="28px"
-            android:text="350464466871"
+            android:text=""
             android:background="@drawable/bg_no_border"
             android:textCursorDrawable="@null"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/v_scan"
-            android:layout_marginStart="22px" />
+            android:layout_marginStart="22px"
+            android:inputType="textAutoComplete"
+            android:imeOptions="actionSearch"
+            />
         <ImageView android:id="@+id/v_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,8 +106,9 @@
             android:layout_toEndOf="@id/v_logo"
             android:layout_below="@id/v_express_name"
             android:layout_marginTop="26px"
-            android:textColor="@color/black"
+            android:textColor="@color/lite_blue"
             android:textSize="36px"
+            android:inputType="phone"
             />
     </RelativeLayout>
 

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import net.runningcode.R;
 import net.runningcode.bean.Express;
+import net.runningcode.utils.L;
 
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class ExpNoAdapter extends BaseAdapter{
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
+        L.i("adapter单号："+getItem(position).getExpNo());
         holder.textView.setText(getItem(position).getExpNo());
         return convertView;
     }

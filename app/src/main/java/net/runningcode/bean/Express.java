@@ -4,36 +4,22 @@ package net.runningcode.bean;
 
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Entity mapped to table "EXP_NO".
  */
-public class Express {
-
-    private Long id;
-    /** Not-null value. */
+public class Express extends RealmObject {
+    @PrimaryKey
     private String expNo;
-
-    // KEEP FIELDS - put your custom fields here
-    // KEEP FIELDS END
 
     public Express() {
     }
 
-    public Express(Long id) {
-        this.id = id;
-    }
-
-    public Express(Long id, String expNo) {
-        this.id = id;
+    public Express(String expNo) {
         this.expNo = expNo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /** Not-null value. */
@@ -45,11 +31,5 @@ public class Express {
     public void setExpNo(String expNo) {
         this.expNo = expNo;
     }
-
-    // KEEP METHODS - put your custom methods here
-    public Express(String expNo) {
-        this.expNo = expNo;
-    }
-    // KEEP METHODS END
 
 }

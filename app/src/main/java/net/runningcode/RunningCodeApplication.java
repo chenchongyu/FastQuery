@@ -19,12 +19,15 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 
 public class RunningCodeApplication extends Application {
     private static String CRASH_LOG = "";
     private static RunningCodeApplication sInstance;
     private boolean mRunInServiceProcess = false;
-
+    Realm realm = null;
 
     public static RunningCodeApplication getInstance(){
         return sInstance;
@@ -65,10 +68,16 @@ public class RunningCodeApplication extends Application {
         Logger.setTag("NoHttpSample");
         Logger.setDebug(true);// 开始NoHttp的调试模式, 这样就能看到请求过程和日志
         CRASH_LOG = PathUtil.getInstance().getCacheRootPath("log") + "/rc_crash.log";
+        initDb();
 //        AutoLayoutConifg.getInstance().useDeviceSize();
-//        RcExceptionHandler handler = new RcExceptionHandler();
-//        Thread.setDefaultUncaughtExceptionHandler(handler);
-//        Thread.currentThread().setUncaughtExceptionHandler(handler);
+        RcExceptionHandler handler = new RcExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler(handler);
+        Thread.currentThread().setUncaughtExceptionHandler(handler);
+    }
+
+    private void initDb() {
+        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
+        Realm.setDefaultConfiguration(config);
     }
 
 

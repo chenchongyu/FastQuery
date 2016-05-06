@@ -22,6 +22,7 @@ import com.yolanda.nohttp.Response;
 
 import net.runningcode.constant.URLConstant;
 import net.runningcode.express.ExpressActivity;
+import net.runningcode.lottery.LotteryActivity;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
@@ -85,12 +86,14 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         map.put(R.drawable.icon_ip,"IP查询");
         map.put(R.drawable.icon_weather,"天气预报");
         map.put(R.drawable.icon_express,"快递查询");
+        map.put(R.drawable.icon_lottery,"彩票查询");
 
-        list = new ArrayList<>(4);
+        list = new ArrayList<>(5);
         list.add(R.drawable.icon_phone);
         list.add(R.drawable.icon_ip);
         list.add(R.drawable.icon_weather);
         list.add(R.drawable.icon_express);
+        list.add(R.drawable.icon_lottery);
 
         adapter = new ItemsAdapter(list);
         vTable.setAdapter(adapter);
@@ -203,6 +206,9 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             case R.drawable.icon_ip:
 //                startActivity(new Intent(this, ExpressActivity.class));
 //                break;
+            case R.drawable.icon_lottery:
+                startActivity(new Intent(this, LotteryActivity.class),view);
+                break;
             default:
                 DialogUtils.showShortToast(this,"敬请期待");
                 break;

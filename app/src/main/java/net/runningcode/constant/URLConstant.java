@@ -14,12 +14,14 @@ public class URLConstant {
     public static final String API_GET_WEATHER = "http://apis.baidu.com/apistore/weatherservice/cityname";
     public static final String API_GET_IP_INFO = "http://apis.baidu.com/apistore/iplookupservice/iplookup";
     public static final String API_GET_PHONE_INFO = "http://apis.baidu.com/apistore/mobilenumber/mobilenumber";
+    public static final String API_GET_LOTTERY_INFO = "http://apis.baidu.com/apistore/lottery/lotteryquery";
     public static final int API_GET_COM_BY_EXPRESS_NO_WHAT = 1;
     public static final int API_GET_INFO_BY_COM_AND_EXPRESS_WHAT = 20;
     public static final int API_GET_WEATHER_WHAT = 3;
     public static final int API_GET_IP_WHAT = 4;
     public static final int API_GET_PHONE_WHAT = 5;
-    private static Map<String,Integer> URL_MAP = new HashMap<>(2);
+    public static final int API_GET_LOTTERY_WHAT = 6;
+    private static Map<String,Integer> URL_MAP = new HashMap<>(5);
 
     static {
         URL_MAP.put(API_GET_COM_BY_EXPRESS_NO,API_GET_COM_BY_EXPRESS_NO_WHAT);
@@ -27,6 +29,7 @@ public class URLConstant {
         URL_MAP.put(API_GET_WEATHER,API_GET_WEATHER_WHAT);
         URL_MAP.put(API_GET_IP_INFO,API_GET_IP_WHAT);
         URL_MAP.put(API_GET_PHONE_INFO,API_GET_PHONE_WHAT);
+        URL_MAP.put(API_GET_LOTTERY_INFO,API_GET_LOTTERY_WHAT);
     }
 
     public static int getWhat(String url){
