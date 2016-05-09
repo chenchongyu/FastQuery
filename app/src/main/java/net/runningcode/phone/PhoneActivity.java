@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +16,7 @@ import com.yolanda.nohttp.Response;
 import net.runningcode.BasicActivity;
 import net.runningcode.R;
 import net.runningcode.constant.URLConstant;
+import net.runningcode.databinding.ActivityPhoneBinding;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
@@ -29,9 +29,7 @@ import net.runningcode.utils.DialogUtils;
 public class PhoneActivity extends BasicActivity implements View.OnClickListener,HttpListener {
     private EditText vPhone;
     private ImageView vQuery,vIcon;
-    private TextView vPhoneNo,vResult;
-    private View vPanel;
-    private Interpolator interpolator;
+//    private View vPanel;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -42,11 +40,8 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
     private void initView() {
         shareTarget.setBackgroundResource(R.drawable.icon_phone);
 
-        vPanel = $(R.id.v_result_panel);
         vPhone = $(R.id.v_phone);
         vIcon = $(R.id.v_icon);
-        vPhoneNo = $(R.id.v_phone_no);
-        vResult = $(R.id.v_phone_result);
         vQuery = $(R.id.v_query);
 
         vQuery.setOnClickListener(this);
@@ -94,20 +89,18 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
 
     @Override
     public void onSucceed(int what, Response response) {
-        vPanel.setVisibility(View.VISIBLE);
         JSONObject result = (JSONObject) response.get();
         JSONObject data = result.getJSONObject("retData");
-        vPhoneNo.setText(data.getString("phone"));
+        ((ActivityPhoneBinding)binding).setPhoneNum(data.getString("phone"));
         String s = TextUtils.equals(data.getString("province"),data.getString("city"))?data.getString("city")
                 :data.getString("province")+data.getString("city");
         final String supplier = data.getString("supplier");
-        vResult.setText(s+ supplier);
+        ((ActivityPhoneBinding)binding).setSupplier(s+ supplier);
         vIcon.setImageResource(CommonUtil.getDrawbleByPhone(supplier));
     }
 
     @Override
     public void onFailed(int what, String url, Object tag, Exception message, int responseCode, long networkMillis) {
-        vPanel.setVisibility(View.VISIBLE);
-        vResult.setText("查询失败："+message);
+        ((ActivityPhoneBinding)binding).setSupplier("查询失败："+message);
     }
 }

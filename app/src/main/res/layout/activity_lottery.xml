@@ -3,13 +3,13 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:paddingLeft="30px"
-              android:paddingRight="30px"
         >
-
+    <include layout="@layout/toolbar"/>
     <RadioGroup android:id="@+id/v_radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
         android:layout_marginTop="30px"
         android:orientation="horizontal">
 
@@ -45,6 +45,8 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:padding="20px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
         >
     </LinearLayout>
 </LinearLayout>

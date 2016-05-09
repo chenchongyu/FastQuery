@@ -1,118 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_gray"
+    android:orientation="vertical"
     >
-    <FrameLayout android:id="@+id/v_weather_panel"
+    <include layout="@layout/toolbar"/>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="264px">
-        <ImageView
-            android:id="@+id/v_weather_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/icon_weatherbg_qing"
-            android:scaleType="fitXY"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/black"
-            android:alpha="0.38"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="18px"
-            android:paddingTop="34px"
-            android:paddingLeft="26px"
-            android:paddingRight="24px"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"
             >
-            <ImageView android:id="@+id/v_weather_icon"
-                android:layout_width="100px"
-                android:layout_height="100px"
-                android:src="@drawable/icon_sunshine"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"/>
-            <TextView android:id="@+id/v_temperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="20px"
-                android:textStyle="bold"
-                android:textSize="72px"
-                android:text="20~30"
-                android:textColor="@android:color/white"
-                android:layout_toRightOf="@+id/v_weather_icon"
-                android:layout_toEndOf="@+id/v_weather_icon"
-                android:layout_alignBaseline="@+id/v_weather_icon"
-                />
-
-            <TextView android:id="@+id/v_ws"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/v_weather_icon"
-                android:padding="10px"
-                android:gravity="center"
-                android:text="微风"
-                android:textColor="@android:color/white"
-                android:textSize="28px"
-                />
-            <View android:id="@+id/v_plit"
-                android:layout_width="1dp"
-                android:layout_height="20px"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_toRightOf="@+id/v_ws"
-                android:layout_alignBottom="@+id/v_ws"
-                android:layout_alignTop="@+id/v_ws"
-                android:background="@android:color/white"/>
-            <TextView android:id="@+id/v_weather_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/v_ws"
-                android:layout_toRightOf="@+id/v_plit"
-                android:layout_toEndOf="@+id/v_plit"
-                android:padding="10px"
-                android:gravity="center"
-                android:text="晴"
-                android:textColor="@android:color/white"
-                android:textSize="28px"
-                />
-
-            <TextView android:id="@+id/v_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:paddingLeft="10px"
-                android:text="定位中"
-                android:textColor="@android:color/white"
-                android:textSize="30px"
-                />
-            <TextView android:id="@+id/v_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="04/01 星期五"
-                android:textColor="@android:color/white"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textSize="24px"/>
-        </RelativeLayout>
-    </FrameLayout>
-
-
-
-
-    <GridView android:id="@+id/v_table"
+<FrameLayout android:id="@+id/v_weather_panel"
+             android:layout_width="match_parent"
+             android:layout_height="264px">
+    <ImageView
+        android:id="@+id/v_weather_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30px"
-        android:numColumns="4"
-        android:animateLayoutChanges="true"
-        android:horizontalSpacing="3px"
-        android:verticalSpacing="3px"
-        android:layout_below="@+id/v_weather_panel"></GridView>
+        android:layout_height="match_parent"
+        android:src="@drawable/icon_weatherbg_qing"
+        android:scaleType="fitXY"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:alpha="0.38"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="18px"
+        android:paddingTop="34px"
+        android:paddingLeft="26px"
+        android:paddingRight="24px"
+        >
+        <ImageView android:id="@+id/v_weather_icon"
+                   android:layout_width="100px"
+                   android:layout_height="100px"
+                   android:src="@drawable/icon_sunshine"
+                   android:layout_alignParentLeft="true"
+                   android:layout_alignParentTop="true"/>
+        <TextView android:id="@+id/v_temperature"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:paddingTop="20px"
+                  android:textStyle="bold"
+                  android:textSize="72px"
+                  android:text="20~30"
+                  android:textColor="@android:color/white"
+                  android:layout_toRightOf="@+id/v_weather_icon"
+                  android:layout_toEndOf="@+id/v_weather_icon"
+                  android:layout_alignBaseline="@+id/v_weather_icon"
+            />
+
+        <TextView android:id="@+id/v_ws"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@+id/v_weather_icon"
+                  android:padding="10px"
+                  android:gravity="center"
+                  android:text="微风"
+                  android:textColor="@android:color/white"
+                  android:textSize="28px"
+            />
+        <View android:id="@+id/v_plit"
+              android:layout_width="1dp"
+              android:layout_height="20px"
+              android:layout_marginTop="8dp"
+              android:layout_marginBottom="8dp"
+              android:layout_toRightOf="@+id/v_ws"
+              android:layout_alignBottom="@+id/v_ws"
+              android:layout_alignTop="@+id/v_ws"
+              android:background="@android:color/white"/>
+        <TextView android:id="@+id/v_weather_text"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignBottom="@+id/v_ws"
+                  android:layout_toRightOf="@+id/v_plit"
+                  android:layout_toEndOf="@+id/v_plit"
+                  android:padding="10px"
+                  android:gravity="center"
+                  android:text="晴"
+                  android:textColor="@android:color/white"
+                  android:textSize="28px"
+            />
+
+        <TextView android:id="@+id/v_city"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                  android:gravity="center"
+                  android:paddingLeft="10px"
+                  android:text="定位中"
+                  android:textColor="@android:color/white"
+                  android:textSize="30px"
+            />
+        <TextView android:id="@+id/v_date"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:text="04/01 星期五"
+                  android:textColor="@android:color/white"
+                  android:layout_alignParentBottom="true"
+                  android:layout_alignParentRight="true"
+                  android:layout_alignParentEnd="true"
+                  android:textSize="24px"/>
+    </RelativeLayout>
+</FrameLayout>
+
+
+
+
+<GridView android:id="@+id/v_table"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="30px"
+          android:numColumns="4"
+          android:animateLayoutChanges="true"
+          android:horizontalSpacing="3px"
+          android:verticalSpacing="3px"
+          android:layout_below="@+id/v_weather_panel"></GridView>
 
 
 </RelativeLayout>
+
+</LinearLayout>
+

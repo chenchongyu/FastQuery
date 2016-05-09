@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -37,7 +39,7 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 	protected Toolbar toolbar;
 	protected View shareTarget;
 	protected Interpolator interpolator;
-
+	protected ViewDataBinding binding;
 //	private SystemBarTintManager tintManager;
 
 	protected void onCreate(Bundle arg0) {
@@ -46,8 +48,8 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		setupWindowAnimations();
 
 		super.setContentView(R.layout.layout_base);
-		setContentView(getContentViewID());
-
+//		setContentView(getContentViewID());
+		binding = DataBindingUtil.setContentView(this, getContentViewID());
 		if(showActionbar())
 			baseInitActionBar();
 
@@ -99,10 +101,11 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		return true;
 	}
 
-	@Override
+	/*@Override
 	public void setContentView(int layoutResID) {
-		setContentView(View.inflate(this, layoutResID, null));
-	}
+
+//		setContentView(View.inflate(this, layoutResID, null));
+	}*/
 
 	@Override
 	public void setContentView(View view) {
