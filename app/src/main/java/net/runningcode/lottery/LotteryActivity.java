@@ -79,15 +79,15 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
         switch (v.getId()){
             case R.id.v_ssq:
                 query(LOTTERY.SSQ);
-                vResult.setBackground(vSsq.getBackground());
+                vResult.setBackgroundColor(getResources().getColor(R.color.btn_success));
                 break;
             case R.id.v_dlt:
                 query(LOTTERY.DLT);
-                vResult.setBackground(vDlt.getBackground());
+                vResult.setBackgroundColor(getResources().getColor(R.color.btn_warn));
                 break;
             case R.id.v_fc3d:
                 query(LOTTERY.FC3D);
-                vResult.setBackground(vFc3d.getBackground());
+                vResult.setBackgroundColor(getResources().getColor(R.color.btn_info));
                 break;
 
         }
@@ -118,7 +118,8 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 0, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.weight = 1;
-        layoutParams.setMarginEnd(10);
+//        layoutParams.setMarginEnd(10);
+        layoutParams.setMargins(0,0,10,0);
         for (int i=0;i<codes.length;i++){
             String subCode = codes[i];
             String[] orgCodes = TextUtils.split(subCode,",");

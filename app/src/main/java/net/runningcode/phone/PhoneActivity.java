@@ -38,7 +38,7 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void initView() {
-        shareTarget.setBackgroundResource(R.drawable.icon_phone);
+        initToolbar(R.color.phone_green,R.drawable.icon_phone);
 
         vPhone = $(R.id.v_phone);
         vIcon = $(R.id.v_icon);
@@ -59,7 +59,7 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
 
     protected void setupWindowAnimations() {
         interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.colorPrimaryGreen);
+        setupEnterAnimations(R.color.phone_green);
         setupExitAnimations();
     }
 

@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -71,8 +70,6 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         initView();
     }
     private void initView() {
-        shareTarget.setBackgroundResource(R.drawable.icon_express);
-        shareTarget.setVisibility(View.VISIBLE);
 
         rootView = $(R.id.reveal_root);
         vResult = $(R.id.v_result);
@@ -132,6 +129,8 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
 
         dialog = new WaitDialog(this);
 
+        initToolbar(R.color.red,R.drawable.icon_express);
+
     }
 
     private void loadData(String s) {
@@ -155,7 +154,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
 
 
     protected void setupWindowAnimations() {
-        interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
+//        interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
         setupEnterAnimations(R.color.red);
         setupExitAnimations();
     }
@@ -216,6 +215,10 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
 
     private void querByNO() {
         String num = vExpressNo.getText().toString();
+        if (TextUtils.isEmpty(num)){
+            DialogUtils.showShortToast(this,"单号没填你查个毛线？！");
+            return;
+        }
         try {
             Express express = new Express(num);
             Dao.saveAsync(express);
@@ -257,9 +260,15 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
 
     @Override
     public void onSucceed(int what, Response<JSON> response) {
+        L.i(what+" 返回："+response.get());
         switch (what){
             case URLConstant.API_GET_COM_BY_EXPRESS_NO_WHAT:
-                coms = (JSONArray) response.get();
+                JSON data = response.get();
+                if(data instanceof JSONObject){
+                    onFailed(what,URLConstant.API_GET_COM_BY_EXPRESS_NO,null,new Exception("根据单号未获得快递信息！"),0,0);
+                    return;
+                }else
+                    coms = (JSONArray) response.get();
                 getExpInfo(0);
                 break;
             default:
@@ -285,6 +294,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
             adapter.notifyItemRangeChanged(0,list.size());
 //            adapter.notifyDataSetChanged();
             L.i("logo地址："+company.getJSONObject("icon").getString("normal"));
+
             Glide.with(this)
                     .load(company.getJSONObject("icon").getString("normal"))
                     .into(vLogo);

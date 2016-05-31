@@ -1,9 +1,13 @@
 package net.runningcode.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.telephony.TelephonyManager;
@@ -101,7 +105,50 @@ public class CommonUtil {
 		     return tm.getDeviceId();
 		}
 
-		 public static boolean hideInputMethod(Context context, View view) {
+	@SuppressLint("NewApi")
+	public static boolean checkPermission(Context context, String permission) {
+		boolean result = false;
+		if (Build.VERSION.SDK_INT >= 23) {
+			if (context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED) {
+				result = true;
+			}
+		} else {
+			PackageManager pm = context.getPackageManager();
+			if (pm.checkPermission(permission, context.getPackageName()) == PackageManager.PERMISSION_GRANTED) {
+				result = true;
+			}
+		}
+		return result;
+	}
+
+	public static String getDeviceInfo(Context context) {
+		try {
+			org.json.JSONObject json = new org.json.JSONObject();
+			android.telephony.TelephonyManager tm = (android.telephony.TelephonyManager) context
+					.getSystemService(Context.TELEPHONY_SERVICE);
+			String device_id = tm.getDeviceId();
+
+			android.net.wifi.WifiManager wifi = (android.net.wifi.WifiManager) context
+					.getSystemService(Context.WIFI_SERVICE);
+			String mac = wifi.getConnectionInfo().getMacAddress();
+			json.put("mac", mac);
+			if (TextUtils.isEmpty(device_id)) {
+				device_id = mac;
+			}
+			if (TextUtils.isEmpty(device_id)) {
+				device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
+						android.provider.Settings.Secure.ANDROID_ID);
+			}
+			json.put("device_id", device_id);
+			return json.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	public static boolean hideInputMethod(Context context, View view) {
 	        if (context == null || view == null) {
 	            return false;
 	        }
@@ -190,6 +237,19 @@ public class CommonUtil {
 		return (int) (pxValue / scale + 0.5f);
 	}
 
+
+	public static void openMarket(Context context) {
+		Intent startintent = new Intent(Intent.ACTION_VIEW);
+		Uri uri = Uri.parse("market://details?id="+context.getPackageName());
+		startintent.setData(uri);
+		startintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(startintent);
+
+//        Intent startintent = new Intent("android.intent.action.MAIN");
+//        startintent.addCategory("android.intent.category.APP_MARKET");
+//        startActivity(startintent);
+	}
+
 	public static String getLocalIpAddress() {
 		try {
 			for (Enumeration en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
@@ -214,7 +274,7 @@ public class CommonUtil {
 	}
 
 	public static int getDrawbleByWeather(String weather){
-		if (TextUtils.equals(weather,"阴")){
+		if (TextUtils.equals(weather,"阴")|| TextUtils.equals(weather,"多云")){
 			return R.drawable.icon_overcast;
 		}else if (TextUtils.equals(weather,"小雨")){
 			return R.drawable.icon_rain_light;
@@ -236,6 +296,25 @@ public class CommonUtil {
 		}else {
 			return R.drawable.icon_mobile;
 		}
+	}
+
+	public static int getDrawbleBySex(String gender) {
+			return TextUtils.equals(gender,"男")?R.drawable.icon_boy:R.drawable.icon_gril;
+	}
+
+	public static int getBgDrawbleByWeather(String weather) {
+		if (TextUtils.equals(weather,"阴") || TextUtils.equals(weather,"多云")){
+			return R.drawable.icon_overcast_bg;
+		}else if (TextUtils.equals(weather,"小雨")){
+			return R.drawable.icon_rain_light_bg;
+		}if (TextUtils.equals(weather,"中雨")){
+			return R.drawable.icon_rain_moderate_bg;
+		}if (TextUtils.equals(weather,"大雨")){
+			return R.drawable.icon_rain_heavy_bg;
+		}if (weather.contains("雪")){
+			return R.drawable.icon_snow_bg;
+		}else
+			return R.drawable.icon_sunny_bg;
 	}
 }
 

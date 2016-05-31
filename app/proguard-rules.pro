@@ -15,6 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-ignorewarnings
 -dontwarn org.apache.**
 -dontwarn android.**
 -dontwarn android.support.v4.**
@@ -33,3 +34,55 @@
 -keep @io.realm.internal.Keep class * { *; }
 -dontwarn javax.**
 -dontwarn io.realm.**
+##安沃
+-dontwarn com.immersion.hapticmedia.**
+-dontwarn com.sixth.adwoad.**
+-keep class com.sixth.adwoad.** {*;}
+-keepclasseswithmembernames class * {
+native <methods>;
+}
+##友盟
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep public class net.runningcode.R$*{
+    public static final int *;
+}
+-dontwarn com.ut.mini.**
+-dontwarn okio.**
+-dontwarn com.xiaomi.**
+-dontwarn com.squareup.wire.**
+-dontwarn android.support.v4.**
+
+-keepattributes *Annotation*
+
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.app.** { *; }
+
+-keep class okio.** {*;}
+-keep class com.squareup.wire.** {*;}
+
+-keep class com.umeng.message.protobuffer.* {
+         public <fields>;
+         public <methods>;
+}
+
+-keep class com.umeng.message.* {
+         public <fields>;
+         public <methods>;
+}
+
+-keep class org.android.agoo.impl.* {
+         public <fields>;
+         public <methods>;
+}
+
+-keep class org.android.agoo.service.* {*;}
+
+-keep class org.android.spdy.**{*;}
+

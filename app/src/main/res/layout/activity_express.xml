@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="58px"
+            android:layout_marginLeft="58px"
             android:src="@drawable/icon_scan"
             />
         <EditText android:id="@+id/v_no"
@@ -29,8 +29,8 @@
             android:background="@drawable/bg_no_border"
             android:textCursorDrawable="@null"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/v_scan"
-            android:layout_marginStart="22px"
+            android:layout_toRightOf="@+id/v_scan"
+            android:layout_marginLeft="22px"
             android:inputType="textAutoComplete"
             android:imeOptions="actionSearch"
             />
@@ -39,14 +39,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="24px"
             android:src="@drawable/icon_clear"
-            android:layout_toStartOf="@+id/view"
+            android:layout_toLeftOf="@+id/view"
             android:visibility="gone"
             />
         <View
             android:layout_width="1px"
             android:layout_height="30px"
             android:layout_marginRight="24px"
-            android:layout_toStartOf="@+id/v_query"
+            android:layout_toLeftOf="@+id/v_query"
             android:background="#cdccd1"
             android:id="@+id/view"
             android:visibility="gone"/>
@@ -56,7 +56,7 @@
             android:layout_marginRight="60px"
             android:src="@drawable/icon_query"
             android:layout_alignBottom="@+id/v_clear"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginEnd="22dp" />
 
         <ListView
@@ -96,7 +96,7 @@
         <TextView android:id="@+id/v_express_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/v_logo"
+            android:layout_toRightOf="@id/v_logo"
             android:textColor="@color/black"
             android:textSize="36px"
             />
@@ -109,7 +109,7 @@
             android:textColor="@color/lite_blue"
             android:textSize="36px"
             android:inputType="phone"
-            />
+            android:layout_toRightOf="@id/v_logo"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

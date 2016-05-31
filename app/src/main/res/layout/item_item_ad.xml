@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.balysv.materialripple.MaterialRippleLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    app:mrl_rippleInAdapter="true"
+    app:mrl_rippleOverlay="true"
+    app:mrl_rippleColor="@color/black_de">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingTop="20px"
+        android:paddingBottom="18px"
+        >
+        <FrameLayout
+            android:id="@+id/v_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <ImageView android:id="@+id/v_icon"
+                       android:layout_gravity="center"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:src="@drawable/icon_express"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/v_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="24px"
+            android:textSize="24px"
+            android:textColor="@color/text_gray"
+            android:text="快递查询"/>
+    </LinearLayout>
+</com.balysv.materialripple.MaterialRippleLayout>

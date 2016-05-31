@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Adwo_Android_SDK6.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/Adwo_Android_SDK6.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

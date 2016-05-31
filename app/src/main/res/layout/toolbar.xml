@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/toolbar"
+    android:id="@+id/toolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -14,8 +14,6 @@
                 <TextView android:id="@+id/title"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:paddingTop="5px"
-                  android:paddingBottom="5px"
                   android:gravity="center"
                   android:layout_gravity="center"
                   android:textColor="@android:color/white"
@@ -29,6 +27,7 @@
                     android:layout_centerHorizontal="true"
                     android:transitionName="express"
                     android:layout_gravity="center"
+                    android:visibility="invisible"
                     />
         </FrameLayout>
 

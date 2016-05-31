@@ -29,12 +29,13 @@
     <color name="ripple_material_teal">#ff149691</color>
 
     <color name="blue">#304f9f</color>
-    <color name="lottery_blue">#56abe4</color>
     <color name="grey">@color/material_blue_grey_800</color>
     <color name="light">@color/primary_material_light</color>
 
     <color name="colorPrimaryGreen">@color/material_deep_teal_500</color>
-
     <color name="windowBackgroundColor">#333333</color>
     <color name="black_translucent">#80000000</color>
+    <color name="green_light">#3ad1aa</color>
+    <color name="phone_green">#24a7a8</color>
+    <color name="lottery_blue">#56abe4</color>
 </resources>

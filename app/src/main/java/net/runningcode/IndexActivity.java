@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -18,10 +20,17 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.sixth.adwoad.AdwoAdView;
+import com.sixth.adwoad.ErrorCode;
+import com.sixth.adwoad.NativeAdListener;
+import com.sixth.adwoad.NativeAdView;
+import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.Response;
 
+import net.runningcode.constant.Constants;
 import net.runningcode.constant.URLConstant;
 import net.runningcode.express.ExpressActivity;
+import net.runningcode.id.IDActivity;
 import net.runningcode.lottery.LotteryActivity;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
@@ -39,12 +48,15 @@ import java.util.List;
  * Created by Administrator on 2016/1/15.
  */
 public class IndexActivity extends BasicActivity implements View.OnClickListener, HttpListener<JSON>,
-        AdapterView.OnItemClickListener,AMapLocationListener {
-    private TextView vWeather,vTemperature,vCity,vDate;
+        AdapterView.OnItemClickListener,AMapLocationListener, NativeAdListener {
+    private TextView vWeather,vTemperature,vCity,vDate,vWD;
     private ImageView vWeatherIcon,vWeatherBg;
+    private RelativeLayout vContent;
     private GridView vTable;
     private SparseArray<String> map;
+    private SparseArray<String> adMap;
     private List<Integer> list;
+
     ItemsAdapter adapter ;
     private String city;
 
@@ -52,46 +64,57 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     public AMapLocationClient mLocationClient = null;
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
+    private NativeAdView ad;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
+//        L.i("设备ID:"+CommonUtil.getDeviceInfo(this));
         initView();
+
     }
+
 
     private void initView() {
         toolbar.setNavigationIcon(null);
+        vContent = $(R.id.v_content);
 
         vWeather = $(R.id.v_weather_text);
         vWeatherIcon = $(R.id.v_weather_icon);
         vTemperature = $(R.id.v_temperature);
         vWeatherBg = $(R.id.v_weather_bg);
+        vWD = $(R.id.v_ws);
         vCity = $(R.id.v_city);
         vDate = $(R.id.v_date);
         vTable = $(R.id.v_table);
+
+        vCity.setOnClickListener(this);
         vTable.setOnItemClickListener(this);
 
         setTitle(R.string.app_name);
         initData();
-//        setToolBarColor(R.color.colorPrimary);
+        setToolBarColor(R.color.colorPrimary);
 //        setStatusBarColor(R.color.colorPrimaryDark);
+        initAD();
     }
+
 
     private void initData() {
         initPosition();
 
         vDate.setText(DateUtil.getCurrentMDE());
         map = new SparseArray<>();
+        adMap = new SparseArray<>(1);
         map.put(R.drawable.icon_phone,"手机归属地");
-        map.put(R.drawable.icon_ip,"IP查询");
-        map.put(R.drawable.icon_weather,"天气预报");
+        map.put(R.drawable.icon_id,"身份证查询");
+//        map.put(R.drawable.icon_weather,"天气预报");
         map.put(R.drawable.icon_express,"快递查询");
         map.put(R.drawable.icon_lottery,"彩票查询");
 
         list = new ArrayList<>(5);
         list.add(R.drawable.icon_phone);
-        list.add(R.drawable.icon_ip);
-        list.add(R.drawable.icon_weather);
+        list.add(R.drawable.icon_id);
+//        list.add(R.drawable.icon_weather);
         list.add(R.drawable.icon_express);
         list.add(R.drawable.icon_lottery);
 
@@ -143,7 +166,9 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-
+            case R.id.v_city:
+                initPosition();
+                break;
         }
 
     }
@@ -168,24 +193,31 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         JSONObject result = (JSONObject) response.get();
         switch (what){
             case URLConstant.API_GET_WEATHER_WHAT:
-                if (result.getIntValue("errNum") != 0){
-                    vWeather.setText("获取天气信息失败");
-                    return;
-                }
-                JSONObject weather = result.getJSONObject("retData");
-                final String du = getString(R.string.du);
-                final String text = weather.getString("l_tmp") + du + "c" + "~" + weather.getString("h_tmp") + du + "c";
-                vTemperature.setText(text);
-                final String weatherString = weather.getString("weather");
-                vWeather.setText(weatherString);
-                int drawble = CommonUtil.getDrawbleByWeather(weatherString);
-                vWeatherIcon.setImageResource(drawble);
+                setWeather(result);
                 break;
             case URLConstant.API_GET_IP_WHAT:
                 getWeather();
                 break;
         }
 
+    }
+
+    private void setWeather(JSONObject result) {
+        if (result.getIntValue("errNum") != 0){
+            vWeather.setText("获取天气信息失败");
+            return;
+        }
+        JSONObject weather = result.getJSONObject("retData");
+        final String du = getString(R.string.du);
+        final String text = weather.getString("l_tmp") + du + "c" + "~" + weather.getString("h_tmp") + du + "c";
+        vTemperature.setText(text);
+        String wd = weather.getString("WD");
+        vWD.setText(wd);
+        final String weatherString = weather.getString("weather");
+        vWeather.setText(weatherString);
+        int drawble = CommonUtil.getDrawbleByWeather(weatherString);
+        vWeatherIcon.setImageResource(drawble);
+        vWeatherBg.setImageResource(CommonUtil.getBgDrawbleByWeather(weatherString));
     }
 
     @Override
@@ -203,11 +235,15 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             case R.drawable.icon_phone:
                 startActivity(new Intent(this, PhoneActivity.class),view);
                 break;
-            case R.drawable.icon_ip:
-//                startActivity(new Intent(this, ExpressActivity.class));
-//                break;
+            case R.drawable.icon_id:
+                startActivity(new Intent(this, IDActivity.class),view);
+                break;
             case R.drawable.icon_lottery:
                 startActivity(new Intent(this, LotteryActivity.class),view);
+                break;
+            case -1:
+                MobclickAgent.onEvent(this,"click Ad");
+                DialogUtils.showShortToast(this,"推广链接，谢谢点击！");
                 break;
             default:
                 DialogUtils.showShortToast(this,"敬请期待");
@@ -221,22 +257,6 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         if (amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
                 //定位成功回调信息，设置相关消息
-                /*amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                amapLocation.getLatitude();//获取纬度
-                amapLocation.getLongitude();//获取经度
-                amapLocation.getAccuracy();//获取精度信息
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date date = new Date(amapLocation.getTime());
-                df.format(date);//定位时间
-                amapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
-                amapLocation.getCountry();//国家信息
-                amapLocation.getProvince();//省信息
-                amapLocation.getDistrict();//城区信息
-                amapLocation.getStreet();//街道信息
-                amapLocation.getStreetNum();//街道门牌号信息
-                amapLocation.getCityCode();//城市编码
-                amapLocation.getAdCode();//地区编码
-                amapLocation.getAoiName();//获取当前定位点的AOI信息*/
                 L.i("定位成功："+amapLocation.getCityCode());//城市编码);
                 String fullname = amapLocation.getCity();
                 city = amapLocation.getCity().substring(0,fullname.length()-1);
@@ -250,6 +270,47 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
                 vCity.setText("定位失败");
             }
         }
+    }
+
+    private void initAD() {
+        ad = new NativeAdView(this,Constants.ANWO_PUBLISHER_ID,true,this);
+        ad.prepareAd();
+
+
+        AdwoAdView adView=new AdwoAdView(this, Constants.ANWO_PUBLISHER_ID,false,20);
+//        adView.setListener(this);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        adView.setLayoutParams(params);
+        vContent.addView(adView);
+    }
+
+    @Override
+    public void onReceiveAd(String s) {
+        L.i("get ad:"+s);
+        JSONObject adJson = JSON.parseObject(s);
+        map.put(-1,adJson.getString("title"));
+        adMap.put(-1,adJson.getString("icon"));
+        list.add(-1);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailedToReceiveAd(View view, ErrorCode errorCode) {
+
+    }
+
+    @Override
+    public void onPresentScreen() {
+
+    }
+
+    @Override
+    public void onDismissScreen() {
+
     }
 
     class ItemsAdapter extends BaseAdapter{
@@ -274,29 +335,66 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             return list.get(i);
         }
 
+        /*@Override
+        public int getViewTypeCount() {
+            return 2;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return list.get(position);
+        }*/
+
         @Override
         public View getView(int position, View view, ViewGroup viewGroup) {
-            int icon = list.get(position);
+            final int icon = list.get(position);
             String title = map.get(icon);
             ViewHolder holder = null;
             if (view == null){
                 holder = new ViewHolder();
-                view = View.inflate(IndexActivity.this, R.layout.item_item, null);
+//                if(getItemViewType(position) < 0){
+//                    //广告
+                    view = View.inflate(IndexActivity.this, R.layout.item_item_ad, null);
+//                    holder.vRoot = (ViewGroup) view.findViewById(R.id.v_root);
+//                    holder.vIcon = (ImageView) view.findViewById(R.id.v_icon);
+//                    holder.vText = (TextView) view.findViewById(R.id.v_item);
+//                }else{
+//                    view = View.inflate(IndexActivity.this, R.layout.item_item, null);
+//                }
+                holder.vRoot = (FrameLayout) view.findViewById(R.id.v_root);
                 holder.vIcon = (ImageView) view.findViewById(R.id.v_icon);
                 holder.vText = (TextView) view.findViewById(R.id.v_item);
                 view.setTag(holder);
+
             }else {
                 holder = (ViewHolder) view.getTag();
             }
-            holder.vIcon.setImageResource(icon);
+            if (icon < 0){
+                L.i("加载广告图片："+adMap.get(icon)+":"+title);
+                RunningCodeApplication.loadImg(holder.vIcon,adMap.get(icon));
+                final ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                        holder.vIcon.getMeasuredWidth(),
+                        holder.vIcon.getMeasuredHeight());
+                ad.setLayoutParams(layoutParams);
+                holder.vRoot.addView(ad);
+            }else{
+//                Glide.clear(holder.vIcon);
+                holder.vIcon.setImageResource(icon);
+            }
+
             holder.vText.setText(title);
 
             return view;
         }
 
+
+
         class ViewHolder{
+            ViewGroup vRoot;
             ImageView vIcon;
             TextView vText;
         }
     }
+
+
 }
