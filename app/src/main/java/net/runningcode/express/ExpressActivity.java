@@ -55,6 +55,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
     private RecyclerView vInfos;
     private ListView vNos;
     private ImageView vLogo,vScan,vQuery,vClear;
+    private View vLine;
     private WaitDialog dialog;
     private JSONArray coms;
     ExpressListAdapter adapter;
@@ -76,6 +77,8 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         vExpressName = $(R.id.v_express_name);
         vExpressTel = $(R.id.v_express_tel);
         vExpressTel.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+        vClear = $(R.id.v_clear);
+        vLine = $(R.id.view);
 
         list = new JSONArray();
         noList = new ArrayList<>();
@@ -126,6 +129,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         vQuery.setOnClickListener(this);
         vScan.setOnClickListener(this);
         vExpressTel.setOnClickListener(this);
+        vClear.setOnClickListener(this);
 
         dialog = new WaitDialog(this);
 
@@ -136,7 +140,12 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
     private void loadData(String s) {
         if (TextUtils.isEmpty(s)){
             vNos.setVisibility(View.GONE);
+            vClear.setVisibility(View.GONE);
+            vLine.setVisibility(View.GONE);
             return;
+        }else{
+            vClear.setVisibility(View.VISIBLE);
+            vLine.setVisibility(View.VISIBLE);
         }
         RealmResults<Express> tmp = Realm.getDefaultInstance().where(Express.class).contains("expNo",s).findAll();
 //        List tmp = dao.queryBuilder().where(ExpressDao.Properties.ExpNo.like(s+"%")).list();
@@ -184,6 +193,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
     }
     @Override
     public void onClick(View view) {
+        L.i("v getId:"+view.getId()+"  view:"+R.id.view+"  vExpressNo:"+vExpressNo.getId());
         switch (view.getId()){
             case R.id.v_query:
                 querByNO();
@@ -193,6 +203,9 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
                 break;
             case R.id.v_express_tel:
                 callExp();
+                break;
+            case R.id.v_clear:
+                vExpressNo.setText("");
                 break;
         }
 

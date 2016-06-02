@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:paddingTop="28px"
     android:paddingBottom="28px"
-    android:background="@drawable/ripple_gray"
     android:drawableRight="@drawable/icon_up_arrow"
     android:textSize="24px"
     android:textColor="@color/text_gray"

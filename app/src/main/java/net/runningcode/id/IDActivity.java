@@ -1,7 +1,9 @@
 package net.runningcode.id;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -29,7 +31,8 @@ import net.runningcode.utils.L;
  */
 public class IDActivity extends BasicActivity implements View.OnClickListener,HttpListener {
     private EditText vID;
-    private ImageView vQuery,vIcon;
+    private ImageView vQuery,vIcon,vClear;
+    private View vLine;
 //    private View vPanel;
 
     @Override
@@ -44,8 +47,12 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
         vID = $(R.id.v_id_no);
         vIcon = $(R.id.v_icon);
         vQuery = $(R.id.v_query);
+        vClear = $(R.id.v_clear);
+        vLine = $(R.id.view);
 
         vQuery.setOnClickListener(this);
+        vClear.setOnClickListener(this);
+
         vID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -54,6 +61,28 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
                     return true;
                 }
                 return false;
+            }
+        });
+        vID.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!TextUtils.isEmpty(s.toString())){
+                    vClear.setVisibility(View.VISIBLE);
+                    vLine.setVisibility(View.VISIBLE);
+                }else {
+                    vClear.setVisibility(View.GONE);
+                    vLine.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -71,7 +100,14 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
 
     @Override
     public void onClick(View v) {
-        queryNo();
+        switch (v.getId()){
+            case R.id.v_query:
+                queryNo();
+                break;
+            case R.id.v_clear:
+                vID.setText("");
+                break;
+        }
     }
 
     private void queryNo() {

@@ -33,6 +33,25 @@
                 android:hint="请输入身份证号码"
                 android:imeOptions="actionSearch"
                 />
+            <ImageView android:id="@+id/v_clear"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="5px"
+                       android:layout_marginRight="24px"
+                       android:src="@drawable/icon_clear"
+                       android:layout_toLeftOf="@+id/view"
+                       android:visibility="gone"
+                />
+            <View
+                android:id="@+id/view"
+                android:layout_width="1px"
+                android:layout_height="30px"
+                android:layout_marginRight="24px"
+                android:layout_marginTop="5px"
+                android:layout_toLeftOf="@+id/v_query"
+                android:background="#cdccd1"
+                android:visibility="gone"/>
+
             <ImageView android:id="@+id/v_query"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
