@@ -24,7 +24,6 @@
 
     <color name="red">#bf360c</color>
     <color name="ripple_red">#ffbf5232</color>
-    <color name="express_red">#ed4e41</color>
 
     <color name="ripple_material_teal">#ff149691</color>
 
@@ -38,4 +37,7 @@
     <color name="green_light">#3ad1aa</color>
     <color name="phone_green">#24a7a8</color>
     <color name="lottery_blue">#56abe4</color>
+    <color name="lottery_yellow">#f19b2c</color>
+    <color name="express_red">#ed4e41</color>
+    <color name="id_red">#f66858</color>
 </resources>

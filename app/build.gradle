@@ -15,7 +15,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        manifestPlaceholders = [ CHANNEL:"default_channel" ]
+        manifestPlaceholders = [ CHANNEL:"default" ]
     }
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
@@ -37,7 +37,7 @@ android {
         wandoujia {}
         baidu {}
         c360 {}
-        uc {}
+        QQ{}
 
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [CHANNEL: name]
@@ -57,15 +57,14 @@ dependencies {
 //    compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.android.support:recyclerview-v7:+'
-    compile 'com.yolanda.nohttp:nohttp:+'
+    compile 'com.yolanda.nohttp:nohttp:1.0.0'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'me.drakeet.materialdialog:library:1.2.8'
     compile 'com.github.bumptech.glide:glide:3.5.2'
     compile 'com.zhy:autolayout:1.4.3'
-    compile 'com.umeng.analytics:analytics:latest.integration'
-    compile project(':PushSDK')
+//    compile project(':PushSDK')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 }

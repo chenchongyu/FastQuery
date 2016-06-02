@@ -24,7 +24,7 @@ import com.sixth.adwoad.AdwoAdView;
 import com.sixth.adwoad.ErrorCode;
 import com.sixth.adwoad.NativeAdListener;
 import com.sixth.adwoad.NativeAdView;
-import com.umeng.analytics.MobclickAgent;
+import com.xiaomi.mistatistic.sdk.MiStatInterface;
 import com.yolanda.nohttp.Response;
 
 import net.runningcode.constant.Constants;
@@ -108,15 +108,15 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         map.put(R.drawable.icon_phone,"手机归属地");
         map.put(R.drawable.icon_id,"身份证查询");
 //        map.put(R.drawable.icon_weather,"天气预报");
-        map.put(R.drawable.icon_express,"快递查询");
         map.put(R.drawable.icon_lottery,"彩票查询");
+        map.put(R.drawable.icon_express,"快递查询");
 
         list = new ArrayList<>(5);
         list.add(R.drawable.icon_phone);
         list.add(R.drawable.icon_id);
 //        list.add(R.drawable.icon_weather);
-        list.add(R.drawable.icon_express);
         list.add(R.drawable.icon_lottery);
+        list.add(R.drawable.icon_express);
 
         adapter = new ItemsAdapter(list);
         vTable.setAdapter(adapter);
@@ -242,7 +242,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
                 startActivity(new Intent(this, LotteryActivity.class),view);
                 break;
             case -1:
-                MobclickAgent.onEvent(this,"click Ad");
+                MiStatInterface.recordCountEvent("click ad","native ad click");
                 DialogUtils.showShortToast(this,"推广链接，谢谢点击！");
                 break;
             default:
@@ -273,19 +273,26 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void initAD() {
-        ad = new NativeAdView(this,Constants.ANWO_PUBLISHER_ID,true,this);
+        ad = new NativeAdView(this,Constants.ANWO_PUBLISHER_ID,false,this);
         ad.prepareAd();
 
 
-        AdwoAdView adView=new AdwoAdView(this, Constants.ANWO_PUBLISHER_ID,false,20);
+        AdwoAdView adView=new AdwoAdView(this, Constants.ANWO_PUBLISHER_ID,false,10);
 //        adView.setListener(this);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         adView.setLayoutParams(params);
+        adView.setBannerMatchScreenWidth(true);
         vContent.addView(adView);
+        adView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MiStatInterface.recordCountEvent("click ad","banner ad click");
+            }
+        });
     }
 
     @Override
@@ -352,15 +359,8 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             ViewHolder holder = null;
             if (view == null){
                 holder = new ViewHolder();
-//                if(getItemViewType(position) < 0){
-//                    //广告
-                    view = View.inflate(IndexActivity.this, R.layout.item_item_ad, null);
-//                    holder.vRoot = (ViewGroup) view.findViewById(R.id.v_root);
-//                    holder.vIcon = (ImageView) view.findViewById(R.id.v_icon);
-//                    holder.vText = (TextView) view.findViewById(R.id.v_item);
-//                }else{
-//                    view = View.inflate(IndexActivity.this, R.layout.item_item, null);
-//                }
+                view = View.inflate(IndexActivity.this, R.layout.item_item_ad, null);
+//
                 holder.vRoot = (FrameLayout) view.findViewById(R.id.v_root);
                 holder.vIcon = (ImageView) view.findViewById(R.id.v_icon);
                 holder.vText = (TextView) view.findViewById(R.id.v_item);

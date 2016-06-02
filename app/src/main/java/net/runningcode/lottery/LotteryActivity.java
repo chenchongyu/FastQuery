@@ -44,8 +44,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
     }
 
     private void initView() {
-        shareTarget.setBackgroundResource(R.drawable.icon_lottery);
-        shareTarget.setVisibility(View.VISIBLE);
+        initToolbar(R.color.lottery_yellow,R.drawable.icon_lottery);
 
         vSsq = $(R.id.v_ssq);
         vDlt = $(R.id.v_dlt);
@@ -60,7 +59,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
 
     protected void setupWindowAnimations() {
         interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.lottery_blue);
+        setupEnterAnimations(R.color.lottery_yellow);
         setupExitAnimations();
     }
 

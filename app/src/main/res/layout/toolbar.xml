@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -22,8 +22,8 @@
                     />
                 <View
                     android:id="@+id/shared_target"
-                    android:layout_width="100px"
-                    android:layout_height="100px"
+                    android:layout_width="60px"
+                    android:layout_height="60px"
                     android:layout_centerHorizontal="true"
                     android:transitionName="express"
                     android:layout_gravity="center"

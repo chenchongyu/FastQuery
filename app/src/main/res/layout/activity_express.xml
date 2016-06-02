@@ -18,18 +18,17 @@
             android:src="@drawable/icon_scan"
             />
         <EditText android:id="@+id/v_no"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="24px"
             android:hint="请输入快递单号"
             android:gravity="center_vertical"
             android:textColor="@color/colorPrimaryGreen"
             android:textSize="28px"
-            android:text=""
-            android:background="@drawable/bg_no_border"
             android:textCursorDrawable="@null"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/v_scan"
+            android:layout_toLeftOf="@+id/v_query"
             android:layout_marginLeft="22px"
             android:inputType="textAutoComplete"
             android:imeOptions="actionSearch"
@@ -57,7 +56,7 @@
             android:src="@drawable/icon_query"
             android:layout_alignBottom="@+id/v_clear"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="22dp" />
+             />
 
         <ListView
             android:id="@+id/v_nos"
@@ -71,12 +70,6 @@
             android:visibility="gone"
             ></ListView>
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3px"
-        android:layout_marginLeft="128px"
-        android:layout_marginRight="36px"
-        android:background="@color/bg_gray_dark"/>
 
     <RelativeLayout
         android:id="@+id/v_result"

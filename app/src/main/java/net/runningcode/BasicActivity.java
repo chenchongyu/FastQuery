@@ -28,8 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.PushAgent;
+import com.xiaomi.mistatistic.sdk.MiStatInterface;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import net.runningcode.utils.AnimationFactory;
@@ -75,7 +74,6 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		filter.addAction(ACTION_EXIT);
 		registerReceiver(mExitReceiver, filter);
 //	    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-		PushAgent.getInstance(this).onAppStart();
 	}
 
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -266,15 +264,15 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		MobclickAgent.onPageStart(getClass().getSimpleName());
-		MobclickAgent.onResume(this);
+//		MobclickAgent.onResume(this);
+		MiStatInterface.recordPageStart(this, getClass().getSimpleName());
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-//		MobclickAgent.onPageEnd(getClass().getSimpleName());
-		MobclickAgent.onPause(this);
+//		MobclickAgent.onPause(this);
+		MiStatInterface.recordPageEnd();
 	}
 
 	@Override

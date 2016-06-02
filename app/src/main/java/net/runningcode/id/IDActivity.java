@@ -39,7 +39,7 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
     }
 
     private void initView() {
-        initToolbar(R.color.green_light,R.drawable.icon_id);
+        initToolbar(R.color.id_red,R.drawable.icon_id);
 
         vID = $(R.id.v_id_no);
         vIcon = $(R.id.v_icon);
@@ -60,7 +60,7 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
 
     protected void setupWindowAnimations() {
         interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.green_light);
+        setupEnterAnimations(R.color.id_red);
         setupExitAnimations();
     }
 
