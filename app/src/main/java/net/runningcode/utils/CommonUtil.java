@@ -305,16 +305,25 @@ public class CommonUtil {
 	public static int getBgDrawbleByWeather(String weather) {
 		if (TextUtils.equals(weather,"阴") || TextUtils.equals(weather,"多云")){
 			return R.drawable.icon_overcast_bg;
-		}else if (TextUtils.equals(weather,"小雨")){
-			return R.drawable.icon_rain_light_bg;
-		}if (TextUtils.equals(weather,"中雨")){
+		}else if (TextUtils.equals(weather,"中雨")){
 			return R.drawable.icon_rain_moderate_bg;
-		}if (TextUtils.equals(weather,"大雨")){
+		}else if (TextUtils.equals(weather,"大雨")){
 			return R.drawable.icon_rain_heavy_bg;
-		}if (weather.contains("雪")){
+		}else if (weather.contains("雨")){
+			return R.drawable.icon_rain_light_bg;
+		}else if (weather.contains("雪")){
 			return R.drawable.icon_snow_bg;
 		}else
 			return R.drawable.icon_sunny_bg;
+	}
+
+	public static String genPicPath() {
+		L.i("图片路径："+PathUtil.getInstance().getCacheRootPath("pic")+"/translate_"+System.currentTimeMillis()+".jpg");
+		return PathUtil.getInstance().getCacheRootPath("pic")+"/translate_"+System.currentTimeMillis()+".jpg";
+	}
+	public static String genMP3Path(String ext) {
+		L.i("语音路径："+PathUtil.getInstance().getCacheRootPath("sound")+"/translate_"+ext.replaceAll(" ","—")+".mp3");
+		return PathUtil.getInstance().getCacheRootPath("sound")+"/translate_"+ext.replaceAll(" ","—")+".mp3";
 	}
 }
 

@@ -2,7 +2,6 @@ package net.runningcode;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +26,19 @@ import com.sixth.adwoad.NativeAdView;
 import com.xiaomi.mistatistic.sdk.MiStatInterface;
 import com.yolanda.nohttp.Response;
 
+import net.runningcode.bank.BankActivity;
 import net.runningcode.constant.Constants;
 import net.runningcode.constant.URLConstant;
 import net.runningcode.express.ExpressActivity;
-import net.runningcode.id.IDActivity;
-import net.runningcode.lottery.LotteryActivity;
+import net.runningcode.simple_activity.CarActivity;
+import net.runningcode.simple_activity.IDActivity;
+import net.runningcode.simple_activity.LotteryActivity;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
-import net.runningcode.phone.PhoneActivity;
+import net.runningcode.simple_activity.NumberActivity;
+import net.runningcode.simple_activity.PhoneActivity;
+import net.runningcode.simple_activity.TranslateActivity;
 import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DateUtil;
 import net.runningcode.utils.DialogUtils;
@@ -49,6 +52,7 @@ import java.util.List;
  */
 public class IndexActivity extends BasicActivity implements View.OnClickListener, HttpListener<JSON>,
         AdapterView.OnItemClickListener,AMapLocationListener, NativeAdListener {
+    private final static int ELEMENT_SIZE = 8;
     private TextView vWeather,vTemperature,vCity,vDate,vWD;
     private ImageView vWeatherIcon,vWeatherBg;
     private RelativeLayout vContent;
@@ -93,9 +97,16 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
 
         setTitle(R.string.app_name);
         initData();
-        setToolBarColor(R.color.colorPrimary);
-//        setStatusBarColor(R.color.colorPrimaryDark);
-        initAD();
+        setToolBarColor(R.drawable.gradient_toolbar);
+//        setToolBarColor(R.color.colorPrimary);
+        setStatusBarColor(R.color.colorPrimaryDark);
+
+        try{
+            initAD();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -103,20 +114,28 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         initPosition();
 
         vDate.setText(DateUtil.getCurrentMDE());
-        map = new SparseArray<>();
+        map = new SparseArray<>(ELEMENT_SIZE);
         adMap = new SparseArray<>(1);
         map.put(R.drawable.icon_phone,"手机归属地");
         map.put(R.drawable.icon_id,"身份证查询");
 //        map.put(R.drawable.icon_weather,"天气预报");
         map.put(R.drawable.icon_lottery,"彩票查询");
         map.put(R.drawable.icon_express,"快递查询");
+        map.put(R.drawable.icon_translate,"翻译");
+        map.put(R.drawable.icon_num,"数字转大写");
+        map.put(R.drawable.icon_car,"汽车摇号");
+//        map.put(R.drawable.icon_bank,"银行卡查询");
 
-        list = new ArrayList<>(5);
+        list = new ArrayList<>(ELEMENT_SIZE);
         list.add(R.drawable.icon_phone);
         list.add(R.drawable.icon_id);
 //        list.add(R.drawable.icon_weather);
         list.add(R.drawable.icon_lottery);
         list.add(R.drawable.icon_express);
+        list.add(R.drawable.icon_translate);
+        list.add(R.drawable.icon_num);
+        list.add(R.drawable.icon_car);
+//        list.add(R.drawable.icon_bank);
 
         adapter = new ItemsAdapter(list);
         vTable.setAdapter(adapter);
@@ -241,6 +260,18 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             case R.drawable.icon_lottery:
                 startActivity(new Intent(this, LotteryActivity.class),view);
                 break;
+            case R.drawable.icon_bank:
+                startActivity(new Intent(this, BankActivity.class),view);
+                break;
+            case R.drawable.icon_translate:
+                startActivity(new Intent(this, TranslateActivity.class),view);
+                break;
+            case R.drawable.icon_num:
+                startActivity(new Intent(this, NumberActivity.class),view);
+                break;
+            case R.drawable.icon_car:
+                startActivity(new Intent(this, CarActivity.class),view);
+                break;
             case -1:
                 MiStatInterface.recordCountEvent("click ad","native ad click");
                 DialogUtils.showShortToast(this,"推广链接，谢谢点击！");
@@ -264,10 +295,11 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
                 getWeather();
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                Log.e("AmapError", "location Error, ErrCode:"
+                L.e("location Error, ErrCode:"
                         + amapLocation.getErrorCode() + ", errInfo:"
                         + amapLocation.getErrorInfo());
-                vCity.setText("定位失败");
+                final String errorReason = "定位失败-" + amapLocation.getErrorInfo()+"";
+                vCity.setText(errorReason);
             }
         }
     }

@@ -31,6 +31,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.xiaomi.mistatistic.sdk.MiStatInterface;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import net.runningcode.net.CallServer;
 import net.runningcode.utils.AnimationFactory;
 import net.runningcode.utils.L;
 import net.runningcode.utils.TransitionHelper;
@@ -280,6 +281,7 @@ public abstract class BasicActivity extends AutoLayoutActivity {
     	// TODO Auto-generated method stub
     	super.onDestroy();
     	unregisterReceiver(mExitReceiver);
+		CallServer.getRequestInstance().cancelAll();
     }
  
 

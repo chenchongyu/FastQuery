@@ -24,8 +24,13 @@ import net.runningcode.utils.DateUtil;
 import net.runningcode.utils.L;
 import net.runningcode.utils.PathUtil;
 import net.runningcode.utils.SPUtils;
+import net.runningcode.utils.StreamUtil;
+import net.runningcode.utils.ThreadPool;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
 
@@ -38,6 +43,8 @@ public class RunningCodeApplication extends Application {
     private static RunningCodeApplication sInstance;
     Realm realm = null;
     static String channel;
+    public String orcPath;
+
     public static RunningCodeApplication getInstance(){
         return sInstance;
     }
@@ -86,9 +93,30 @@ public class RunningCodeApplication extends Application {
         if (shouldInit())
             initXiaoMi();
 //        AutoLayoutConifg.getInstance().useDeviceSize();
-        RcExceptionHandler handler = new RcExceptionHandler();
-        Thread.setDefaultUncaughtExceptionHandler(handler);
-        Thread.currentThread().setUncaughtExceptionHandler(handler);
+//        initOCR();
+//        RcExceptionHandler handler = new RcExceptionHandler();
+//        Thread.setDefaultUncaughtExceptionHandler(handler);
+//        Thread.currentThread().setUncaughtExceptionHandler(handler);
+    }
+
+    private void initOCR() {
+        String folder = PathUtil.getInstance().getCacheRootPath("ocr");
+        orcPath = folder + "/" + "TianruiWorkroomOCR.dat";
+        final File file = new File(orcPath);
+        if (!file.exists()){
+            ThreadPool.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        InputStream in = getAssets().open("TianruiWorkroomOCR.dat");
+                        StreamUtil.InputStream2File(in,file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
     }
 
     private void initDb() {

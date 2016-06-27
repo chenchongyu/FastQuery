@@ -1,4 +1,4 @@
-package net.runningcode.phone;
+package net.runningcode.simple_activity;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,18 +18,19 @@ import com.yolanda.nohttp.Response;
 import net.runningcode.BasicActivity;
 import net.runningcode.R;
 import net.runningcode.constant.URLConstant;
-import net.runningcode.databinding.ActivityPhoneBinding;
+import net.runningcode.databinding.ActivityIdBinding;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
 import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DialogUtils;
+import net.runningcode.utils.L;
 
 /**
  * Created by Administrator on 2016/4/11.
  */
-public class PhoneActivity extends BasicActivity implements View.OnClickListener,HttpListener {
-    private EditText vPhone;
+public class IDActivity extends BasicActivity implements View.OnClickListener,HttpListener {
+    private EditText vID;
     private ImageView vQuery,vIcon,vClear;
     private View vLine;
 //    private View vPanel;
@@ -41,18 +42,18 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void initView() {
-        initToolbar(R.color.phone_green,R.drawable.icon_phone);
+        initToolbar(R.color.id_red,R.drawable.icon_id);
 
-        vPhone = $(R.id.v_phone);
+        vID = $(R.id.v_id_no);
         vIcon = $(R.id.v_icon);
         vQuery = $(R.id.v_query);
         vClear = $(R.id.v_clear);
         vLine = $(R.id.view);
 
-        vClear.setOnClickListener(this);
         vQuery.setOnClickListener(this);
+        vClear.setOnClickListener(this);
 
-        vPhone.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        vID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
@@ -62,8 +63,7 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
                 return false;
             }
         });
-
-        vPhone.addTextChangedListener(new TextWatcher() {
+        vID.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -89,13 +89,13 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
 
     protected void setupWindowAnimations() {
         interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.phone_green);
+        setupEnterAnimations(R.color.id_red);
         setupExitAnimations();
     }
 
     @Override
     public int getContentViewID() {
-        return R.layout.activity_phone;
+        return R.layout.activity_id;
     }
 
     @Override
@@ -105,21 +105,19 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
                 queryNo();
                 break;
             case R.id.v_clear:
-                vPhone.setText("");
+                vID.setText("");
                 break;
         }
     }
 
     private void queryNo() {
-        String num = vPhone.getText().toString();
-
-        if (!CommonUtil.isPhoneNum(num)){
-            DialogUtils.showShortToast(this,"请输入合法的电话号码！");
+        String num = vID.getText().toString();
+        if (TextUtils.isEmpty(num)){
+            DialogUtils.showShortToast(this,"你到底想查谁？！");
             return;
         }
-
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_PHONE_INFO);
-        request.add("phone",num);
+        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_ID_INFO);
+        request.add("idcard",num);
 
         CallServer.getRequestInstance().add(this,request,this,true,true);
     }
@@ -127,17 +125,25 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
     @Override
     public void onSucceed(int what, Response response) {
         JSONObject result = (JSONObject) response.get();
-        JSONObject data = result.getJSONObject("retData");
-        ((ActivityPhoneBinding)binding).setPhoneNum(data.getString("phone"));
-        String s = TextUtils.equals(data.getString("province"),data.getString("city"))?data.getString("city")
-                :data.getString("province")+data.getString("city");
-        final String supplier = data.getString("supplier");
-        ((ActivityPhoneBinding)binding).setSupplier(s+ supplier);
-        vIcon.setImageResource(CommonUtil.getDrawbleByPhone(supplier));
+        L.i("onsucceed:"+result);
+        if (result.getIntValue("error") == -1){
+            ((ActivityIdBinding)binding).setConstellation(result.getString("msg"));
+            ((ActivityIdBinding)binding).setAddress("");
+            vIcon.setImageResource(R.drawable.icon_error);
+            return;
+        }
+        JSONObject data = result.getJSONObject("data");
+        ((ActivityIdBinding)binding).setAddress(data.getString("address"));
+        ((ActivityIdBinding)binding).setBirthday(data.getString("birthday"));
+        ((ActivityIdBinding)binding).setZodiac("生肖："+data.getString("zodiac"));
+        ((ActivityIdBinding)binding).setConstellation(data.getString("constellation"));
+
+        final String gender = data.getString("gender");
+        vIcon.setImageResource(CommonUtil.getDrawbleBySex(gender));
     }
 
     @Override
     public void onFailed(int what, String url, Object tag, Exception message, int responseCode, long networkMillis) {
-        ((ActivityPhoneBinding)binding).setSupplier("查询失败："+message);
+        ((ActivityIdBinding)binding).setAddress("查询失败："+message);
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#37b8c9</color>
-    <color name="colorPrimaryDark">#37b8c9</color>
+    <color name="colorPrimaryDark">#41bfca</color>
     <color name="colorAccent">#FF4081</color>
 
     <!--  bootstrap 样式按钮  -->
@@ -40,4 +40,9 @@
     <color name="lottery_yellow">#f19b2c</color>
     <color name="express_red">#ed4e41</color>
     <color name="id_red">#f66858</color>
+    <color name="translate_purple">#6f58db</color>
+    <color name="num_yellow">#ed8e24</color>
+    <color name="car_blue">#38aad2</color>
+
+
 </resources>

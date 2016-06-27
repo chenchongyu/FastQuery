@@ -16,14 +16,18 @@
         <ImageView android:id="@+id/v_icon"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:src="@drawable/icon_express"/>
+                   android:src="@drawable/icon_express"
+                   android:layout_gravity="center"
+            />
         <TextView
             android:id="@+id/v_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="24px"
+            android:paddingTop="20px"
             android:textSize="24px"
             android:textColor="@color/text_gray"
-            android:text="快递查询"/>
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="翻译"/>
     </LinearLayout>
 </com.andexert.library.RippleView>

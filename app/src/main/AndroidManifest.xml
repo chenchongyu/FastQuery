@@ -35,7 +35,10 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <application android:allowBackup="true"
+    <!-- Camera features - recommended -->
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+
+    <application
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:supportsRtl="true"
@@ -56,14 +59,23 @@
         <!--<activity android:name=".IndexActivity" android:screenOrientation="portrait"-->
                   <!--android:hardwareAccelerated="true"/>-->
         <activity android:name=".express.ExpressActivity" android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".phone.PhoneActivity" android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".lottery.LotteryActivity" android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".id.IDActivity" android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".express.CaptureActivity" android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity android:name=".simple_activity.PhoneActivity" android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity android:name=".simple_activity.LotteryActivity" android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity android:name=".simple_activity.IDActivity" android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity android:name=".express.CaptureActivity"
+                  android:exported="false" android:screenOrientation="portrait" />
+        <activity android:name=".bank.BankActivity"
+                  android:exported="false" android:screenOrientation="portrait" />
+        <activity android:name=".simple_activity.TranslateActivity"
+                  android:exported="false" android:screenOrientation="portrait" />
+        <activity android:name=".simple_activity.NumberActivity"
+                  android:exported="false" android:screenOrientation="portrait" />
+        <activity android:name=".simple_activity.CarActivity"
+                  android:exported="false" android:screenOrientation="portrait" />
 
         <service android:name="com.amap.api.location.APSService"></service>
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+    <include layout="@layout/toolbar"/>
+    <RelativeLayout android:id="@+id/reveal_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="45px"
+        android:orientation="horizontal">
+
+        <EditText android:id="@+id/v_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24px"
+            android:hint="输入摇号申请编码"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimaryGreen"
+            android:textSize="28px"
+            android:textCursorDrawable="@null"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/v_query"
+            android:layout_marginLeft="22px"
+            android:inputType="numberSigned"
+            />
+        <ImageView android:id="@+id/v_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24px"
+            android:src="@drawable/icon_clear"
+            android:layout_toLeftOf="@+id/view"
+            android:visibility="gone"
+            />
+        <View
+            android:id="@+id/view"
+            android:layout_width="1px"
+            android:layout_height="30px"
+            android:layout_marginRight="24px"
+            android:layout_toLeftOf="@+id/v_query"
+            android:background="#cdccd1"
+            android:visibility="gone"/>
+        <ImageView android:id="@+id/v_query"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginRight="60px"
+                   android:src="@drawable/icon_query_green"
+                   android:layout_alignBottom="@+id/v_clear"
+                   android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/v_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:paddingLeft="32px"
+        android:paddingTop="34px"
+        android:paddingBottom="34px"
+        android:layout_marginTop="24px"
+        android:background="@color/bg_gray"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <TextView android:id="@+id/v_main_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10px"
+            android:textIsSelectable="true"
+            android:textColor="@color/colorPrimaryGreen"
+            android:textSize="42px"
+            />
+
+    </RelativeLayout>
+</LinearLayout>

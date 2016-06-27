@@ -11,6 +11,8 @@ public class Constants {
 
     //百度api
     public final static String BAIDU_API_KEY = "139694d38786afa74c61c486d76d7f0d";
+    public final static String BAIDU_TRANS_APP_ID="20160621000023710";
+    public final static String BAIDU_TRANS_APP_TOKEN="qCVTqei8Z4Ml56JCl3De";
     //高德地图
     public final static String GAODE_API_KEY = "80e8e106504b233f97f429699d55602d";
 
@@ -22,9 +24,13 @@ public class Constants {
     public static final String MI_APP_ID = "2882303761517476257";
     public static final String MI_APP_KEY = "5741747692257";
 
+    //易源接口
+    public static final String YY_APP_ID="20714";
+    public static final String YY_APP_SECRET="7648cc23a03445feacf909557c4a0d63";
     //自定义消息类型
     //打开应用商店
     public static final String TYPE_OPEN = "update";
 
 
+    public static final String KEY_CAR_NO = "car_no";
 }

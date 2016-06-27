@@ -1,4 +1,4 @@
-package net.runningcode.lottery;
+package net.runningcode.simple_activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
