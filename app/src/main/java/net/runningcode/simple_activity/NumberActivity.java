@@ -69,7 +69,7 @@ public class NumberActivity extends BasicActivity implements View.OnClickListene
         vClear.setOnClickListener(this);
         vMainResult.setOnClickListener(this);
         initToolbar(R.color.num_yellow,R.drawable.icon_num);
-
+        setTitle("数字转换");
     }
 
 

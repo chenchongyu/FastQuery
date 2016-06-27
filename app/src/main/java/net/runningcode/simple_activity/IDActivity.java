@@ -43,7 +43,7 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
 
     private void initView() {
         initToolbar(R.color.id_red,R.drawable.icon_id);
-
+        setTitle("身份证");
         vID = $(R.id.v_id_no);
         vIcon = $(R.id.v_icon);
         vQuery = $(R.id.v_query);

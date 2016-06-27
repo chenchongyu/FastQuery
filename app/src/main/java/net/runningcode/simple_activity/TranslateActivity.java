@@ -126,7 +126,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         dialog = new WaitDialog(this);
 
         initToolbar(R.color.translate_purple,R.drawable.icon_translate);
-
+        setTitle("翻译");
     }
 
 

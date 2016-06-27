@@ -42,7 +42,7 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
 
     private void initView() {
         initToolbar(R.color.phone_green,R.drawable.icon_phone);
-
+        setTitle("手机归属地");
         vPhone = $(R.id.v_phone);
         vIcon = $(R.id.v_icon);
         vQuery = $(R.id.v_query);

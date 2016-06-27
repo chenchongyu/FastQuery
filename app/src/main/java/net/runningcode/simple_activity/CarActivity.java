@@ -76,7 +76,7 @@ public class CarActivity extends BasicActivity implements View.OnClickListener,H
         vQuery.setOnClickListener(this);
         vMainResult.setOnClickListener(this);
         initToolbar(R.color.car_blue,R.drawable.icon_car);
-
+        setTitle("摇号查询");
     }
 
 

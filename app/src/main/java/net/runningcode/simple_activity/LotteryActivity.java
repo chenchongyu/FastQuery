@@ -45,7 +45,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
 
     private void initView() {
         initToolbar(R.color.lottery_yellow,R.drawable.icon_lottery);
-
+        setTitle("彩票");
         vSsq = $(R.id.v_ssq);
         vDlt = $(R.id.v_dlt);
         vFc3d = $(R.id.v_fc3d);

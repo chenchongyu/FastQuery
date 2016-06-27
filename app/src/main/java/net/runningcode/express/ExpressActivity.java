@@ -134,7 +134,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         dialog = new WaitDialog(this);
 
         initToolbar(R.color.red,R.drawable.icon_express);
-
+        setTitle("快递");
     }
 
     private void loadData(String s) {
