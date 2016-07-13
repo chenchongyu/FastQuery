@@ -1,6 +1,7 @@
 package net.runningcode;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
@@ -101,11 +102,14 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
 //        setToolBarColor(R.color.colorPrimary);
         setStatusBarColor(R.color.colorPrimaryDark);
 
-        try{
+        L.i("version===============:" + Build.VERSION.SDK_INT);
+//        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+        try {
             initAD();
         }catch (Exception e){
-            e.printStackTrace();
+            L.e("初始化广告失败："+e);
         }
+//        }
 
     }
 
@@ -318,6 +322,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         adView.setLayoutParams(params);
         adView.setBannerMatchScreenWidth(true);
+
         vContent.addView(adView);
         adView.setOnClickListener(new View.OnClickListener() {
             @Override

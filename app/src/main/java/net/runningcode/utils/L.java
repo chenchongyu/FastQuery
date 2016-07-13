@@ -2,6 +2,8 @@ package net.runningcode.utils;
 
 import android.util.Log;
 
+import net.runningcode.BuildConfig;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -15,12 +17,13 @@ public class L
 		throw new UnsupportedOperationException("cannot be instantiated");
 	}
 
-	public static boolean isDebug = true;// 是否需要打印bug，可以在application的onCreate函数里面初始化
-	private static final String TAG = "ksc";
+	public static boolean isDebug = BuildConfig.DEBUG;
+	private static final String TAG = "fastquery";
 
 	// 下面四个是默认tag的函数
 	public static void i(String msg)
 	{
+		System.out.println("是否degbu："+isDebug);
 		if (isDebug)
 			Log.i(TAG, msg);
 //		writeLog(msg);
@@ -45,11 +48,17 @@ public class L
 //		writeLog(msg);
 	}
 
-	public static void e(String msg)
+	public static void e(final String msg)
 	{
 		if (isDebug)
 			Log.e(TAG, msg);
-		writeLog(msg);
+		ThreadPool.submit(new Runnable() {
+			@Override
+			public void run() {
+				writeLog(msg);
+			}
+		});
+
 	}
 
 	public static void v(String msg)
@@ -63,14 +72,12 @@ public class L
 	{
 		if (isDebug)
 			Log.i(tag, msg);
-		writeLog(msg);
 	}
 
 	public static void d(String tag, String msg)
 	{
 		if (isDebug)
 			Log.i(tag, msg);
-		writeLog(msg);
 	}
 
 	public static void e(String tag, String msg)

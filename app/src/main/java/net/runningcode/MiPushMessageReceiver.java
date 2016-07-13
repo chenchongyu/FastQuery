@@ -77,6 +77,7 @@ public class MiPushMessageReceiver extends PushMessageReceiver {
             }
         } else if (MiPushClient.COMMAND_SUBSCRIBE_TOPIC.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
+                Log.i(LOG, "设置topic成功！"+message);
 //                log = context.getString(R.string.subscribe_topic_success, cmdArg1);
             } else {
 //                log = context.getString(R.string.subscribe_topic_fail, message.getReason());

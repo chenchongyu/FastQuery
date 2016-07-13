@@ -339,21 +339,29 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         JSONArray result = data.getJSONArray("translation");
         vMainResult.setText( getTranslation(result));
 
-        JSONArray basicResult = data.getJSONObject("basic").getJSONArray("explains");
-        JSONArray webResult = data.getJSONArray("web");
-        StringBuilder web = new StringBuilder();
-        for(int i=0;i<webResult.size();i++){
-            JSONObject jsonObject = webResult.getJSONObject(i);
-            JSONArray v = jsonObject.getJSONArray("value");
-            String k = jsonObject.getString("key");
-            if (TextUtils.equals(k.toLowerCase(),vText.getText().toString().toLowerCase())){
-                web.append(getTranslationOneLine(v,"，")).append("\n");
-            }
-
+        final StringBuilder text = new StringBuilder();
+        final JSONObject basic = data.getJSONObject("basic");
+        if (basic != null){
+            JSONArray basicResult = basic.getJSONArray("explains");
+            text.append(getTranslation(basicResult));
         }
 
-        final String text =getTranslation(basicResult) + "\n【网络释义】\n" + web;
-        vTransResult.setText(text);
+        JSONArray webResult = data.getJSONArray("web");
+        if (webResult != null){
+            StringBuilder web = new StringBuilder();
+            for(int i=0;i<webResult.size();i++){
+                JSONObject jsonObject = webResult.getJSONObject(i);
+                JSONArray v = jsonObject.getJSONArray("value");
+                String k = jsonObject.getString("key");
+                if (TextUtils.equals(k.toLowerCase(),vText.getText().toString().toLowerCase())){
+                    web.append(getTranslationOneLine(v,"，")).append("\n");
+                }
+            }
+
+            text.append("\n【网络释义】\n").append(web);
+        }
+
+        vTransResult.setText(text.toString());
 
     }
 

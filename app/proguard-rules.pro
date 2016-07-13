@@ -44,6 +44,10 @@ native <methods>;
 ##mipush
 -keep public class * extends android.content.BroadcastReceiver
 -keep class net.runningcode.MiPushMessageReceiver {*;}
+
+#保留行号的等信息方便崩溃之后还原日志
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
 ##友盟
 #-keepclassmembers class * {
 #   public <init> (org.json.JSONObject);

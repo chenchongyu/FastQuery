@@ -76,7 +76,7 @@ public class RunningCodeApplication extends Application {
         PathUtil.initial(this);
         NoHttp.init(this);
         Logger.setTag("NoHttpSample");
-        Logger.setDebug(true);// 开始NoHttp的调试模式, 这样就能看到请求过程和日志
+        Logger.setDebug(BuildConfig.DEBUG);// 开始NoHttp的调试模式, 这样就能看到请求过程和日志
         CRASH_LOG = PathUtil.getInstance().getCacheRootPath("log") + "/rc_crash.log";
         try {
             ApplicationInfo appInfo = this.getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
