@@ -114,6 +114,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     }
 
 
+    // TODO: 2016/7/26 汇率转换、成语、周公解梦  改用RxAndroid  butterknife
     private void initData() {
         initPosition();
 

@@ -15,39 +15,42 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
--ignorewarnings
--dontwarn org.apache.**
--dontwarn android.**
--dontwarn android.support.v4.**
--dontwarn com.alibaba.fastjson.**
--dontwarn java.nio.file.Files
--dontwarn java.nio.file.Path
--dontwarn java.nio.file.OpenOption
 
--keep class com.amap.api.location.**{*;}
--keep class com.amap.api.fence.**{*;}
--keep class com.autonavi.aps.amapapi.model.**{*;}
-
--keep class io.realm.annotations.RealmModule
--keep @io.realm.annotations.RealmModule class *
--keep class io.realm.internal.Keep
--keep @io.realm.internal.Keep class * { *; }
--dontwarn javax.**
--dontwarn io.realm.**
-##安沃
--dontwarn com.immersion.hapticmedia.**
--dontwarn com.sixth.adwoad.**
--keep class com.sixth.adwoad.** {*;}
--keepclasseswithmembernames class * {
-native <methods>;
-}
-##mipush
--keep public class * extends android.content.BroadcastReceiver
--keep class net.runningcode.MiPushMessageReceiver {*;}
+#因为使用了360加固   故先不混淆了   这样在代码出问题的时候方便查找问题
+#-ignorewarnings
+#-dontwarn org.apache.**
+#-dontwarn android.**
+#-dontwarn android.support.v4.**
+#-dontwarn com.alibaba.fastjson.**
+#-dontwarn java.nio.file.Files
+#-dontwarn java.nio.file.Path
+#-dontwarn java.nio.file.OpenOption
+#
+#-keep class com.amap.api.location.**{*;}
+#-keep class com.amap.api.fence.**{*;}
+#-keep class com.autonavi.aps.amapapi.model.**{*;}
+#
+#-keep class io.realm.annotations.RealmModule
+#-keep @io.realm.annotations.RealmModule class *
+#-keep class io.realm.internal.Keep
+#-keep @io.realm.internal.Keep class * { *; }
+#-dontwarn javax.**
+#-dontwarn io.realm.**
+###安沃
+#-dontwarn com.immersion.hapticmedia.**
+#-dontwarn com.sixth.adwoad.**
+#-keep class com.sixth.adwoad.** {*;}
+#-keepclasseswithmembernames class * {
+#native <methods>;
+#}
+###mipush
+#-keep public class * extends android.content.BroadcastReceiver
+#-keep class net.runningcode.MiPushMessageReceiver {*;}
 
 #保留行号的等信息方便崩溃之后还原日志
--renamesourcefileattribute SourceFile
--keepattributes SourceFile,LineNumberTable
+#-renamesourcefileattribute SourceFile
+#-keepattributes SourceFile,LineNumberTable
+
 ##友盟
 #-keepclassmembers class * {
 #   public <init> (org.json.JSONObject);

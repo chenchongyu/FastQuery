@@ -16,6 +16,9 @@ android {
         versionCode 4
         versionName "1.2.1"
         manifestPlaceholders = [ CHANNEL:"default" ]
+        ndk {
+            abiFilters "armeabi"
+        }
     }
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
@@ -33,6 +36,7 @@ android {
 
     productFlavors {
 //        xiaomi {manifestPlaceholders = [ CHANNEL:"xiaomi"]}
+        anzhi {}
         xiaomi {}
         wandoujia {}
         baidu {}

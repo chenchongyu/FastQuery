@@ -13,6 +13,8 @@ public class Constants {
     public final static String BAIDU_API_KEY = "139694d38786afa74c61c486d76d7f0d";
     public final static String BAIDU_TRANS_APP_ID="20160621000023710";
     public final static String BAIDU_TRANS_APP_TOKEN="qCVTqei8Z4Ml56JCl3De";
+    //阿凡达API
+    public final static String AVARDA_KEY = "c1f7452fd811485abaddab965862b3ef";
     //高德地图
     public final static String GAODE_API_KEY = "80e8e106504b233f97f429699d55602d";
 
