@@ -289,9 +289,11 @@ public class CommonUtil {
 	}
 
 	public static int getDrawbleByPhone(String supplier){
-		if (TextUtils.equals(supplier,"联通")){
+		if (TextUtils.isEmpty(supplier))
+			return R.drawable.icon_mobile;
+		if (supplier.startsWith("联通")){
 			return R.drawable.icon_unicom;
-		}else if (TextUtils.equals(supplier,"电信")){
+		}else if (supplier.startsWith("电信")){
 			return R.drawable.icon_telecom;
 		}else {
 			return R.drawable.icon_mobile;
@@ -299,7 +301,7 @@ public class CommonUtil {
 	}
 
 	public static int getDrawbleBySex(String gender) {
-			return TextUtils.equals(gender,"男")?R.drawable.icon_boy:R.drawable.icon_gril;
+			return TextUtils.equals(gender,"M")?R.drawable.icon_boy:R.drawable.icon_gril;
 	}
 
 	public static int getBgDrawbleByWeather(String weather) {

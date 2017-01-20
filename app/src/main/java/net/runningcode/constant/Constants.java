@@ -1,5 +1,7 @@
 package net.runningcode.constant;
 
+import android.util.ArrayMap;
+
 /**
  * Created by Administrator on 2016/1/15.
  */
@@ -14,7 +16,8 @@ public class Constants {
     public final static String BAIDU_TRANS_APP_ID="20160621000023710";
     public final static String BAIDU_TRANS_APP_TOKEN="qCVTqei8Z4Ml56JCl3De";
     //阿凡达API
-    public final static String AVARDA_KEY = "c1f7452fd811485abaddab965862b3ef";
+//    public final static String AVARDA_KEY = "f611175c9ec94f95a8fef3f15ac8666c";//正式
+    public final static String AVARDA_KEY = "300f1037633d4af191fc4577fa6cda18";//测试
     //高德地图
     public final static String GAODE_API_KEY = "80e8e106504b233f97f429699d55602d";
 
@@ -35,4 +38,18 @@ public class Constants {
 
 
     public static final String KEY_CAR_NO = "car_no";
+
+    //不同地市公积金缴纳比例（整数），实际使用需除以100
+    public static ArrayMap GJJ_RATE = new ArrayMap();
+    static {
+        GJJ_RATE.put("beijing",12);
+        GJJ_RATE.put("shanghai",7);
+        GJJ_RATE.put("tianjin",11);
+        GJJ_RATE.put("shenzhen",20);
+        GJJ_RATE.put("guangzhou",20);
+        GJJ_RATE.put("zhengzhou",12);
+        GJJ_RATE.put("chongqing",12);
+        GJJ_RATE.put("hangzhou",12);
+        GJJ_RATE.put("wuhan",12);
+    }
 }

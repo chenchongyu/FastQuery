@@ -25,6 +25,8 @@ import net.runningcode.net.HttpListener;
 import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DialogUtils;
 
+import static net.runningcode.net.FastJsonRequest.getNewInstance;
+
 /**
  * Created by Administrator on 2016/4/11.
  */
@@ -118,8 +120,8 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
             return;
         }
 
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_PHONE_INFO);
-        request.add("phone",num);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_PHONE_INFO);
+        request.add("mobileNumber",num);
 
         CallServer.getRequestInstance().add(this,request,this,true,true);
     }
@@ -127,12 +129,11 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
     @Override
     public void onSucceed(int what, Response response) {
         JSONObject result = (JSONObject) response.get();
-        JSONObject data = result.getJSONObject("retData");
-        ((ActivityPhoneBinding)binding).setPhoneNum(data.getString("phone"));
-        String s = TextUtils.equals(data.getString("province"),data.getString("city"))?data.getString("city")
-                :data.getString("province")+data.getString("city");
-        final String supplier = data.getString("supplier");
-        ((ActivityPhoneBinding)binding).setSupplier(s+ supplier);
+        JSONObject data = result.getJSONObject("result");
+        ((ActivityPhoneBinding)binding).setPhoneNum(vPhone.getText().toString());
+        String s = data.getString("mobilearea");
+        final String supplier = data.getString("mobiletype");
+        ((ActivityPhoneBinding)binding).setSupplier(s+"-"+ supplier);
         vIcon.setImageResource(CommonUtil.getDrawbleByPhone(supplier));
     }
 

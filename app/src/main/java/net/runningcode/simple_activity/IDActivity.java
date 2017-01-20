@@ -26,6 +26,8 @@ import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
 
+import static net.runningcode.net.FastJsonRequest.getNewInstance;
+
 /**
  * Created by Administrator on 2016/4/11.
  */
@@ -53,6 +55,7 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
         vQuery.setOnClickListener(this);
         vClear.setOnClickListener(this);
 
+        setEditBottomColor(vID,R.color.id_red);
         vID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -116,8 +119,8 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
             DialogUtils.showShortToast(this,"你到底想查谁？！");
             return;
         }
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_ID_INFO);
-        request.add("idcard",num);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_ID_INFO);
+        request.add("id",num);
 
         CallServer.getRequestInstance().add(this,request,this,true,true);
     }
@@ -126,19 +129,17 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
     public void onSucceed(int what, Response response) {
         JSONObject result = (JSONObject) response.get();
         L.i("onsucceed:"+result);
-        if (result.getIntValue("error") == -1){
-            ((ActivityIdBinding)binding).setConstellation(result.getString("msg"));
-            ((ActivityIdBinding)binding).setAddress("");
+        if (result.getIntValue("error_code") != 0){
+            ((ActivityIdBinding)binding).setAddress(result.getString("reason"));
             vIcon.setImageResource(R.drawable.icon_error);
             return;
         }
-        JSONObject data = result.getJSONObject("data");
+        JSONObject data = result.getJSONObject("result");
         ((ActivityIdBinding)binding).setAddress(data.getString("address"));
         ((ActivityIdBinding)binding).setBirthday(data.getString("birthday"));
-        ((ActivityIdBinding)binding).setZodiac("生肖："+data.getString("zodiac"));
-        ((ActivityIdBinding)binding).setConstellation(data.getString("constellation"));
+//        ((ActivityIdBinding)binding).setConstellation(data.getString("constellation"));
 
-        final String gender = data.getString("gender");
+        final String gender = data.getString("sex");
         vIcon.setImageResource(CommonUtil.getDrawbleBySex(gender));
     }
 

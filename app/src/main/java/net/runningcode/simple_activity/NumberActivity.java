@@ -41,6 +41,7 @@ public class NumberActivity extends BasicActivity implements View.OnClickListene
         vResult = $(R.id.v_result);
         vMainResult = $(R.id.v_main_result);
 
+        setEditBottomColor(vText,R.color.num_yellow);
         vText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -109,8 +110,13 @@ public class NumberActivity extends BasicActivity implements View.OnClickListene
                     try {
                         activity.vMainResult.setText(StringUtils.toTrandition(Integer.parseInt(num)));
                     } catch (Exception e) {
-                        activity.vMainResult.setText("程序异常:"+e.getLocalizedMessage());
-                        e.printStackTrace();
+                        if (e instanceof NumberFormatException){
+                            activity.vMainResult.setText("你牛X，输入这么大的数你会读吗？");
+                        }else {
+                            activity.vMainResult.setText("程序异常:"+e.getLocalizedMessage());
+                            e.printStackTrace();
+                        }
+
                     }
                 }
             }

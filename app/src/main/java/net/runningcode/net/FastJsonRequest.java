@@ -26,7 +26,6 @@ import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.RestRequest;
 import com.yolanda.nohttp.StringRequest;
 
-import net.runningcode.constant.Constants;
 import net.runningcode.constant.URLConstant;
 import net.runningcode.utils.L;
 
@@ -42,10 +41,17 @@ import java.util.Map;
  */
 public class FastJsonRequest extends RestRequest<JSON> {
     public int what;
-    public FastJsonRequest(String url) {
+    private FastJsonRequest(String url) {
         super(url);
         what = URLConstant.getWhat(url);
-        addHeader("apikey", Constants.BAIDU_API_KEY);
+//        addHeader("apikey", Constants.BAIDU_API_KEY);
+    }
+
+    public static FastJsonRequest getNewInstance(String url){
+        FastJsonRequest fastJsonRequest = new FastJsonRequest(url);
+//        fastJsonRequest.add("key",Constants.AVARDA_KEY);
+
+        return fastJsonRequest;
     }
 
     public FastJsonRequest(String url, RequestMethod requestMethod) {
@@ -61,8 +67,20 @@ public class FastJsonRequest extends RestRequest<JSON> {
         if (!TextUtils.isEmpty(result) && !"[]".equals(result)) {
             if (result.startsWith("[{")){
                 jsonObject = JSONArray.parseArray(result);
-            }else
-                jsonObject = JSON.parseObject(result);
+            }else{
+                try {
+                    jsonObject = JSON.parseObject(result);
+                }catch (Exception e){
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("error_code", -1);
+                    map.put("url", url());
+                    map.put("data", e.getLocalizedMessage());
+                    map.put("method", getRequestMethod().toString());
+                    jsonObject = (JSONObject) JSON.toJSON(map);
+                }
+
+            }
+
         } else {
             // 这里默认的错误可以定义为你们自己的协议
             Map<String, Object> map = new HashMap<String, Object>();

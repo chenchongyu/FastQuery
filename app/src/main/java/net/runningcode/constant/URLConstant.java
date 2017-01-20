@@ -10,11 +10,11 @@ public class URLConstant {
 
     public static final String API_GET_COM_BY_EXPRESS_NO = "http://m.kuaidi100.com/autonumber/auto";
     public static final String API_GET_INFO_BY_COM_AND_EXPRESS = "https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury";
-    public static final String API_GET_WEATHER = "http://apis.baidu.com/apistore/weatherservice/cityname";
+    public static final String API_GET_WEATHER = "http://api.avatardata.cn/Weather/Query?key=300f1037633d4af191fc4577fa6cda18";
     public static final String API_GET_IP_INFO = "http://apis.baidu.com/apistore/iplookupservice/iplookup";
-    public static final String API_GET_PHONE_INFO = "http://apis.baidu.com/apistore/mobilenumber/mobilenumber";
-    public static final String API_GET_LOTTERY_INFO = "http://apis.baidu.com/apistore/lottery/lotteryquery";
-    public static final String API_GET_ID_INFO = "http://apis.baidu.com/chazhao/idcard/idcard";
+    public static final String API_GET_PHONE_INFO = "http://api.avatardata.cn/MobilePlace/LookUp?key=59046f7f7f4c47618a390087b7a9c5c3";
+    public static final String API_GET_LOTTERY_INFO = "http://api.avatardata.cn/Lottery/Search?key=d69c23a6a3974db19d017824a7fd2e3b";
+    public static final String API_GET_ID_INFO = "http://api.avatardata.cn/IdCard/LookUp?key=3e4fa33594d347658886ec4a118b9169";
 //    public static final String API_GET_BANK_INFO = "http://apis.baidu.com/datatiny/cardinfo/cardinfo";
     public static final String API_GET_BANK_INFO = "http://route.showapi.com/896-1";
     public static final String API_GET_TEXT_JOKE = "http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text";

@@ -8,7 +8,7 @@
     <RelativeLayout android:id="@+id/reveal_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="45px"
+        android:paddingTop="30px"
         android:orientation="horizontal">
 
         <EditText android:id="@+id/v_no"
@@ -19,6 +19,8 @@
             android:gravity="center_vertical"
             android:textColor="@color/colorPrimaryGreen"
             android:textSize="28px"
+          android:background="@null"
+          android:drawablePadding="5dp"
             android:textCursorDrawable="@null"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"

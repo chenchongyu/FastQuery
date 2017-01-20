@@ -20,7 +20,6 @@ import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 
 import net.runningcode.constant.Constants;
-import net.runningcode.utils.DateUtil;
 import net.runningcode.utils.L;
 import net.runningcode.utils.PathUtil;
 import net.runningcode.utils.SPUtils;
@@ -28,10 +27,8 @@ import net.runningcode.utils.StreamUtil;
 import net.runningcode.utils.ThreadPool;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.List;
 
 import io.realm.Realm;
@@ -39,9 +36,7 @@ import io.realm.RealmConfiguration;
 
 
 public class RunningCodeApplication extends Application {
-    private static String CRASH_LOG = "";
     private static RunningCodeApplication sInstance;
-    Realm realm = null;
     static String channel;
     public String orcPath;
 
@@ -77,7 +72,6 @@ public class RunningCodeApplication extends Application {
         NoHttp.init(this);
         Logger.setTag("NoHttpSample");
         Logger.setDebug(BuildConfig.DEBUG);// 开始NoHttp的调试模式, 这样就能看到请求过程和日志
-        CRASH_LOG = PathUtil.getInstance().getCacheRootPath("log") + "/rc_crash.log";
         try {
             ApplicationInfo appInfo = this.getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
             channel = appInfo.metaData.getString("CHANNEL");
@@ -141,16 +135,6 @@ public class RunningCodeApplication extends Application {
         Log.i("mipush", MiStatInterface.getDeviceID(sInstance));
 
     }
-    /*
-    private void initPush() {
-        PushAgent mPushAgent = PushAgent.getInstance(this);
-        mPushAgent.setDebugMode(false);
-        mPushAgent.enable();
-        mPushAgent.setNotificationClickHandler(notificationClickHandler);
-        //开启推送并设置注册的回调处理
-        L.i("是否开启了推送："+mPushAgent.isEnabled()+"   "+mPushAgent.getRegistrationId());
-    }
-*/
     public static void loadImg(final ImageView view, String url) {
         Glide.with(sInstance).load(url).placeholder(R.drawable.icon_query)
                 .into(view);
@@ -161,64 +145,4 @@ public class RunningCodeApplication extends Application {
     public void onTerminate() {
         super.onTerminate();
     }
-
-    private class RcExceptionHandler implements Thread.UncaughtExceptionHandler {
-
-        @Override
-        public void uncaughtException(Thread thread, Throwable ex) {
-            PrintStream printer = null;
-            try {
-                FileOutputStream out = new FileOutputStream(CRASH_LOG, true);
-                printer = new PrintStream(out, false);
-                printer.print("#====== ");
-                printer.print(DateUtil.getCurDateStr());
-                printer.println(" ======");
-
-                printer.print("UncaughtException:");
-                if (thread != null) {
-                    printer.print(thread.getName());
-                    printer.print("(" + thread.getId() + ")");
-                }
-                printer.println();
-
-                if (ex != null) {
-                    ex.printStackTrace();
-                    ex.printStackTrace(printer);
-
-                    Throwable t = ex.getCause();
-                    if (t != null) {
-                        printer.println("Case trace:");
-                        t.printStackTrace(printer);
-                    }
-                }
-            } catch (Throwable t) {
-                t.printStackTrace();
-            } finally {
-                if (printer != null) {
-                    try {
-                        printer.close();
-                    } catch (Throwable t) {
-                        // ignore
-                    }
-                }
-            }
-
-        }
-    }
-
-    /**
-     * 该Handler是在BroadcastReceiver中被调用，故
-     * 如果需启动Activity，需添加Intent.FLAG_ACTIVITY_NEW_TASK
-     * */
-   /* UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler(){
-        @Override
-        public void dealWithCustomAction(Context context, UMessage msg) {
-            Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
-            L.i("接收到自定义消息："+msg.extra);
-            String type = msg.extra.get("type").toString();
-            if (TextUtils.equals(type, Constants.TYPE_OPEN)){
-                CommonUtil.openMarket(sInstance);
-            }
-        }
-    };*/
 }

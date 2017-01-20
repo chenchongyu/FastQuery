@@ -53,6 +53,17 @@
                       android:layout_toEndOf="@+id/v_weather_icon"
                       android:layout_alignBaseline="@+id/v_weather_icon"
                 />
+            <TextView android:id="@+id/v_air"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:paddingTop="20px"
+                      android:paddingLeft="20px"
+                      android:textSize="32px"
+                      tools:text="空气优(25)"
+                      android:layout_alignParentRight="true"
+                      android:layout_centerInParent="true"
+                      android:textColor="@android:color/white"
+                />
 
             <TextView android:id="@+id/v_ws"
                       android:layout_width="wrap_content"

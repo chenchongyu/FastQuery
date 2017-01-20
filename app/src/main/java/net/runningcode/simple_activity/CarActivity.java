@@ -24,6 +24,8 @@ import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
 import net.runningcode.utils.SPUtils;
 
+import static net.runningcode.net.FastJsonRequest.getNewInstance;
+
 /**
  * Created by Administrator on 2016/1/15.
  */
@@ -107,7 +109,7 @@ public class CarActivity extends BasicActivity implements View.OnClickListener,H
             return;
         }
         SPUtils.getInstance(null).edit().putString(Constants.KEY_CAR_NO,num);
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_YAOHAO);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_YAOHAO);
 //        ?name=6704105512283&city=%E5%8C%97%E4%BA%AC&format=json&resource_id=4003
         request.add("name",num);
         request.add("city","北京");

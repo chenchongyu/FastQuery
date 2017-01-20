@@ -9,6 +9,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -24,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Interpolator;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -261,6 +263,16 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		view.setVisibility(View.VISIBLE);
 		view.setTextColor(color);
 	}
+
+	public void setEditBottomColor(EditText editText,int color){
+		L.i("setEditBottomColor------");
+		GradientDrawable shape = new GradientDrawable();
+		shape.setColor(getResources().getColor(color));
+		shape.setSize(1000,2);
+		shape.setBounds(0, 0, shape.getMinimumWidth(), shape.getMinimumHeight());
+		editText.setCompoundDrawables(null, null, null, shape);
+	}
+
 
 	@Override
 	protected void onResume() {

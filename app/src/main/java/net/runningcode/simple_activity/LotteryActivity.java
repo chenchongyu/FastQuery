@@ -20,6 +20,8 @@ import net.runningcode.net.HttpListener;
 import net.runningcode.utils.L;
 import net.runningcode.view.CircleTextView;
 
+import static net.runningcode.net.FastJsonRequest.getNewInstance;
+
 /**
  * Created by Administrator on 2016/5/6.
  */
@@ -66,7 +68,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
     private void query(LOTTERY lottery){
         L.i("当前彩票类型："+lottery.toString());
 
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_LOTTERY_INFO);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_LOTTERY_INFO);
         request.add("lotterycode",lottery.toString());
         request.add("recordcnt",1);
 
@@ -95,11 +97,11 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
     @Override
     public void onSucceed(int what, Response response) {
         JSONObject result = (JSONObject) response.get();
-        int errNum = result.getIntValue("errNum");
+        int errNum = result.getIntValue("error_code");
         if (errNum != 0){
-            vResultLabel.setText(result.getString("retMsg"));
+            vResultLabel.setText(result.getString("reason"));
         }else {
-            JSONObject data = result.getJSONObject("retData").getJSONArray("data").getJSONObject(0);
+            JSONObject data = result.getJSONObject("result").getJSONArray("data").getJSONObject(0);
             String batch = data.getString("expect");
             String code = data.getString("openCode");
 

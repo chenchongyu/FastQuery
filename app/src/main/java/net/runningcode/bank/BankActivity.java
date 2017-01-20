@@ -27,6 +27,8 @@ import net.runningcode.net.WaitDialog;
 import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
 
+import static net.runningcode.net.FastJsonRequest.getNewInstance;
+
 /**
  * Created by Administrator on 2016/1/15.
  */
@@ -165,7 +167,7 @@ public class BankActivity extends BasicActivity implements View.OnClickListener,
 //        }
 
         cardNo = num;
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_BANK_INFO);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_BANK_INFO);
         request.add("showapi_appid", Constants.YY_APP_ID);
         request.add("showapi_sign", Constants.YY_APP_SECRET);
         request.add("cardnum", cardNo);

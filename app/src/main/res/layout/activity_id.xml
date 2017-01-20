@@ -27,6 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="64px"
                 android:paddingLeft="10px"
+                android:background="@null"
+                android:drawablePadding="3dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:inputType="textVisiblePassword"
@@ -100,6 +102,7 @@
                     android:textColor="@color/black"
                     android:text="@{constellation}"
                     tools:text="天蝎座"
+                    android:visibility="gone"
                     />
                 <TextView
                     android:id="@+id/v_zodiac"
@@ -112,6 +115,7 @@
                     android:textColor="@color/black"
                     android:text="@{zodiac}"
                     tools:text="生肖：牛"
+                    android:visibility="gone"
                     />
                 <TextView
                     android:id="@+id/v_address"

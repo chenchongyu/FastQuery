@@ -3,6 +3,7 @@ package net.runningcode;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,16 +28,14 @@ import com.sixth.adwoad.NativeAdView;
 import com.xiaomi.mistatistic.sdk.MiStatInterface;
 import com.yolanda.nohttp.Response;
 
-import net.runningcode.bank.BankActivity;
 import net.runningcode.constant.Constants;
 import net.runningcode.constant.URLConstant;
 import net.runningcode.express.ExpressActivity;
-import net.runningcode.simple_activity.CarActivity;
-import net.runningcode.simple_activity.IDActivity;
-import net.runningcode.simple_activity.LotteryActivity;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
+import net.runningcode.simple_activity.IDActivity;
+import net.runningcode.simple_activity.LotteryActivity;
 import net.runningcode.simple_activity.NumberActivity;
 import net.runningcode.simple_activity.PhoneActivity;
 import net.runningcode.simple_activity.TranslateActivity;
@@ -45,16 +44,24 @@ import net.runningcode.utils.DateUtil;
 import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.runningcode.net.FastJsonRequest.getNewInstance;
+
+
 /**
  * Created by Administrator on 2016/1/15.
+ * // TODO: 2017/1/19
+ * 1、身份证查询接口失效，改用阿凡达接口
+ * 2、增加常用地市工资计算
+ * 3、消息通知，弹出提示
  */
 public class IndexActivity extends BasicActivity implements View.OnClickListener, HttpListener<JSON>,
         AdapterView.OnItemClickListener,AMapLocationListener, NativeAdListener {
     private final static int ELEMENT_SIZE = 8;
-    private TextView vWeather,vTemperature,vCity,vDate,vWD;
+    private TextView vWeather,vTemperature,vCity,vDate,vWD,vAir;
     private ImageView vWeatherIcon,vWeatherBg;
     private RelativeLayout vContent;
     private GridView vTable;
@@ -92,6 +99,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         vCity = $(R.id.v_city);
         vDate = $(R.id.v_date);
         vTable = $(R.id.v_table);
+        vAir = $(R.id.v_air);
 
         vCity.setOnClickListener(this);
         vTable.setOnItemClickListener(this);
@@ -128,8 +136,9 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         map.put(R.drawable.icon_express,"快递查询");
         map.put(R.drawable.icon_translate,"翻译");
         map.put(R.drawable.icon_num,"数字转大写");
-        map.put(R.drawable.icon_car,"汽车摇号");
-//        map.put(R.drawable.icon_bank,"银行卡查询");
+//        map.put(R.drawable.icon_car,"汽车摇号");
+        map.put(R.drawable.icon_feedback,"吐槽反馈");
+//        map.put(R.drawable.icon_bank,"吐槽反馈");
 
         list = new ArrayList<>(ELEMENT_SIZE);
         list.add(R.drawable.icon_phone);
@@ -139,7 +148,9 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         list.add(R.drawable.icon_express);
         list.add(R.drawable.icon_translate);
         list.add(R.drawable.icon_num);
-        list.add(R.drawable.icon_car);
+//        list.add(R.drawable.icon_car);
+//        list.add(R.drawable.icon_car);
+        list.add(R.drawable.icon_feedback);
 //        list.add(R.drawable.icon_bank);
 
         adapter = new ItemsAdapter(list);
@@ -148,6 +159,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void initPosition() {
+        BigDecimal bigDecimal = new BigDecimal("111");
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
         //设置定位回调监听
@@ -173,15 +185,8 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         mLocationClient.startLocation();
     }
 
-    private void getIp() {
-        L.i("IP:"+CommonUtil.getLocalIpAddress());
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_IP_INFO);
-        request.add("ip", CommonUtil.getLocalIpAddress());
-        CallServer.getRequestInstance().add(this, request, this, true, true);
-    }
-
     private void getWeather() {
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_WEATHER);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_WEATHER);
         request.add("cityname", city);
 
         CallServer.getRequestInstance().add(this, request, this, true, true);
@@ -227,21 +232,29 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void setWeather(JSONObject result) {
-        if (result.getIntValue("errNum") != 0){
-            vWeather.setText("获取天气信息失败");
+        if (result.getIntValue("error_code") != 0){
+            final String reason = result.getString("reason");
+
+            vWeather.setText(TextUtils.isEmpty(reason) ?"获取天气信息失败":reason);
             return;
         }
-        JSONObject weather = result.getJSONObject("retData");
+        JSONObject data = result.getJSONObject("result");
+        JSONObject realtime = data.getJSONObject("realtime");
+        JSONObject pm25 = data.getJSONObject("pm25").getJSONObject("pm25");
+        JSONObject weather = realtime.getJSONObject("weather");
+        JSONObject wd = realtime.getJSONObject("wind");
         final String du = getString(R.string.du);
-        final String text = weather.getString("l_tmp") + du + "c" + "~" + weather.getString("h_tmp") + du + "c";
+        final String text = weather.getString("temperature") + du + "c";
         vTemperature.setText(text);
-        String wd = weather.getString("WD");
-        vWD.setText(wd);
-        final String weatherString = weather.getString("weather");
+        String wdStr = wd.getString("direct")+" "+wd.getString("power");
+        vWD.setText(wdStr);
+        final String weatherString = weather.getString("info");
         vWeather.setText(weatherString);
         int drawble = CommonUtil.getDrawbleByWeather(weatherString);
         vWeatherIcon.setImageResource(drawble);
         vWeatherBg.setImageResource(CommonUtil.getBgDrawbleByWeather(weatherString));
+
+        vAir.setText("空气"+pm25.getString("quality")+"("+pm25.getString("pm25")+")");
     }
 
     @Override
@@ -266,7 +279,8 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
                 startActivity(new Intent(this, LotteryActivity.class),view);
                 break;
             case R.drawable.icon_bank:
-                startActivity(new Intent(this, BankActivity.class),view);
+//                startActivity(new Intent(this, BankActivity.class),view);
+                sendEmail();
                 break;
             case R.drawable.icon_translate:
                 startActivity(new Intent(this, TranslateActivity.class),view);
@@ -274,9 +288,11 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             case R.drawable.icon_num:
                 startActivity(new Intent(this, NumberActivity.class),view);
                 break;
-            case R.drawable.icon_car:
-                startActivity(new Intent(this, CarActivity.class),view);
+            case R.drawable.icon_feedback:
+                sendEmail();
+//                startActivity(new Intent(this, CarActivity.class),view);
                 break;
+
             case -1:
                 MiStatInterface.recordCountEvent("click ad","native ad click");
                 DialogUtils.showShortToast(this,"推广链接，谢谢点击！");
@@ -286,6 +302,20 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
                 break;
 
         }
+    }
+
+    private void sendEmail() {
+        String[] reciver = new String[] { "wochenchongyu@126.com" };
+        String[] mySbuject = new String[] { "我要吐槽" };
+        String myCc = "cc";
+        String mybody = "测试Email Intent";
+        Intent myIntent = new Intent(android.content.Intent.ACTION_SEND);
+        myIntent.setType("plain/text");
+        myIntent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver);
+        myIntent.putExtra(android.content.Intent.EXTRA_CC, myCc);
+        myIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, mySbuject);
+        myIntent.putExtra(android.content.Intent.EXTRA_TEXT, mybody);
+        startActivity(Intent.createChooser(myIntent, "mail test"));
     }
 
     @Override

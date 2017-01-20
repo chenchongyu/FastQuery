@@ -45,6 +45,8 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+import static net.runningcode.net.FastJsonRequest.getNewInstance;
+
 /**
  * Created by Administrator on 2016/1/15.
  */
@@ -100,6 +102,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         vExpressNo = $(R.id.v_no);
         vQuery = $(R.id.v_query);
 
+        setEditBottomColor(vExpressNo,R.color.red);
         vExpressNo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -240,7 +243,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         }
 
         expNo = num;
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_COM_BY_EXPRESS_NO);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_COM_BY_EXPRESS_NO);
         request.add("num", expNo);
         dialog.show();
         CallServer.getRequestInstance().add(this, request, this, true, false);
@@ -324,7 +327,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
     private void getExpInfo(int i) {
         L.i("第"+i+"次请求");
         JSONObject com = coms.getJSONObject(i);
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_INFO_BY_COM_AND_EXPRESS);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_INFO_BY_COM_AND_EXPRESS);
         request.add("com",com.getString("comCode"));
         request.add("nu",expNo);
         request.add("appid",4001);//这个值是从百度页面扒的

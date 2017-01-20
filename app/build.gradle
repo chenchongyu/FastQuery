@@ -13,8 +13,8 @@ android {
         applicationId "net.runningcode"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 4
-        versionName "1.2.1"
+        versionCode 5
+        versionName "1.2.2"
         manifestPlaceholders = [ CHANNEL:"default" ]
         ndk {
             abiFilters "armeabi"
@@ -28,8 +28,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -48,17 +48,20 @@ android {
 
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java']//, 'src/main/java-gen'
+            java.srcDirs = ['src/main/java']//,'src/main/java-gen'
         }
     }
+
+//    dexOptions {
+//        preDexLibraries = false
+//    }
 
 }
 
 dependencies {
-//    compile 'de.greenrobot:greendao:2.0.0'
-//    compile 'com.squareup.okhttp3:okhttp:3.0.1'
+
     compile 'com.balysv:material-ripple:1.0.2'
-    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.yolanda.nohttp:nohttp:1.0.0'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
@@ -66,6 +69,27 @@ dependencies {
     compile 'me.drakeet.materialdialog:library:1.2.8'
     compile 'com.github.bumptech.glide:glide:3.5.2'
     compile 'com.zhy:autolayout:1.4.3'
+//    compile ('com.balysv:material-ripple:1.0.2'){
+//        exclude module: 'support-v4'
+//    }
+//    compile 'com.android.support:recyclerview-v7:+'
+//    compile ('com.yolanda.nohttp:nohttp:1.0.0'){
+//        exclude module: 'support-v4'
+//    }
+//
+//    compile 'com.android.support:appcompat-v7:23.2.1'
+//    compile ('com.android.support:design:23.2.1'){
+//        exclude module: 'support-v4'
+//    }
+//    compile ('com.readystatesoftware.systembartint:systembartint:1.0.3'){
+//        exclude module: 'support-v4'
+//    }
+//    compile ('me.drakeet.materialdialog:library:1.2.8'){
+//        exclude module: 'support-v4'
+//    }
+//    compile ('com.github.bumptech.glide:glide:3.5.2'){
+//        exclude module: 'support-v4'
+//    }
 //    compile 'io.card:android-sdk:5.4.0' //信用卡查询
 //    compile project(':PushSDK')
     compile fileTree(dir: 'libs', include: ['*.jar'])

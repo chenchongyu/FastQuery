@@ -45,6 +45,8 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.Random;
 
+import static net.runningcode.net.FastJsonRequest.getNewInstance;
+
 /**
  * Created by Administrator on 2016/1/15.
  */
@@ -84,6 +86,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         vTransResult = $(R.id.v_translate_result);
         vMainResult = $(R.id.v_main_result);
 
+        setEditBottomColor(vText,R.color.translate_purple);
         vText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -163,7 +166,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
             playSound();
         }else {
             String text = vMainResult.getText().toString();
-            FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_SOUND_BY_TEXT);
+            FastJsonRequest request = getNewInstance(URLConstant.API_GET_SOUND_BY_TEXT);
 //        try {
 //            request.add("text", URLEncoder.encode(text,"UTF-8"));
             request.add("text", text);
@@ -210,7 +213,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         final String md5 = StringUtils.md5(md5str.toString()).toLowerCase();
         L.i("md5:"+md5);
 
-        FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_TANSLATE_INFO);
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_TANSLATE_INFO);
         request.add("q", q);
 /*        request.add("from", "auto");
         request.add("to", "zh");
