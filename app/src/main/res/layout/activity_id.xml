@@ -66,7 +66,7 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:layout_alignParentLeft="true"
-                           android:src="@drawable/icon_unicom"
+
                     />
                 <TextView
                     android:id="@+id/v_birthday"
