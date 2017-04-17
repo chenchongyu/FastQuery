@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <import type="net.runningcode.utils.CommonUtil"/>
-        <import type="android.view.View" />
 
-        <variable name="phoneNum" type="String"/>
-        <variable name="supplier" type="String"/>
-    </data>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"
+                  xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical">
-        <include layout="@layout/toolbar"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -69,7 +63,7 @@
                             android:paddingRight="60px"
                             android:orientation="horizontal"
                             android:background="@color/btn_gray"
-                            android:visibility="@{supplier != null ? View.VISIBLE : View.GONE}"
+
                 >
                 <ImageView android:id="@+id/v_icon"
                            android:layout_width="wrap_content"
@@ -84,7 +78,7 @@
                     android:textSize="50px"
                     android:paddingLeft="30px"
                     android:textColor="@color/black"
-                    tools:text="@{phoneNum}"
+
                     />
                 <TextView
                     android:id="@+id/v_phone_result"
@@ -96,9 +90,9 @@
                     android:paddingLeft="30px"
                     android:paddingTop="30px"
                     android:textColor="@color/black"
-                    android:text="@{supplier}"
+
                     />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
-</layout>
+

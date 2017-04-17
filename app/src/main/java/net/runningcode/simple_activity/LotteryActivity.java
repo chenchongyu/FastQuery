@@ -101,7 +101,12 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
         if (errNum != 0){
             vResultLabel.setText(result.getString("reason"));
         }else {
-            JSONObject data = result.getJSONObject("result").getJSONArray("data").getJSONObject(0);
+            final JSONObject result1 = result.getJSONObject("result");
+            if(result1 == null){
+                vResultLabel.setText("暂无数据");
+                return;
+            }
+            JSONObject data = result1.getJSONArray("data").getJSONObject(0);
             String batch = data.getString("expect");
             String code = data.getString("openCode");
 

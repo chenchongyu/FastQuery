@@ -18,7 +18,6 @@ import com.yolanda.nohttp.Response;
 import net.runningcode.BasicActivity;
 import net.runningcode.R;
 import net.runningcode.constant.URLConstant;
-import net.runningcode.databinding.ActivityPhoneBinding;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
@@ -34,7 +33,8 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
     private EditText vPhone;
     private ImageView vQuery,vIcon,vClear;
     private View vLine;
-//    private View vPanel;
+    private View vPanel;
+    private TextView vPhoneNO,vPhoneResult;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -50,10 +50,13 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
         vQuery = $(R.id.v_query);
         vClear = $(R.id.v_clear);
         vLine = $(R.id.view);
+        vPanel = $(R.id.v_result_panel);
+        vPhoneNO = $(R.id.v_phone_no);
+        vPhoneResult = $(R.id.v_phone_result);
 
         vClear.setOnClickListener(this);
         vQuery.setOnClickListener(this);
-
+        setEditBottomColor(vPhone,R.color.id_red);
         vPhone.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -130,15 +133,16 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
     public void onSucceed(int what, Response response) {
         JSONObject result = (JSONObject) response.get();
         JSONObject data = result.getJSONObject("result");
-        ((ActivityPhoneBinding)binding).setPhoneNum(vPhone.getText().toString());
+        vPhoneNO.setText(vPhone.getText().toString());
         String s = data.getString("mobilearea");
         final String supplier = data.getString("mobiletype");
-        ((ActivityPhoneBinding)binding).setSupplier(s+"-"+ supplier);
+        vPhoneResult.setText(s+"-"+ supplier);
+//        vPhoneResult.setVisibility(View.VISIBLE);
         vIcon.setImageResource(CommonUtil.getDrawbleByPhone(supplier));
     }
 
     @Override
     public void onFailed(int what, String url, Object tag, Exception message, int responseCode, long networkMillis) {
-        ((ActivityPhoneBinding)binding).setSupplier("查询失败："+message);
+        vPhoneResult.setText("查询失败："+message);
     }
 }

@@ -76,6 +76,8 @@
                   android:exported="false" android:screenOrientation="portrait" />
         <activity android:name=".simple_activity.CarActivity"
                   android:exported="false" android:screenOrientation="portrait" />
+        <activity android:name=".simple_activity.ShortUrlActivity" android:screenOrientation="portrait" />
+
 
         <service android:name="com.amap.api.location.APSService"></service>
 

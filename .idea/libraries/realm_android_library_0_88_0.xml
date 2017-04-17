@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="realm-android-library-0.88.0">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/io.realm/realm-android-library/0.88.0/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/io.realm/realm-android-library/0.88.0/jars/classes.jar!/" />
+      <root url="file://D:/Program Files/Android/android-sdk/.android/build-cache/02c055342d396d2c0343886228ac559bfeb847c3/output/res" />
+      <root url="jar://D:/Program Files/Android/android-sdk/.android/build-cache/02c055342d396d2c0343886228ac559bfeb847c3/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

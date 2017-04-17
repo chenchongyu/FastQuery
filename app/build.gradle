@@ -1,17 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
-
-    dataBinding {
-        enabled true
-    }
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "net.runningcode"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 5
         versionName "1.2.2"
@@ -58,17 +55,26 @@ android {
 
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:appcompat-v7:23.2.1'
+    }
+}
 dependencies {
 
     compile 'com.balysv:material-ripple:1.0.2'
-    compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.yolanda.nohttp:nohttp:1.0.0'
+    compile 'com.yanzhenjie:permission:1.0.5'
+    compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'me.drakeet.materialdialog:library:1.2.8'
     compile 'com.github.bumptech.glide:glide:3.5.2'
+    compile 'com.jakewharton:butterknife:8.4.0'
     compile 'com.zhy:autolayout:1.4.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
 //    compile ('com.balysv:material-ripple:1.0.2'){
 //        exclude module: 'support-v4'
 //    }

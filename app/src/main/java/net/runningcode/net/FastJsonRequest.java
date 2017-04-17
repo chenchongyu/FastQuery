@@ -41,7 +41,7 @@ import java.util.Map;
  */
 public class FastJsonRequest extends RestRequest<JSON> {
     public int what;
-    private FastJsonRequest(String url) {
+    public FastJsonRequest(String url) {
         super(url);
         what = URLConstant.getWhat(url);
 //        addHeader("apikey", Constants.BAIDU_API_KEY);
@@ -49,6 +49,7 @@ public class FastJsonRequest extends RestRequest<JSON> {
 
     public static FastJsonRequest getNewInstance(String url){
         FastJsonRequest fastJsonRequest = new FastJsonRequest(url);
+//        fastJsonRequest.addHeader("apikey", Constants.BAIDU_API_KEY);
 //        fastJsonRequest.add("key",Constants.AVARDA_KEY);
 
         return fastJsonRequest;

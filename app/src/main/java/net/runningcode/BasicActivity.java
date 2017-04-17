@@ -5,8 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -38,6 +36,8 @@ import net.runningcode.utils.AnimationFactory;
 import net.runningcode.utils.L;
 import net.runningcode.utils.TransitionHelper;
 
+import butterknife.ButterKnife;
+
 
 public abstract class BasicActivity extends AutoLayoutActivity {
 	public static final String ACTION_EXIT = RunningCodeApplication.getInstance().getPackageName() + ".EXIT";
@@ -48,7 +48,7 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 	protected Toolbar toolbar;
 	protected View shareTarget;
 	protected Interpolator interpolator;
-	protected ViewDataBinding binding;
+//	protected ViewDataBinding binding;
 	private SystemBarTintManager tintManager;
 
 	protected void onCreate(Bundle arg0) {
@@ -61,8 +61,11 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		binding = DataBindingUtil.setContentView(this, getContentViewID());
+//		binding = DataBindingUtil.setContentView(this, R.layout.layout_base);
+		setContentView(R.layout.layout_base);
+		addView(getContentViewID());
 
+		ButterKnife.bind(this);
 		//设置FitsSystemWindows
 		ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
 		View parentView = contentFrameLayout.getChildAt(0);
@@ -77,6 +80,13 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		filter.addAction(ACTION_EXIT);
 		registerReceiver(mExitReceiver, filter);
 //	    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+	}
+
+	public void addView(int layoutResID) {
+		View view = View.inflate(this, layoutResID, null);
+		ViewGroup root = (ViewGroup) findViewById(R.id.v_root);
+		if(root == null) return;
+		root.addView(view,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 	}
 
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)

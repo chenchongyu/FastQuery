@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <EditText
+            android:id="@+id/v_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/v_gen"
+            android:inputType="textWebEmailAddress"
+            android:hint="请输入原网址"
+            />
+        <TextView
+            android:id="@+id/v_gen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="生成"
+            android:textColor="@color/black"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/v_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:autoLink="web"
+        android:textIsSelectable="true"
+        android:background="@drawable/shape_round_rect_gray_fill"
+        android:textColor="@android:color/white"
+        android:text="www.baidu.com"
+        />
+</LinearLayout>

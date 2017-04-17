@@ -18,7 +18,6 @@ import com.yolanda.nohttp.Response;
 import net.runningcode.BasicActivity;
 import net.runningcode.R;
 import net.runningcode.constant.URLConstant;
-import net.runningcode.databinding.ActivityIdBinding;
 import net.runningcode.net.CallServer;
 import net.runningcode.net.FastJsonRequest;
 import net.runningcode.net.HttpListener;
@@ -35,7 +34,8 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
     private EditText vID;
     private ImageView vQuery,vIcon,vClear;
     private View vLine;
-//    private View vPanel;
+    private View vPanel;
+    TextView vBirthday,vConstellation,vZodiac,vAddress;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -51,6 +51,11 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
         vQuery = $(R.id.v_query);
         vClear = $(R.id.v_clear);
         vLine = $(R.id.view);
+        vPanel = $(R.id.v_result_panel);
+        vBirthday = $(R.id.v_birthday);
+        vConstellation = $(R.id.v_constellation);
+        vZodiac = $(R.id.v_zodiac);
+        vAddress = $(R.id.v_address);
 
         vQuery.setOnClickListener(this);
         vClear.setOnClickListener(this);
@@ -130,13 +135,13 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
         JSONObject result = (JSONObject) response.get();
         L.i("onsucceed:"+result);
         if (result.getIntValue("error_code") != 0){
-            ((ActivityIdBinding)binding).setAddress(result.getString("reason"));
+            vAddress.setText(result.getString("reason"));
             vIcon.setImageResource(R.drawable.icon_error);
             return;
         }
         JSONObject data = result.getJSONObject("result");
-        ((ActivityIdBinding)binding).setAddress(data.getString("address"));
-        ((ActivityIdBinding)binding).setBirthday(data.getString("birthday"));
+        vAddress.setText(data.getString("address"));
+        vBirthday.setText(data.getString("birthday"));
 //        ((ActivityIdBinding)binding).setConstellation(data.getString("constellation"));
 
         final String gender = data.getString("sex");
@@ -145,6 +150,6 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
 
     @Override
     public void onFailed(int what, String url, Object tag, Exception message, int responseCode, long networkMillis) {
-        ((ActivityIdBinding)binding).setAddress("查询失败："+message);
+        vAddress.setText("查询失败："+message);
     }
 }

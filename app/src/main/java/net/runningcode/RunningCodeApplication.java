@@ -20,6 +20,7 @@ import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 
 import net.runningcode.constant.Constants;
+import net.runningcode.detect.BlockDetector;
 import net.runningcode.utils.L;
 import net.runningcode.utils.PathUtil;
 import net.runningcode.utils.SPUtils;
@@ -86,6 +87,11 @@ public class RunningCodeApplication extends Application {
 //        initPush();
         if (shouldInit())
             initXiaoMi();
+
+        if (BuildConfig.DEBUG){
+            //ui卡顿检测
+            BlockDetector.start();
+        }
 //        AutoLayoutConifg.getInstance().useDeviceSize();
 //        initOCR();
 //        RcExceptionHandler handler = new RcExceptionHandler();

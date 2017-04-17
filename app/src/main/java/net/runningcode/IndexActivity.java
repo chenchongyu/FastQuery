@@ -26,6 +26,7 @@ import com.sixth.adwoad.ErrorCode;
 import com.sixth.adwoad.NativeAdListener;
 import com.sixth.adwoad.NativeAdView;
 import com.xiaomi.mistatistic.sdk.MiStatInterface;
+import com.yanzhenjie.permission.AndPermission;
 import com.yolanda.nohttp.Response;
 
 import net.runningcode.constant.Constants;
@@ -44,7 +45,6 @@ import net.runningcode.utils.DateUtil;
 import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,6 +123,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
 
 
     // TODO: 2016/7/26 汇率转换、成语、周公解梦  改用RxAndroid  butterknife
+    // TODO: 2017/3/23 动态权限
     private void initData() {
         initPosition();
 
@@ -136,7 +137,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         map.put(R.drawable.icon_express,"快递查询");
         map.put(R.drawable.icon_translate,"翻译");
         map.put(R.drawable.icon_num,"数字转大写");
-//        map.put(R.drawable.icon_car,"汽车摇号");
+        map.put(R.drawable.icon_car,"工资计算");
         map.put(R.drawable.icon_feedback,"吐槽反馈");
 //        map.put(R.drawable.icon_bank,"吐槽反馈");
 
@@ -148,7 +149,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         list.add(R.drawable.icon_express);
         list.add(R.drawable.icon_translate);
         list.add(R.drawable.icon_num);
-//        list.add(R.drawable.icon_car);
+        list.add(R.drawable.icon_car);
 //        list.add(R.drawable.icon_car);
         list.add(R.drawable.icon_feedback);
 //        list.add(R.drawable.icon_bank);
@@ -159,7 +160,21 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void initPosition() {
-        BigDecimal bigDecimal = new BigDecimal("111");
+        // 先判断是否有权限。
+        if(AndPermission.hasPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            // 有权限，直接do anything.
+            locatePos();
+        } else {
+            // 申请权限。
+            AndPermission.with(this)
+                    .requestCode(100)
+                    .permission( android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                    .send();
+        }
+
+    }
+
+    private void locatePos() {
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
         //设置定位回调监听
@@ -288,6 +303,9 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             case R.drawable.icon_num:
                 startActivity(new Intent(this, NumberActivity.class),view);
                 break;
+            case R.drawable.icon_car:
+                startActivity(new Intent(this, NumberActivity.class),view);
+                break;
             case R.drawable.icon_feedback:
                 sendEmail();
 //                startActivity(new Intent(this, CarActivity.class),view);
@@ -308,14 +326,14 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         String[] reciver = new String[] { "wochenchongyu@126.com" };
         String[] mySbuject = new String[] { "我要吐槽" };
         String myCc = "cc";
-        String mybody = "测试Email Intent";
+        String mybody = "我要吐槽：";
         Intent myIntent = new Intent(android.content.Intent.ACTION_SEND);
         myIntent.setType("plain/text");
         myIntent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver);
         myIntent.putExtra(android.content.Intent.EXTRA_CC, myCc);
         myIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, mySbuject);
         myIntent.putExtra(android.content.Intent.EXTRA_TEXT, mybody);
-        startActivity(Intent.createChooser(myIntent, "mail test"));
+        startActivity(Intent.createChooser(myIntent, "我要吐槽"));
     }
 
     @Override

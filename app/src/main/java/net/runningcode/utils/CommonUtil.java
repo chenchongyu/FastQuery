@@ -1,6 +1,8 @@
 package net.runningcode.utils;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -326,6 +328,11 @@ public class CommonUtil {
 	public static String genMP3Path(String ext) {
 		L.i("语音路径："+PathUtil.getInstance().getCacheRootPath("sound")+"/translate_"+ext.replaceAll(" ","—")+".mp3");
 		return PathUtil.getInstance().getCacheRootPath("sound")+"/translate_"+ext.replaceAll(" ","—")+".mp3";
+	}
+
+	public static void copy(Context context,String str){
+		ClipboardManager clip = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+		clip.setPrimaryClip(ClipData.newPlainText(null, str));
 	}
 }
 

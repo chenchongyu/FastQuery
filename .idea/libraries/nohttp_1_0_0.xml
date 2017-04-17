@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="nohttp-1.0.0">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.yolanda.nohttp/nohttp/1.0.0/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.yolanda.nohttp/nohttp/1.0.0/jars/classes.jar!/" />
+      <root url="file://D:/Program Files/Android/android-sdk/.android/build-cache/3f502ac4f2d7d885a936bea462ebb2dac37c43cf/output/res" />
+      <root url="jar://D:/Program Files/Android/android-sdk/.android/build-cache/3f502ac4f2d7d885a936bea462ebb2dac37c43cf/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -15,6 +15,9 @@ public class Constants {
     public final static String BAIDU_API_KEY = "139694d38786afa74c61c486d76d7f0d";
     public final static String BAIDU_TRANS_APP_ID="20160621000023710";
     public final static String BAIDU_TRANS_APP_TOKEN="qCVTqei8Z4Ml56JCl3De";
+    public final static String BAIDU_TTS_APP_ID="8308285";
+    public final static String BAIDU_TTS_API_KEY="A0iWWk5Vm6eYe2jNKEzV0F26yPmQjOcO";
+    public final static String BAIDU_TTS_SECRET_KEY="RADnpFLcPNuesWl4frKdkI0pfPuEXTTD";
     //阿凡达API
 //    public final static String AVARDA_KEY = "f611175c9ec94f95a8fef3f15ac8666c";//正式
     public final static String AVARDA_KEY = "300f1037633d4af191fc4577fa6cda18";//测试
@@ -40,16 +43,24 @@ public class Constants {
     public static final String KEY_CAR_NO = "car_no";
 
     //不同地市公积金缴纳比例（整数），实际使用需除以100
-    public static ArrayMap GJJ_RATE = new ArrayMap();
+    public static ArrayMap<String,Integer> GJJ_RATE = new ArrayMap<String,Integer>();
     static {
         GJJ_RATE.put("beijing",12);
         GJJ_RATE.put("shanghai",7);
         GJJ_RATE.put("tianjin",11);
         GJJ_RATE.put("shenzhen",20);
         GJJ_RATE.put("guangzhou",20);
-        GJJ_RATE.put("zhengzhou",12);
-        GJJ_RATE.put("chongqing",12);
+        GJJ_RATE.put("chengdu",12);
         GJJ_RATE.put("hangzhou",12);
-        GJJ_RATE.put("wuhan",12);
+        GJJ_RATE.put("xiamen",12);
+        GJJ_RATE.put("xian",15);
+    }
+
+    //不同地市失业险缴纳比例（整数），实际使用需除以100
+    public static ArrayMap<String,Double> SY_RATE = new ArrayMap<String,Double>();
+    public static final double DEFAULST_SY_RATE = 0.5;
+    static {
+        SY_RATE.put("beijing",0.2);
+        SY_RATE.put("shenzhen",1.0);
     }
 }

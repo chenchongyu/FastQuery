@@ -24,6 +24,7 @@ public class URLConstant {
     public static final String API_GET_IMG_INFO = "http://api1.wozhitu.com:8080/imagesearch/api/v1.0/kwdsuggest";
     public static final String API_GET_YAOHAO = "https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/common/api/yaohao";
     public static final String API_GET_CURRENCY = "http://apis.baidu.com/apistore/currencyservice/currency";
+    public static final String API_GET_SHORT_URL = "http://api.avatardata.cn/ShortLink/LookUp?key=b8029d22dc354a03a2dd8e2598058c0a";
 
     public static final int API_GET_COM_BY_EXPRESS_NO_WHAT = 1;
     public static final int API_GET_INFO_BY_COM_AND_EXPRESS_WHAT = 20;
@@ -40,6 +41,7 @@ public class URLConstant {
     public static final int API_GET_SOUND_WHAT = 102;
     public static final int API_GET_YAOHAO_WHAT = 201;
     public static final int API_GET_CURRENCY_WHAT = 301;
+    public static final int API_GET_SHORT_URL_WHAT = 401;
     private static Map<String,Integer> URL_MAP = new HashMap<>(13);
 
     static {
@@ -58,6 +60,7 @@ public class URLConstant {
         URL_MAP.put(API_GET_SOUND_BY_TEXT,API_GET_SOUND_WHAT);
         URL_MAP.put(API_GET_YAOHAO,API_GET_YAOHAO_WHAT);
         URL_MAP.put(API_GET_CURRENCY,API_GET_CURRENCY_WHAT);
+        URL_MAP.put(API_GET_SHORT_URL,API_GET_SHORT_URL_WHAT);
     }
 
     public static int getWhat(String url){
