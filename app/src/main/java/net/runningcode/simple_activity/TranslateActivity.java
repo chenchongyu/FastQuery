@@ -79,12 +79,6 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
     }
     private void initView() {
 
-//        rlt = Native.openOcrEngine(RunningCodeApplication.getInstance().orcPath); // step 1: open OCR engine
-//        rlt = Native.setOcrLanguage(Native.TIANRUI_LANGUAGE_ENGLISH); // step 2: set recognition language
-//        if (rlt != 1){
-//            DialogUtils.showShortToast(this,"OCR图形引擎启动失败！");
-//        }
-
         mMyHandler = new MyHandler(this);
         vClear = $(R.id.v_clear);
 
@@ -96,7 +90,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         vTransResult = $(R.id.v_translate_result);
         vMainResult = $(R.id.v_main_result);
 
-        setEditBottomColor(vText,R.color.translate_purple);
+        setEditBottomColor(vText,R.color.item_green);
         vText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -138,7 +132,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
 
         dialog = new WaitDialog(this);
 
-        initToolbar(R.color.translate_purple,R.drawable.icon_translate);
+        initToolbar(R.color.item_green,R.drawable.icon_translate);
         setTitle("翻译");
 
         initialEnv();
@@ -244,7 +238,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
 
     protected void setupWindowAnimations() {
 //        interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.translate_purple);
+        setupEnterAnimations(R.drawable.gradient_toolbar_green);
         setupExitAnimations();
     }
 
@@ -322,7 +316,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
     private void setResult(JSONObject data) {
         int error = data.getIntValue("errorCode");
         if (error != 0){
-            DialogUtils.showShortToast(this,error);
+            DialogUtils.showShortToast(this,"请求错误:"+error);
             return;
         }
         vResult.setVisibility(View.VISIBLE);

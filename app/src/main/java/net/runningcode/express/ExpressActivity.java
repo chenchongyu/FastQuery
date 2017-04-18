@@ -102,7 +102,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
         vExpressNo = $(R.id.v_no);
         vQuery = $(R.id.v_query);
 
-        setEditBottomColor(vExpressNo,R.color.red);
+        setEditBottomColor(vExpressNo,R.color.item_purple);
         vExpressNo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -136,7 +136,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
 
         dialog = new WaitDialog(this);
 
-        initToolbar(R.color.red,R.drawable.icon_express);
+        initToolbar(R.color.item_purple,R.drawable.icon_express);
         setTitle("快递");
     }
 
@@ -167,7 +167,7 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
 
     protected void setupWindowAnimations() {
 //        interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.red);
+        setupEnterAnimations(R.drawable.gradient_toolbar_purple);
         setupExitAnimations();
     }
 

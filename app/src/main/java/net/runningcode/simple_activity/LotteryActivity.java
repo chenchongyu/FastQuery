@@ -46,7 +46,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
     }
 
     private void initView() {
-        initToolbar(R.color.lottery_yellow,R.drawable.icon_lottery);
+        initToolbar(R.color.item_red,R.drawable.icon_lottery);
         setTitle("彩票");
         vSsq = $(R.id.v_ssq);
         vDlt = $(R.id.v_dlt);
@@ -61,7 +61,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
 
     protected void setupWindowAnimations() {
         interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.lottery_yellow);
+        setupEnterAnimations(R.drawable.gradient_toolbar_red);
         setupExitAnimations();
     }
 

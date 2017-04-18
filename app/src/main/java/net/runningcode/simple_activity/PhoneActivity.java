@@ -43,7 +43,7 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
     }
 
     private void initView() {
-        initToolbar(R.color.phone_green,R.drawable.icon_phone);
+        initToolbar(R.color.item_orange,R.drawable.icon_phone);
         setTitle("手机归属地");
         vPhone = $(R.id.v_phone);
         vIcon = $(R.id.v_icon);
@@ -56,7 +56,7 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
 
         vClear.setOnClickListener(this);
         vQuery.setOnClickListener(this);
-        setEditBottomColor(vPhone,R.color.id_red);
+        setEditBottomColor(vPhone,R.color.item_orange);
         vPhone.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -94,7 +94,7 @@ public class PhoneActivity extends BasicActivity implements View.OnClickListener
 
     protected void setupWindowAnimations() {
         interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.phone_green);
+        setupEnterAnimations(R.drawable.gradient_toolbar_orange);
         setupExitAnimations();
     }
 

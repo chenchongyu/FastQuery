@@ -39,6 +39,7 @@ import net.runningcode.simple_activity.IDActivity;
 import net.runningcode.simple_activity.LotteryActivity;
 import net.runningcode.simple_activity.NumberActivity;
 import net.runningcode.simple_activity.PhoneActivity;
+import net.runningcode.simple_activity.SalaryActivity;
 import net.runningcode.simple_activity.TranslateActivity;
 import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DateUtil;
@@ -107,7 +108,6 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         setTitle(R.string.app_name);
         initData();
         setToolBarColor(R.drawable.gradient_toolbar);
-//        setToolBarColor(R.color.colorPrimary);
         setStatusBarColor(R.color.colorPrimaryDark);
 
         L.i("version===============:" + Build.VERSION.SDK_INT);
@@ -137,7 +137,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         map.put(R.drawable.icon_express,"快递查询");
         map.put(R.drawable.icon_translate,"翻译");
         map.put(R.drawable.icon_num,"数字转大写");
-        map.put(R.drawable.icon_car,"工资计算");
+        map.put(R.drawable.icon_salary,"工资计算");
         map.put(R.drawable.icon_feedback,"吐槽反馈");
 //        map.put(R.drawable.icon_bank,"吐槽反馈");
 
@@ -149,7 +149,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         list.add(R.drawable.icon_express);
         list.add(R.drawable.icon_translate);
         list.add(R.drawable.icon_num);
-        list.add(R.drawable.icon_car);
+        list.add(R.drawable.icon_salary);
 //        list.add(R.drawable.icon_car);
         list.add(R.drawable.icon_feedback);
 //        list.add(R.drawable.icon_bank);
@@ -303,8 +303,8 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             case R.drawable.icon_num:
                 startActivity(new Intent(this, NumberActivity.class),view);
                 break;
-            case R.drawable.icon_car:
-                startActivity(new Intent(this, NumberActivity.class),view);
+            case R.drawable.icon_salary:
+                startActivity(new Intent(this, SalaryActivity.class),view);
                 break;
             case R.drawable.icon_feedback:
                 sendEmail();

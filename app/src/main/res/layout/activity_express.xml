@@ -103,7 +103,7 @@
             android:layout_toEndOf="@id/v_logo"
             android:layout_below="@id/v_express_name"
             android:layout_marginTop="26px"
-            android:textColor="@color/lite_blue"
+            android:textColor="@color/colorPrimaryGreen"
             android:textSize="36px"
             android:inputType="phone"
             android:layout_toRightOf="@id/v_logo"/>

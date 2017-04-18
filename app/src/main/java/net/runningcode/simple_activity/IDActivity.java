@@ -25,6 +25,8 @@ import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
 
+import butterknife.BindDrawable;
+
 import static net.runningcode.net.FastJsonRequest.getNewInstance;
 
 /**
@@ -37,6 +39,8 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
     private View vPanel;
     TextView vBirthday,vConstellation,vZodiac,vAddress;
 
+    @BindDrawable(R.drawable.gradient_toolbar_blue)
+    int toolbarBg;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -44,7 +48,7 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
     }
 
     private void initView() {
-        initToolbar(R.color.id_red,R.drawable.icon_id);
+        initToolbar(R.color.item_blue,R.drawable.icon_id);
         setTitle("身份证");
         vID = $(R.id.v_id_no);
         vIcon = $(R.id.v_icon);
@@ -60,7 +64,7 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
         vQuery.setOnClickListener(this);
         vClear.setOnClickListener(this);
 
-        setEditBottomColor(vID,R.color.id_red);
+        setEditBottomColor(vID,R.color.item_blue);
         vID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -97,7 +101,7 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
 
     protected void setupWindowAnimations() {
         interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.id_red);
+        setupEnterAnimations(R.drawable.gradient_toolbar_blue);
         setupExitAnimations();
     }
 

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/v_data_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50px"
+        android:paddingRight="50px"
+        >
+
+        <TextView
+            android:id="@+id/v_salary_lable"
+            android:text="税前:"
+            style="@style/StyleSalaryInfoTitle"/>
+
+        <EditText
+            android:id="@+id/v_salary"
+            android:maxLength="9"
+            style="@style/StyleSalaryInfoInput"/>
+
+        <TextView
+            android:id="@+id/v_city_lable"
+            android:text="城市:"
+            android:layout_below="@id/v_salary_lable"
+            style="@style/StyleSalaryInfoTitle"/>
+
+        <EditText
+            android:id="@+id/v_city"
+            android:layout_width="280px"
+            android:layout_below="@id/v_salary_lable"
+            android:drawableRight="@drawable/icon_array_down"
+            android:text="北京"
+            style="@style/StyleSalaryInfoInput"/>
+        <Button
+            android:id="@+id/v_compute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_toolbar_orange"
+            android:layout_toRightOf="@id/v_city"
+            android:layout_below="@id/v_salary_lable"
+            android:layout_marginLeft="26px"
+            android:padding="28px"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:text="计算"
+            />
+
+        <TextView
+            android:id="@+id/v_sb_lable"
+            android:text="社保汇缴基数:"
+            android:layout_below="@id/v_city_lable"
+            style="@style/StyleSalaryInfoTitle"/>
+        <EditText
+            android:id="@+id/v_sb_rate"
+            android:layout_below="@id/v_city_lable"
+            android:layout_marginLeft="27px"
+            android:layout_toRightOf="@+id/v_sb_lable"
+            android:layout_toEndOf="@+id/v_sb_lable"
+            style="@style/StyleSalaryInfoInput"/>
+
+        <TextView
+            android:id="@+id/v_gjj_lable"
+            android:text="公积金汇缴基数:"
+            android:layout_below="@id/v_sb_lable"
+            style="@style/StyleSalaryInfoTitle"/>
+        <EditText
+            android:id="@+id/v_gjj_rate"
+            android:layout_below="@id/v_sb_lable"
+            android:layout_toRightOf="@+id/v_gjj_lable"
+            android:layout_toEndOf="@+id/v_gjj_lable"
+            style="@style/StyleSalaryInfoInput"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:gravity="center_vertical"
+        android:paddingLeft="50px"
+        android:orientation="horizontal"
+        android:background="@color/bg_gray"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="税后："
+            />
+        <TextView
+            android:id="@+id/v_salary_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/salary_after_tax"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50px"
+        android:paddingTop="30px"
+        android:paddingBottom="24px"
+        android:textColor="@color/text_orange"
+        android:text="五险一金汇缴明细"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50px"
+        android:paddingRight="50px"
+        android:stretchColumns="0,1,2"
+        android:gravity="center"
+        android:divider="@drawable/table_divider"
+        android:showDividers="beginning|middle|end"
+        android:orientation="vertical"
+        >
+        <TableRow>
+            <TextView android:text="个人应缴部分" android:layout_height="58px" android:layout_column="1" android:gravity="center"/>
+            <TextView android:text="企业应缴部分" android:layout_column="2" android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="养老保险金：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_ylj_self" android:text="640" android:gravity="center"/>
+            <TextView android:id="@+id/v_ylj_qy" android:text="1520" android:gravity="center"/>
+        </TableRow>
+
+        <TableRow >
+            <TextView android:text="医疗保险金：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_yl_self" android:text="640" android:gravity="center"/>
+            <TextView android:id="@+id/v_yl_qy" android:text="1520" android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="失业保险金：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_sy_self" android:text="640" android:gravity="center"/>
+            <TextView android:id="@+id/v_sy_qy" android:text="1520" android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="工伤保险金：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_gs_self" android:text="640" android:gravity="center"/>
+            <TextView android:id="@+id/v_gs_qy" android:text="1520" android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="生育保险金：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_sy2_self" android:text="640" android:gravity="center"/>
+            <TextView android:id="@+id/v_sy2_qy" android:text="1520" android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="住房公积金：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_gjj_self" android:text="640" android:gravity="center"/>
+            <TextView android:id="@+id/v_gjj_qy" android:text="1520" android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="个人所得税：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_grsds" android:text="640" android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="共计支出：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_total_pay_out" android:text="640" android:gravity="center"/>
+        </TableRow>
+
+
+        <TableRow>
+            <TextView android:text="税后月薪：" android:layout_height="58px"/>
+            <TextView android:id="@+id/v_salary_result2" android:text="640" android:gravity="center"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

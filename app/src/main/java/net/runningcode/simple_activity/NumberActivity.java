@@ -41,7 +41,7 @@ public class NumberActivity extends BasicActivity implements View.OnClickListene
         vResult = $(R.id.v_result);
         vMainResult = $(R.id.v_main_result);
 
-        setEditBottomColor(vText,R.color.num_yellow);
+        setEditBottomColor(vText,R.color.item_purple);
         vText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -69,14 +69,14 @@ public class NumberActivity extends BasicActivity implements View.OnClickListene
 
         vClear.setOnClickListener(this);
         vMainResult.setOnClickListener(this);
-        initToolbar(R.color.num_yellow,R.drawable.icon_num);
+        initToolbar(R.color.item_purple,R.drawable.icon_num);
         setTitle("数字转换");
     }
 
 
     protected void setupWindowAnimations() {
 //        interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.color.num_yellow);
+        setupEnterAnimations(R.drawable.gradient_toolbar_purple);
         setupExitAnimations();
     }
 

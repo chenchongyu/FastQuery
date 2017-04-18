@@ -3,69 +3,6 @@
 
     <item
         is-multidex="false"
-        jar="D:\Program Files\Android\android-sdk\.android\build-cache\7698b09b5daa5f0adf837ef37107fb0e46c99cf8\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="7b3e997517ba1b2ef7d22f0aabec3efbd598b613">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\classes_a26ab6daee95679c5080eea1172b40f7f9aa384a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\io.realm\realm-annotations\0.88.0\e5bb12591f0b0c765e331d8ff16710ffb1e9c1dc\realm-annotations-0.88.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e5bb12591f0b0c765e331d8ff16710ffb1e9c1dc">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\realm-annotations-0.88.0_6f74a9e01eb60029f2d9d6aecee93331d569e390.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\AMap_Location_V2.4.0_20160308.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="dd8aedb3d0d87b92777ab997ec883427d88f379a">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\AMap_Location_V2.4.0_20160308_0c233b9d6921abefaeb11ef54b07fb826d803629.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\fastjson-1.2.5.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="9f675e9a1b2bf1224183005752a9214226e8aa8e">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\fastjson-1.2.5_23cac7ff177dde275eab96c171c0e43145a96cc2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\Adwo_Android_SDK6.2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ba4a7bb9ed1e6d368907f022b3bbb1bcb3706a5b">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\Adwo_Android_SDK6.2_007d95a3574850d8bd1fb5658aa92634be886012.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.5.2\ecf534dba3a8446ce84cbb797d314763be212a68\glide-3.5.2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\glide-3.5.2_ea43fa33689a18fd8d7307d472bff1ec5c77700e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Program Files\Android\android-sdk\.android\build-cache\74a26a30dc3711c67815a0daf8c2a890164a231f\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0573d010bcb1ee874e1c258a31e98ab920e6805f">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\classes_ffa64e6a42781e14683f269c5c2e23c0b7631afd.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="E:\privatespace\FastQuery\app\libs\zxing.jar"
         jumboMode="false"
         optimize="true"
@@ -75,12 +12,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="D:\Program Files\Android\android-sdk\.android\build-cache\2d75b2406fd621d207bedcc5048daaa5e2924623\output\jars\classes.jar"
+        jar="E:\privatespace\FastQuery\app\libs\AMap_Location_V2.4.0_20160308.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="1aa28b11440779f8a6b0023688e283e9a0dcbb39">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\classes_91fbe21eed54e12b4fe21532f35609f5e7d969f8.jar" />
+        sha1="dd8aedb3d0d87b92777ab997ec883427d88f379a">
+        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\AMap_Location_V2.4.0_20160308_0c233b9d6921abefaeb11ef54b07fb826d803629.jar" />
     </item>
     <item
         is-multidex="false"
@@ -102,21 +39,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="D:\Program Files\Android\android-sdk\.android\build-cache\3f502ac4f2d7d885a936bea462ebb2dac37c43cf\output\jars\classes.jar"
+        jar="E:\privatespace\FastQuery\app\libs\fastjson-1.2.5.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="8d395aa0ba3bf73a6333eca823bbec369531702c">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\classes_37a35feab5ff160d4b9da18cad5bae2e30d29993.jar" />
+        sha1="9f675e9a1b2bf1224183005752a9214226e8aa8e">
+        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\fastjson-1.2.5_23cac7ff177dde275eab96c171c0e43145a96cc2.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="D:\Program Files\Android\android-sdk\.android\build-cache\02c055342d396d2c0343886228ac559bfeb847c3\output\jars\classes.jar"
+        jar="E:\privatespace\FastQuery\app\libs\Adwo_Android_SDK6.2.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="3f22f81c8ebfb063166902f8cab6e86b36fd658c">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\classes_47de5555a437285e926fadf0f7ef887268506388.jar" />
+        sha1="ba4a7bb9ed1e6d368907f022b3bbb1bcb3706a5b">
+        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\Adwo_Android_SDK6.2_007d95a3574850d8bd1fb5658aa92634be886012.jar" />
     </item>
     <item
         is-multidex="false"
@@ -126,24 +63,6 @@
         revision="25.0.0"
         sha1="13821b9782a321df92a623074b28c8aee1f03348">
         <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\com.baidu.tts_2.3.0_eecb63550fcbf2047607daf957285bc01ce3a22f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Program Files\Android\android-sdk\.android\build-cache\a962bc4a45fd4265b397f58b2d4037cf2ba5b9a0\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="911eeaf6f474e74b7dbd9fa7f19aa56715a344ae">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\classes_a42376e5f2554c7ad27c137081484f36e94ba20e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Program Files\Android\android-sdk\.android\build-cache\d0587632fc2402950a40509a06f72ec1081f2890\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="9416eb35add2a1c18df5d7de28f8906a090878b9">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\classes_f076885f93013f180b231593affcea08b16864dc.jar" />
     </item>
 
 </items>

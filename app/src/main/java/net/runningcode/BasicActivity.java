@@ -231,6 +231,10 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 
 	public abstract int getContentViewID();
 
+	/**
+	 * @param color 设置状态栏的颜色
+	 * @param drawble 设置新页面的shareTarget图标
+	 */
 	protected void initToolbar(int color,int drawble){
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
 			setToolBarColor(color);
@@ -238,12 +242,14 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 			shareTarget.setBackgroundResource(drawble);
 			shareTarget.setVisibility(View.VISIBLE);
 		}
+
+		setStatusBarColor(color);
 	}
 
 	protected void setToolBarColor(int color){
 		shareTarget.setVisibility(View.INVISIBLE);
 		toolbar.setBackgroundResource(color);
-		setStatusBarColor(color);
+//		setStatusBarColor(color);
 	}
 	protected void setStatusBarColor(int color){
 //		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

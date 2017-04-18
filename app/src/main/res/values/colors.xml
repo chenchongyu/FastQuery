@@ -39,10 +39,11 @@
     <color name="lottery_blue">#56abe4</color>
     <color name="lottery_yellow">#f19b2c</color>
     <color name="express_red">#ed4e41</color>
-    <color name="id_red">#f66858</color>
-    <color name="translate_purple">#6f58db</color>
-    <color name="num_yellow">#ed8e24</color>
-    <color name="car_blue">#38aad2</color>
-
+    <color name="item_orange">#e8b43c</color>
+    <color name="item_red">#e26434</color>
+    <color name="item_green">#3bc359</color>
+    <color name="item_purple">#a265c9</color>
+    <color name="item_blue">#29b3b3</color>
+    <color name="text_orange">#ef7a22</color>
 
 </resources>

@@ -44,4 +44,21 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">35px</item>
     </style>
+
+    <style name="StyleSalaryInfoTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:padding">28px</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">26px</item>
+    </style>
+
+    <style name="StyleSalaryInfoInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">28px</item>
+        <item name="android:layout_toEndOf">@+id/v_salary_lable</item>
+        <item name="android:layout_toRightOf">@+id/v_salary_lable</item>
+    </style>
 </resources>

@@ -47,8 +47,8 @@ public class ExpressListAdapter extends RecyclerView.Adapter<ExpressListAdapter.
                 holder.vDownLine.setVisibility(View.INVISIBLE);
             }
             holder.vType.setImageResource(R.drawable.icon_time);
-            holder.vTime.setTextColor(context.getResources().getColor(R.color.black_de));
-            holder.vDesc.setTextColor(context.getResources().getColor(R.color.black_de));
+            holder.vTime.setTextColor(context.getResources().getColor(R.color.black));
+            holder.vDesc.setTextColor(context.getResources().getColor(R.color.black));
         }
 
 
