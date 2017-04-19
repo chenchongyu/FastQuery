@@ -1,5 +1,6 @@
 package net.runningcode.simple_activity;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import net.runningcode.net.HttpListener;
 import net.runningcode.utils.DialogUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -30,6 +32,11 @@ public class ShortUrlActivity extends BasicActivity implements HttpListener{
     @BindView(R.id.v_result)
     TextView mVResult;
 
+    @Override
+    protected void onCreate(Bundle arg0) {
+        super.onCreate(arg0);
+        ButterKnife.bind(this);
+    }
 
     @Override
     public int getContentViewID() {
