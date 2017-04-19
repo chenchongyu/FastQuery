@@ -3,39 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\zxing.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e88c14e6e7daa0fa65172a62b54ee6a16ff4162d">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\zxing_d94b576882af053b8153b73f36618733f15f5562.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="E:\privatespace\FastQuery\app\libs\AMap_Location_V2.4.0_20160308.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="dd8aedb3d0d87b92777ab997ec883427d88f379a">
         <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\AMap_Location_V2.4.0_20160308_0c233b9d6921abefaeb11ef54b07fb826d803629.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\MiStats_SDK_Client_1_7_0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="33799725277566a755b9e4a7b75e0d53a2ecc8fc">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\MiStats_SDK_Client_1_7_0_c41d0ec42648aedf6e3793ed9ff2ecec312fd469.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\MiPush_SDK_Client_2_2_18.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="4248cdd58eada843ff5ee443891bbb959aebe2ae">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\MiPush_SDK_Client_2_2_18_43c59d3f7d5e46bd5ffcccd73b133c49ebd1f42a.jar" />
     </item>
     <item
         is-multidex="false"
@@ -54,6 +27,33 @@
         revision="25.0.0"
         sha1="ba4a7bb9ed1e6d368907f022b3bbb1bcb3706a5b">
         <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\Adwo_Android_SDK6.2_007d95a3574850d8bd1fb5658aa92634be886012.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\privatespace\FastQuery\app\libs\zxing.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e88c14e6e7daa0fa65172a62b54ee6a16ff4162d">
+        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\zxing_d94b576882af053b8153b73f36618733f15f5562.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\privatespace\FastQuery\app\libs\MiStats_SDK_Client_1_7_0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="33799725277566a755b9e4a7b75e0d53a2ecc8fc">
+        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\MiStats_SDK_Client_1_7_0_c41d0ec42648aedf6e3793ed9ff2ecec312fd469.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\privatespace\FastQuery\app\libs\MiPush_SDK_Client_2_2_18.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4248cdd58eada843ff5ee443891bbb959aebe2ae">
+        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\MiPush_SDK_Client_2_2_18_43c59d3f7d5e46bd5ffcccd73b133c49ebd1f42a.jar" />
     </item>
     <item
         is-multidex="false"

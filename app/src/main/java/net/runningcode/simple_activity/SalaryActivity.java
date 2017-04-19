@@ -2,6 +2,7 @@ package net.runningcode.simple_activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import net.runningcode.BasicActivity;
 import net.runningcode.R;
 import net.runningcode.utils.DialogUtils;
+import net.runningcode.utils.L;
 import net.runningcode.utils.SalaryUtil;
 
 import butterknife.BindView;
@@ -78,7 +80,10 @@ public class SalaryActivity extends BasicActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mVCity.setText("上海");
+        L.i(mVSalaryLable+":"+mVYlSelf+":"+mVSbRate+":"+mVCompute);
+
+        initToolbar(R.color.item_orange,R.drawable.icon_salary);
+        setTitle("薪资计算");
     }
 
     /**
@@ -121,6 +126,12 @@ public class SalaryActivity extends BasicActivity {
     @Override
     public int getContentViewID() {
         return R.layout.activity_salary;
+    }
+
+    protected void setupWindowAnimations() {
+        interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
+        setupEnterAnimations(R.drawable.gradient_toolbar_orange);
+        setupExitAnimations();
     }
 
     @OnClick(R.id.v_city)

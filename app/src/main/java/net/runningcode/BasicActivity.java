@@ -65,7 +65,7 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		setContentView(R.layout.layout_base);
 		addView(getContentViewID());
 
-		ButterKnife.bind(this);
+
 		//设置FitsSystemWindows
 		ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
 		View parentView = contentFrameLayout.getChildAt(0);
@@ -76,6 +76,8 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		if(showActionbar())
 			baseInitActionBar();
 
+		ButterKnife.bind(this);
+
 	    IntentFilter filter = new IntentFilter();
 		filter.addAction(ACTION_EXIT);
 		registerReceiver(mExitReceiver, filter);
@@ -83,10 +85,11 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 	}
 
 	public void addView(int layoutResID) {
-		View view = View.inflate(this, layoutResID, null);
 		ViewGroup root = (ViewGroup) findViewById(R.id.v_root);
-		if(root == null) return;
-		root.addView(view,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+		View.inflate(this, layoutResID, root);
+//		View view = getLayoutInflater().inflate(layoutResID,null);
+//		if(root == null) return;
+//		root.addView(view,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 	}
 
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -113,10 +116,10 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 			// 激活导航栏设置
 			tintManager.setNavigationBarTintEnabled(true);
 
-			baseSubject = (TextView) toolbar.findViewById(R.id.title);
-			toolbar.setVisibility(View.VISIBLE);
-			toolbar.setNavigationIcon(R.drawable.icon_back);
-			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			baseSubject = (TextView) this.toolbar.findViewById(R.id.title);
+			this.toolbar.setVisibility(View.VISIBLE);
+			this.toolbar.setNavigationIcon(R.drawable.icon_back);
+			this.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -125,7 +128,7 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 						finish();
 				}
 			});
-			shareTarget = toolbar.findViewById(R.id.shared_target);
+			shareTarget = this.toolbar.findViewById(R.id.shared_target);
 		}
 
 	}

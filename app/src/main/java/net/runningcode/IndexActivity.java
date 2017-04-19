@@ -1,8 +1,11 @@
 package net.runningcode;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
@@ -26,7 +29,6 @@ import com.sixth.adwoad.ErrorCode;
 import com.sixth.adwoad.NativeAdListener;
 import com.sixth.adwoad.NativeAdView;
 import com.xiaomi.mistatistic.sdk.MiStatInterface;
-import com.yanzhenjie.permission.AndPermission;
 import com.yolanda.nohttp.Response;
 
 import net.runningcode.constant.Constants;
@@ -45,6 +47,7 @@ import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DateUtil;
 import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
+import net.runningcode.utils.PermissionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +65,7 @@ import static net.runningcode.net.FastJsonRequest.getNewInstance;
 public class IndexActivity extends BasicActivity implements View.OnClickListener, HttpListener<JSON>,
         AdapterView.OnItemClickListener,AMapLocationListener, NativeAdListener {
     private final static int ELEMENT_SIZE = 8;
+    private static final int REQUEST_CODE_READ_PHONE = 101;
     private TextView vWeather,vTemperature,vCity,vDate,vWD,vAir;
     private ImageView vWeatherIcon,vWeatherBg;
     private RelativeLayout vContent;
@@ -161,17 +165,27 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
 
     private void initPosition() {
         // 先判断是否有权限。
-        if(AndPermission.hasPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+        if(PermissionUtils.hasPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
             // 有权限，直接do anything.
             locatePos();
         } else {
             // 申请权限。
-            AndPermission.with(this)
-                    .requestCode(100)
-                    .permission( android.Manifest.permission.ACCESS_COARSE_LOCATION)
-                    .send();
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    REQUEST_CODE_READ_PHONE);
         }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        AndPermission.onRequestPermissionsResult(requestCode, permissions, grantResults, listener);
+        if (requestCode == REQUEST_CODE_READ_PHONE && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            locatePos();
+        }else{
+            L.i("onRequestPermissionsResult FAILED!");
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private void locatePos() {
