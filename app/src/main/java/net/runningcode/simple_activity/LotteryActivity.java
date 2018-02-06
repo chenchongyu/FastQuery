@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yolanda.nohttp.Response;
 
@@ -25,9 +26,9 @@ import static net.runningcode.net.FastJsonRequest.getNewInstance;
 /**
  * Created by Administrator on 2016/5/6.
  */
-public class LotteryActivity extends BasicActivity implements HttpListener,View.OnClickListener {
-    enum LOTTERY{
-        DLT,SSQ,FC3D;
+public class LotteryActivity extends BasicActivity implements HttpListener, View.OnClickListener {
+    enum LOTTERY {
+        DLT, SSQ, FC3D;
 
         @Override
         public String toString() {
@@ -35,7 +36,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
         }
     }
 
-    private Button vSsq,vDlt,vFc3d;
+    private Button vSsq, vDlt, vFc3d;
     private TextView vResultLabel;
     private LinearLayout vResult;
 
@@ -46,7 +47,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
     }
 
     private void initView() {
-        initToolbar(R.color.item_red,R.drawable.icon_lottery);
+        initToolbar(R.color.item_red, R.drawable.icon_lottery);
         setTitle("彩票");
         vSsq = $(R.id.v_ssq);
         vDlt = $(R.id.v_dlt);
@@ -65,19 +66,19 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
         setupExitAnimations();
     }
 
-    private void query(LOTTERY lottery){
-        L.i("当前彩票类型："+lottery.toString());
+    private void query(LOTTERY lottery) {
+        L.i("当前彩票类型：" + lottery.toString());
 
         FastJsonRequest request = getNewInstance(URLConstant.API_GET_LOTTERY_INFO);
-        request.add("lotterycode",lottery.toString());
-        request.add("recordcnt",1);
+        request.add("lotterycode", lottery.toString());
+        request.add("recordcnt", 1);
 
-        CallServer.getRequestInstance().add(this,request,this,true,true);
+        CallServer.getRequestInstance().add(this, request, this, true, true);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.v_ssq:
                 query(LOTTERY.SSQ);
                 vResult.setBackgroundColor(getResources().getColor(R.color.btn_success));
@@ -98,21 +99,31 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
     public void onSucceed(int what, Response response) {
         JSONObject result = (JSONObject) response.get();
         int errNum = result.getIntValue("error_code");
-        if (errNum != 0){
+        if (errNum != 0) {
             vResultLabel.setText(result.getString("reason"));
-        }else {
+        } else {
             final JSONObject result1 = result.getJSONObject("result");
-            if(result1 == null){
+            if (result1 == null) {
                 vResultLabel.setText("暂无数据");
                 return;
             }
-            JSONObject data = result1.getJSONArray("data").getJSONObject(0);
+            JSONArray jsonArray = result1.getJSONArray("data");
+            if (jsonArray == null) {
+                vResultLabel.setText("暂无数据");
+                return;
+            }
+            JSONObject data = jsonArray.getJSONObject(0);
+            if (data == null) {
+                vResultLabel.setText("暂无数据");
+                return;
+            }
             String batch = data.getString("expect");
             String code = data.getString("openCode");
 
             parseCode(code);
 
-            vResultLabel.setText("第"+batch+"期开奖结果：");
+            String text = "第" + batch + "期开奖结果：";
+            vResultLabel.setText(text);
 
         }
     }
@@ -120,27 +131,27 @@ public class LotteryActivity extends BasicActivity implements HttpListener,View.
     private void parseCode(String code) {
         vResult.removeAllViews();
 
-        String[] codes = TextUtils.split(code,"\\+");
+        String[] codes = TextUtils.split(code, "\\+");
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 0, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.weight = 1;
 //        layoutParams.setMarginEnd(10);
-        layoutParams.setMargins(0,0,10,0);
-        for (int i=0;i<codes.length;i++){
+        layoutParams.setMargins(0, 0, 10, 0);
+        for (int i = 0; i < codes.length; i++) {
             String subCode = codes[i];
-            String[] orgCodes = TextUtils.split(subCode,",");
-            for (String c:orgCodes){
+            String[] orgCodes = TextUtils.split(subCode, ",");
+            for (String c : orgCodes) {
                 CircleTextView textView = new CircleTextView(this);
                 textView.setLayoutParams(layoutParams);
                 textView.setText(c);
                 textView.setCircleWidth(3);
                 textView.setRadius(36);
 //                textView.setBackgroundColor(Color.YELLOW);
-                if (i == 0){
+                if (i == 0) {
                     textView.setCircleColor(getResources().getColor(R.color.red));
 //                    textView.setBackgroundResource(R.drawable.bg_circle_red);
                     textView.setTextColor(getResources().getColor(R.color.red));
-                }else{
+                } else {
                     textView.setCircleColor(getResources().getColor(R.color.blue));
                     textView.setTextColor(getResources().getColor(R.color.blue));
                 }

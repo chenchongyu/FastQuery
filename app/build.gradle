@@ -4,7 +4,7 @@ apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "net.runningcode"
@@ -12,12 +12,14 @@ android {
         targetSdkVersion 23
         versionCode 5
         versionName "1.2.2"
+        flavorDimensions "5"
         manifestPlaceholders = [ CHANNEL:"default" ]
         ndk {
-            abiFilters "armeabi"
+//            abiFilters "armeabi"
         }
     }
     packagingOptions {
+        exclude "lib/armeabi/librealm-jni.so"
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/NOTICE'
@@ -53,6 +55,10 @@ android {
 //        preDexLibraries = false
 //    }
 
+}
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
 configurations.all {
@@ -105,21 +111,26 @@ android{
 
     //修改生成的apk名字
     applicationVariants.all{ variant->
-        variant.outputs.each { output->
-            def oldFile = output.outputFile
-            def newName = '';
-            if(variant.buildType.name.equals('release')){
-//                println(variant.productFlavors[0].name)
-                newName = 'FastQuery-v' + versionName+"-"+variant.productFlavors[0].name + '.apk'
-                output.outputFile = new File(oldFile.parent, newName)
-            }
-            if(variant.buildType.name.equals('beta')){
-                newName = 'FastQuery-v' + versionName +'-'+getDate()+'-beta.apk'
-                output.outputFile = new File(oldFile.parent, newName)
-            }
-            if(variant.buildType.name.equals('debug')){
-
-            }
+        //gradle3.0之前输出自定义apl名字脚本
+//        variant.outputs.each { output->
+//            def oldFile = output.outputFile
+//            def newName = '';
+//            if(variant.buildType.name.equals('release')){
+////                println(variant.productFlavors[0].name)
+//                newName = 'FastQuery-v' + versionName+"-"+variant.productFlavors[0].name + '.apk'
+//                output.outputFile = new File(oldFile.parent, newName)
+//            }
+//            if(variant.buildType.name.equals('beta')){
+//                newName = 'FastQuery-v' + versionName +'-'+getDate()+'-beta.apk'
+//                output.outputFile = new File(oldFile.parent, newName)
+//            }
+//            if(variant.buildType.name.equals('debug')){
+//
+//            }
+//        }
+        variant.outputs.all {
+            outputFileName = "FastQuery${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
         }
+
     }
 }

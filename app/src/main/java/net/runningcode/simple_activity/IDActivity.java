@@ -1,5 +1,6 @@
 package net.runningcode.simple_activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -40,7 +41,7 @@ public class IDActivity extends BasicActivity implements View.OnClickListener,Ht
     TextView vBirthday,vConstellation,vZodiac,vAddress;
 
     @BindDrawable(R.drawable.gradient_toolbar_blue)
-    int toolbarBg;
+    Drawable toolbarBg;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);

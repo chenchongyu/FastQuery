@@ -28,8 +28,7 @@ public class ExpressListAdapter extends RecyclerView.Adapter<ExpressListAdapter.
     @Override
     public ExpressListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_express, parent, false);
-        ViewHolder holder = new ViewHolder(v);
-        return holder;
+        return new ViewHolder(v);
     }
 
     @Override

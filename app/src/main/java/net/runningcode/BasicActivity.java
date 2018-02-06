@@ -345,7 +345,7 @@ public abstract class BasicActivity extends AutoLayoutActivity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 
 			final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, false,
-					new Pair<>(view, "express"));
+					new Pair<>(view, getString(R.string.transition_name)));
 //		final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, true);
 			ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
 			startActivity(intent, transitionActivityOptions.toBundle());

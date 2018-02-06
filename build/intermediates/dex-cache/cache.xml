@@ -3,66 +3,253 @@
 
     <item
         is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\AMap_Location_V2.4.0_20160308.jar"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-23.2.1.aar/a1ef81c50eccb88a2931a6b9a7921ea5/jars/classes.jar"
         jumboMode="false"
+        min-sdk-version="19"
         optimize="true"
-        revision="25.0.0"
-        sha1="dd8aedb3d0d87b92777ab997ec883427d88f379a">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\AMap_Location_V2.4.0_20160308_0c233b9d6921abefaeb11ef54b07fb826d803629.jar" />
+        revision="26.0.2"
+        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/13.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\fastjson-1.2.5.jar"
+        jar="/Users/didi/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.1.0/support-annotations-24.1.0.jar"
         jumboMode="false"
+        min-sdk-version="19"
         optimize="true"
-        revision="25.0.0"
+        revision="26.0.2"
+        sha1="8a23146e1a8c7cb4758e3d3f62449213f1e51f67">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/realm-android-library-2.3.1.aar/13ce3c312e0a6663fb3cba42081ed854/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="205155180b7747a96c076484ba0014e4bcacb33d">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/StudioProjects/FastQuery/app/libs/fastjson-1.2.5.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
         sha1="9f675e9a1b2bf1224183005752a9214226e8aa8e">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\fastjson-1.2.5_23cac7ff177dde275eab96c171c0e43145a96cc2.jar" />
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/4.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\Adwo_Android_SDK6.2.jar"
+        jar="/Users/didi/StudioProjects/FastQuery/app/libs/com.baidu.tts_2.3.0.jar"
         jumboMode="false"
+        min-sdk-version="19"
         optimize="true"
-        revision="25.0.0"
-        sha1="ba4a7bb9ed1e6d368907f022b3bbb1bcb3706a5b">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\Adwo_Android_SDK6.2_007d95a3574850d8bd1fb5658aa92634be886012.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\zxing.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e88c14e6e7daa0fa65172a62b54ee6a16ff4162d">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\zxing_d94b576882af053b8153b73f36618733f15f5562.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\MiStats_SDK_Client_1_7_0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="33799725277566a755b9e4a7b75e0d53a2ecc8fc">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\MiStats_SDK_Client_1_7_0_c41d0ec42648aedf6e3793ed9ff2ecec312fd469.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\MiPush_SDK_Client_2_2_18.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="4248cdd58eada843ff5ee443891bbb959aebe2ae">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\MiPush_SDK_Client_2_2_18_43c59d3f7d5e46bd5ffcccd73b133c49ebd1f42a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\privatespace\FastQuery\app\libs\com.baidu.tts_2.3.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
+        revision="26.0.2"
         sha1="13821b9782a321df92a623074b28c8aee1f03348">
-        <dex dex="E:\privatespace\FastQuery\app\build\intermediates\pre-dexed\QQ\debug\com.baidu.tts_2.3.0_eecb63550fcbf2047607daf957285bc01ce3a22f.jar" />
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.4.0/ea392375cf9ff59234a82e7928a204215ccc98cd/butterknife-annotations-8.4.0.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ea392375cf9ff59234a82e7928a204215ccc98cd">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/butterknife-8.4.0.aar/5023818d914b29e4352fbff13bf758c5/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a07818a1ecabdb149998823429cce555af4b9cba">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.2.1.aar/68ed910b5fe4eba1935546e97a1e144f/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/StudioProjects/FastQuery/app/libs/zxing.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e88c14e6e7daa0fa65172a62b54ee6a16ff4162d">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/support-v4-23.2.1.aar/38b77b9ae2ad8765a6bd3e8ca5fb1e25/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/support-v4-23.2.1.aar/38b77b9ae2ad8765a6bd3e8ca5fb1e25/jars/libs/internal_impl-23.2.1.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-23.2.1.aar/b2daaad2eb4a999478346f08f4efb1c0/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.5.2/ecf534dba3a8446ce84cbb797d314763be212a68/glide-3.5.2.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/17.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/modules-2/files-2.1/com.readystatesoftware.systembartint/systembartint/1.0.3/de4f7404e2f58d8f6e83cb1e85d0c2d6c2987287/systembartint-1.0.3.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="de4f7404e2f58d8f6e83cb1e85d0c2d6c2987287">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/16.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/modules-2/files-2.1/io.realm/realm-annotations/2.3.1/1c1c75a7e1dfee58c51822987dc658f93e036c81/realm-annotations-2.3.1.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1c1c75a7e1dfee58c51822987dc658f93e036c81">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/material-ripple-1.0.2.aar/141bad72cfe57e1c8599057a3f40ca04/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c733e9d1b065d940a08f2fca0ff920dfc08d94cc">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/StudioProjects/FastQuery/app/libs/MiStats_SDK_Client_1_7_0.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="33799725277566a755b9e4a7b75e0d53a2ecc8fc">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/StudioProjects/FastQuery/app/libs/MiPush_SDK_Client_2_2_18.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="4248cdd58eada843ff5ee443891bbb959aebe2ae">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/StudioProjects/FastQuery/app/libs/AMap_Location_V2.4.0_20160308.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="dd8aedb3d0d87b92777ab997ec883427d88f379a">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/autolayout-1.4.3.aar/55a923cd8f45d20ce0d288ebe90d7016/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="911eeaf6f474e74b7dbd9fa7f19aa56715a344ae">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/nohttp-1.0.0.aar/fc631f220f35830cdf76e899acf7e241/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8d395aa0ba3bf73a6333eca823bbec369531702c">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-23.2.1.aar/7464e25a03f422a6790b51bc6aaf4099/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/StudioProjects/FastQuery/app/libs/Adwo_Android_SDK6.2.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ba4a7bb9ed1e6d368907f022b3bbb1bcb3706a5b">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/design-23.2.1.aar/1c15d4f13ba53e07bcbd1c9087c1edc6/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/didi/.gradle/caches/transforms-1/files-1.1/relinker-1.2.2.aar/52e7f31780a8b467d1672b7a4650fa8f/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b64dd5f01bc37de289f90fd59299b0c76d119611">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/19.jar" />
     </item>
 
 </items>

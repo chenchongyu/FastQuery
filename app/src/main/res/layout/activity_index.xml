@@ -119,17 +119,15 @@
                       android:textSize="32px"/>
         </RelativeLayout>
 </FrameLayout>
-    <GridView android:id="@+id/v_table"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/v_table"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="30px"
-              android:numColumns="4"
               android:animateLayoutChanges="true"
-              android:horizontalSpacing="3px"
-              android:verticalSpacing="3px"
               android:layout_below="@+id/v_weather_panel">
 
-    </GridView>
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
 

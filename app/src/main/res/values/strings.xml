@@ -68,4 +68,5 @@
     <string name="please_enter_lottery">请输入彩票号码</string>
     
     <string name="salary_after_tax">￥%1$d</string>
+    <string name="transition_name">express</string>
 </resources>

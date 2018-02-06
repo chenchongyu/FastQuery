@@ -95,4 +95,7 @@
 #-keep class org.android.agoo.service.* {*;}
 #
 #-keep class org.android.spdy.**{*;}
+#重用同一个mapping
+#-applymapping /Users/drome/Developer/mi-cashier-android/cashierbeta/build/outputs/mapping/release/mapping.txt
+-applymapping /Users/didi/StudioProjects/FastQuery/app/build/outputs/apk/xiaomi/mapping/mapping.txt
 

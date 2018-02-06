@@ -9,13 +9,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Process;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xiaomi.mistatistic.sdk.MiStatInterface;
-import com.xiaomi.mistatistic.sdk.URLStatsRecorder;
 import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 
@@ -33,7 +31,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 
 public class RunningCodeApplication extends Application {
@@ -120,8 +117,7 @@ public class RunningCodeApplication extends Application {
     }
 
     private void initDb() {
-        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
-        Realm.setDefaultConfiguration(config);
+        Realm.init(this);
     }
 
     private static void initXiaoMi() {
@@ -137,8 +133,8 @@ public class RunningCodeApplication extends Application {
         MiStatInterface.enableExceptionCatcher(true);
 
         // enable network monitor
-        URLStatsRecorder.enableAutoRecord();
-        Log.i("mipush", MiStatInterface.getDeviceID(sInstance));
+//        URLStatsRecorder.enableAutoRecord();
+//        Log.i("mipush", MiStatInterface.getDeviceID(sInstance));
 
     }
     public static void loadImg(final ImageView view, String url) {
