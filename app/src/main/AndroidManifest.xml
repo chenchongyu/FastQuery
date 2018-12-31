@@ -1,11 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.runningcode">
-    <!-- 在SDCard中创建与删除文件权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+          package="net.runningcode">
 
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
 
     <!--用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -19,122 +17,144 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <!--用于访问网络，网络定位需要上网-->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!--用于读取手机当前的状态-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!--写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission  android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <permission
         android:name="net.runningcode.permission.MIPUSH_RECEIVE"
-        android:protectionLevel="signature" />
+        android:protectionLevel="signature"/>
 
-    <uses-permission android:name="net.runningcode.permission.MIPUSH_RECEIVE" />
+    <uses-permission android:name="net.runningcode.permission.MIPUSH_RECEIVE"/>
 
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <!-- Camera features - recommended -->
-    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false"/>
 
     <application
-        android:label="@string/app_name"
-        android:icon="@drawable/ic_launcher"
-        android:supportsRtl="true"
         android:name=".RunningCodeApplication"
         android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".IndexActivity"
-            android:theme="@style/AppTheme"
             android:hardwareAccelerated="true"
-             >
+            android:theme="@style/AppTheme"
+            >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!--<activity android:name=".IndexActivity" android:screenOrientation="portrait"-->
-                  <!--android:hardwareAccelerated="true"/>-->
-        <activity android:name=".express.ExpressActivity" android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" android:exported="false"/>
-        <activity android:name=".simple_activity.PhoneActivity" android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustPan" android:exported="false"/>
-        <activity android:name=".simple_activity.LotteryActivity" android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustPan" android:exported="false"/>
-        <activity android:name=".simple_activity.IDActivity" android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustPan" android:exported="false"/>
-        <activity android:name=".express.CaptureActivity"
-                  android:exported="false" android:screenOrientation="portrait" />
-        <activity android:name=".bank.BankActivity"
-                  android:exported="false" android:screenOrientation="portrait" />
-        <activity android:name=".simple_activity.TranslateActivity"
-                  android:exported="false" android:screenOrientation="portrait" />
-        <activity android:name=".simple_activity.NumberActivity"
-                  android:exported="false" android:screenOrientation="portrait" />
-        <activity android:name=".simple_activity.SalaryActivity"
-                  android:exported="false" android:screenOrientation="portrait" />
-        <activity android:name=".simple_activity.ShortUrlActivity" android:screenOrientation="portrait" />
+        <!--<activity android:name=".LogoActivity" android:screenOrientation="portrait"
+                  android:hardwareAccelerated="true"/>-->
+        <activity
+            android:name=".express.ExpressActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".simple_activity.PhoneActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".simple_activity.LotteryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".simple_activity.IDActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".express.CaptureActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".simple_activity.TranslateActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".simple_activity.NumberActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".simple_activity.SalaryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".simple_activity.ShortUrlActivity"
+            android:screenOrientation="portrait"/>
 
 
-        <service android:name="com.amap.api.location.APSService"></service>
+        <service android:name="com.amap.api.location.APSService"/>
 
         <!-- xiaomi push-->
 
         <service
             android:name="com.xiaomi.push.service.XMPushService"
             android:enabled="true"
-            android:process=":pushservice" />
+            android:process=":pushservice"/>
         <service
             android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"/>
         <service
             android:name="com.xiaomi.mipush.sdk.MessageHandleService"
-            android:enabled="true" />
+            android:enabled="true"/>
 
         <receiver
             android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
         <receiver
             android:name="com.xiaomi.push.service.receivers.PingReceiver"
             android:exported="false"
-            android:process=":pushservice" >
+            android:process=":pushservice">
             <intent-filter>
-                <action android:name="com.xiaomi.push.PING_TIMER" />
+                <action android:name="com.xiaomi.push.PING_TIMER"/>
             </intent-filter>
         </receiver>
         <receiver
             android:name=".MiPushMessageReceiver"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
-                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.xiaomi.mipush.ERROR" />
+                <action android:name="com.xiaomi.mipush.ERROR"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED"/>
             </intent-filter>
 
         </receiver>
         <!-- miPush end -->
 
-
-        <meta-data android:name="design_width" android:value="768"/>
-        <meta-data android:name="design_height" android:value="1280"/>
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="80e8e106504b233f97f429699d55602d"/>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="80e8e106504b233f97f429699d55602d"/>
         <!--<meta-data android:name="UMENG_APPKEY" android:value="574cfead67e58ebf07000982" />-->
         <!--<meta-data android:name="UMENG_MESSAGE_SECRET" android:value="fd6354cd876bc63b62ee609b9a9f1f8a" />-->
-        <meta-data android:name="CHANNEL" android:value="${CHANNEL}" />
+        <meta-data
+            android:name="CHANNEL"
+            android:value="${CHANNEL}"/>
     </application>
 
 </manifest>

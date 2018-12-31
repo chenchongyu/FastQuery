@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yolanda.nohttp.Response;
 
@@ -26,9 +25,10 @@ import static net.runningcode.net.FastJsonRequest.getNewInstance;
 /**
  * Created by Administrator on 2016/5/6.
  */
-public class LotteryActivity extends BasicActivity implements HttpListener, View.OnClickListener {
+public class LotteryActivity extends BasicActivity implements HttpListener,
+        View.OnClickListener {
     enum LOTTERY {
-        DLT, SSQ, FC3D;
+        DLT, SSQ, FCSD;
 
         @Override
         public String toString() {
@@ -47,7 +47,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener, View
     }
 
     private void initView() {
-        initToolbar(R.color.item_red, R.drawable.icon_lottery);
+        initToolbar(R.drawable.icon_lottery);
         setTitle("彩票");
         vSsq = $(R.id.v_ssq);
         vDlt = $(R.id.v_dlt);
@@ -62,7 +62,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener, View
 
     protected void setupWindowAnimations() {
         interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
-        setupEnterAnimations(R.drawable.gradient_toolbar_red);
+        setupEnterAnimations(R.drawable.gradient_toolbar_orange);
         setupExitAnimations();
     }
 
@@ -70,8 +70,8 @@ public class LotteryActivity extends BasicActivity implements HttpListener, View
         L.i("当前彩票类型：" + lottery.toString());
 
         FastJsonRequest request = getNewInstance(URLConstant.API_GET_LOTTERY_INFO);
-        request.add("lotterycode", lottery.toString());
-        request.add("recordcnt", 1);
+        request.add("lottery_id", lottery.toString());
+//        request.add("recordcnt", 1);
 
         CallServer.getRequestInstance().add(this, request, this, true, true);
     }
@@ -88,7 +88,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener, View
                 vResult.setBackgroundColor(getResources().getColor(R.color.btn_warn));
                 break;
             case R.id.v_fc3d:
-                query(LOTTERY.FC3D);
+                query(LOTTERY.FCSD);
                 vResult.setBackgroundColor(getResources().getColor(R.color.btn_info));
                 break;
 
@@ -107,18 +107,8 @@ public class LotteryActivity extends BasicActivity implements HttpListener, View
                 vResultLabel.setText("暂无数据");
                 return;
             }
-            JSONArray jsonArray = result1.getJSONArray("data");
-            if (jsonArray == null) {
-                vResultLabel.setText("暂无数据");
-                return;
-            }
-            JSONObject data = jsonArray.getJSONObject(0);
-            if (data == null) {
-                vResultLabel.setText("暂无数据");
-                return;
-            }
-            String batch = data.getString("expect");
-            String code = data.getString("openCode");
+            String batch = result1.getString("lottery_no");
+            String code = result1.getString("lottery_res");
 
             parseCode(code);
 
@@ -131,7 +121,7 @@ public class LotteryActivity extends BasicActivity implements HttpListener, View
     private void parseCode(String code) {
         vResult.removeAllViews();
 
-        String[] codes = TextUtils.split(code, "\\+");
+        String[] codes = TextUtils.split(code, ",");
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 0, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.weight = 1;
@@ -145,7 +135,8 @@ public class LotteryActivity extends BasicActivity implements HttpListener, View
                 textView.setLayoutParams(layoutParams);
                 textView.setText(c);
                 textView.setCircleWidth(3);
-                textView.setRadius(36);
+                textView.setRadius(50);
+                textView.setTextSize(40f);
 //                textView.setBackgroundColor(Color.YELLOW);
                 if (i == 0) {
                     textView.setCircleColor(getResources().getColor(R.color.red));
@@ -163,12 +154,17 @@ public class LotteryActivity extends BasicActivity implements HttpListener, View
 
     @Override
     public void onFailed(int what, String url, Object tag, Exception message, int responseCode, long networkMillis) {
-
+        vResultLabel.setText("请求失败！原因：" + message.getLocalizedMessage());
     }
 
 
     @Override
     public int getContentViewID() {
         return R.layout.activity_lottery;
+    }
+
+    @Override
+    protected int getStatusBarColor() {
+        return R.color.item_orange;
     }
 }

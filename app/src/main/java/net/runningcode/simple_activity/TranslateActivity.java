@@ -5,13 +5,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +31,7 @@ import net.runningcode.utils.CommonUtil;
 import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
 import net.runningcode.utils.StringUtils;
+import net.runningcode.view.SearchView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,12 +41,15 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.Random;
 
+import butterknife.BindView;
+
 import static net.runningcode.net.FastJsonRequest.getNewInstance;
 
 /**
  * Created by Administrator on 2016/1/15.
  */
-public class TranslateActivity extends BasicActivity implements View.OnClickListener, HttpListener<JSON> , SpeechSynthesizerListener {
+public class TranslateActivity extends BasicActivity implements View.OnClickListener,
+        HttpListener<JSON>, SpeechSynthesizerListener {
     private static final int SCANNIN_GREQUEST_CODE = 1;
     private static final int MSG_PLAY_MP3 = 1;
     private static final String SAMPLE_DIR_NAME = "baiduTTS";
@@ -62,77 +61,58 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
     private static final String ENGLISH_SPEECH_MALE_MODEL_NAME = "bd_etts_speech_male_en.dat";
     private static final String ENGLISH_TEXT_MODEL_NAME = "bd_etts_text_en.dat";
 
-    private EditText vText;
-    private ImageView vScan,vQuery,vClear,vPlay;
-    private TextView vTransResult,vMainResult;
-    private View vResult;
-    private WaitDialog dialog;
+    @BindView(R.id.v_play)
+    public ImageView vPlay;
+    @BindView(R.id.v_translate_result)
+    public TextView vTransResult;
+    @BindView(R.id.v_main_result)
+    public TextView vMainResult;
+    @BindView(R.id.v_result)
+    public View vResult;
+    @BindView(R.id.v_searchview)
+    public SearchView vSearchView;
+
     private MyHandler mMyHandler;
+    private WaitDialog dialog;
 
     private SpeechSynthesizer mSpeechSynthesizer;
     private String mSampleDirPath;
+    private String words;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         initView();
     }
+
     private void initView() {
 
         mMyHandler = new MyHandler(this);
-        vClear = $(R.id.v_clear);
 
-        vScan = $(R.id.v_scan);
-        vText = $(R.id.v_no);
-        vQuery = $(R.id.v_query);
-        vResult = $(R.id.v_result);
-        vPlay = $(R.id.v_play);
-        vTransResult = $(R.id.v_translate_result);
-        vMainResult = $(R.id.v_main_result);
-
-        setEditBottomColor(vText,R.color.item_green);
-        vText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//        setEditBottomColor(vText, R.color.item_green);
+        vSearchView.setOnSearchClickListener(new SearchView.OnQueryClickListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH){
-                    querByNO();
-                    return true;
-                }
-                return false;
+            public void onClick(String key) {
+                querByNO(key);
+                words = key;
             }
         });
 
-        vText.addTextChangedListener(new TextWatcher() {
+        vSearchView.setOnTextChangedListener(new SearchView.OnTextChangedListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (TextUtils.isEmpty(s.toString())){
-                    vClear.setVisibility(View.GONE);
+            public void onTextChanged(String ss) {
+                if (TextUtils.isEmpty(ss)) {
                     vResult.setVisibility(View.GONE);
-                }else {
-                    vClear.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        vQuery.setOnClickListener(this);
-        vScan.setOnClickListener(this);
-        vClear.setOnClickListener(this);
         vPlay.setOnClickListener(this);
         vMainResult.setOnClickListener(this);
 
         dialog = new WaitDialog(this);
 
-        initToolbar(R.color.item_green,R.drawable.icon_translate);
+        initToolbar(R.drawable.icon_translate);
         setTitle("翻译");
 
         initialEnv();
@@ -220,7 +200,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
                 + SPEECH_FEMALE_MODEL_NAME);
 
         this.mSpeechSynthesizer.setAppId(Constants.BAIDU_TTS_APP_ID);
-        this.mSpeechSynthesizer.setApiKey(Constants.BAIDU_TTS_API_KEY,Constants.BAIDU_TTS_SECRET_KEY);
+        this.mSpeechSynthesizer.setApiKey(Constants.BAIDU_TTS_API_KEY, Constants.BAIDU_TTS_SECRET_KEY);
         // 发音人（在线引擎），可用参数为0,1,2,3。。。（服务器端会动态增加，各值含义参考文档，以文档说明为准。0--普通女声，1--普通男声，2--特别男声，3--情感男声。。。）
         this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEAKER, "3");
         // 设置Mix模式的合成策略
@@ -231,7 +211,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         mSpeechSynthesizer.initTts(TtsMode.MIX);
         // 加载离线英文资源（提供离线英文合成功能）
         mSpeechSynthesizer.loadEnglishModel(mSampleDirPath + "/" + ENGLISH_TEXT_MODEL_NAME, mSampleDirPath
-                        + "/" + ENGLISH_SPEECH_FEMALE_MODEL_NAME);
+                + "/" + ENGLISH_SPEECH_FEMALE_MODEL_NAME);
 
     }
 
@@ -244,14 +224,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        L.i("v getId:"+view.getId()+"  view:"+R.id.view+"  vText:"+ vText.getId());
-        switch (view.getId()){
-            case R.id.v_query:
-                querByNO();
-                break;
-            case R.id.v_clear:
-                vText.setText("");
-                break;
+        switch (view.getId()) {
             case R.id.v_main_result:
             case R.id.v_play:
                 play();
@@ -262,7 +235,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
 
     private void play() {
         String text = vMainResult.getText().toString();
-        L.i("开始播放："+text);
+        L.i("开始播放：" + text);
         int result = this.mSpeechSynthesizer.speak(text);
         if (result < 0) {
             toPrint("error,please look up error code in doc or URL:http://yuyin.baidu.com/docs/tts/122 ");
@@ -270,19 +243,17 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
     }
 
 
-    private void querByNO() {
-        String q = vText.getText().toString();
-        if (TextUtils.isEmpty(q)){
-            DialogUtils.showShortToast(this,"你想查个毛线？！");
+    private void querByNO(String q) {
+        if (TextUtils.isEmpty(q)) {
+            DialogUtils.showShortToast(this, "你想查个毛线？！");
             return;
         }
-
 
         final int salt = new Random().nextInt(10000);
         StringBuilder md5str = new StringBuilder();
         md5str.append(Constants.BAIDU_TRANS_APP_ID).append(q).append(salt).append(Constants.BAIDU_TRANS_APP_TOKEN);
         final String md5 = StringUtils.md5(md5str.toString()).toLowerCase();
-        L.i("md5:"+md5);
+        L.i("md5:" + md5);
 
         FastJsonRequest request = getNewInstance(URLConstant.API_GET_TANSLATE_INFO);
         request.add("q", q);
@@ -301,11 +272,16 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         return R.layout.activity_translate;
     }
 
+    @Override
+    protected int getStatusBarColor() {
+        return R.color.item_green;
+    }
+
 
     @Override
     public void onSucceed(int what, Response<JSON> response) {
         JSONObject result = (JSONObject) response.get();
-        L.i(what+" 返回："+result);
+        L.i(what + " 返回：" + result);
 
         dialog.dismiss();
 
@@ -315,31 +291,31 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
 
     private void setResult(JSONObject data) {
         int error = data.getIntValue("errorCode");
-        if (error != 0){
-            DialogUtils.showShortToast(this,"请求错误:"+error);
+        if (error != 0) {
+            DialogUtils.showShortToast(this, "请求错误:" + error);
             return;
         }
         vResult.setVisibility(View.VISIBLE);
-        CommonUtil.hideInputMethod(this,vResult);
+        CommonUtil.hideInputMethod(this, vResult);
         JSONArray result = data.getJSONArray("translation");
-        vMainResult.setText( getTranslation(result));
+        vMainResult.setText(getTranslation(result));
 
         final StringBuilder text = new StringBuilder();
         final JSONObject basic = data.getJSONObject("basic");
-        if (basic != null){
+        if (basic != null) {
             JSONArray basicResult = basic.getJSONArray("explains");
             text.append(getTranslation(basicResult));
         }
 
         JSONArray webResult = data.getJSONArray("web");
-        if (webResult != null){
+        if (webResult != null) {
             StringBuilder web = new StringBuilder();
-            for(int i=0;i<webResult.size();i++){
+            for (int i = 0; i < webResult.size(); i++) {
                 JSONObject jsonObject = webResult.getJSONObject(i);
                 JSONArray v = jsonObject.getJSONArray("value");
                 String k = jsonObject.getString("key");
-                if (TextUtils.equals(k.toLowerCase(),vText.getText().toString().toLowerCase())){
-                    web.append(getTranslationOneLine(v,"，")).append("\n");
+                if (TextUtils.equals(k.toLowerCase(), words.toLowerCase())) {
+                    web.append(getTranslationOneLine(v, "，")).append("\n");
                 }
             }
 
@@ -352,18 +328,20 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
 
     private String getTranslation(JSONArray result) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i=0;i<result.size();i++){
+        for (int i = 0; i < result.size(); i++) {
             stringBuilder.append(result.getString(i)).append("\n");
         }
 
         return stringBuilder.toString();
     }
-    private String getTranslationOneLine(JSONArray result,String ext) {
+
+    private String getTranslationOneLine(JSONArray result, String ext) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i=0;i<result.size();i++){
+        for (int i = 0; i < result.size(); i++) {
             stringBuilder.append(result.getString(i));
-            if (i!=result.size()-1)
+            if (i != result.size() - 1) {
                 stringBuilder.append(ext);
+            }
         }
 
         return stringBuilder.toString();
@@ -372,7 +350,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
     @Override
     public void onFailed(int what, String url, Object tag, Exception message, int responseCode, long networkMillis) {
         dialog.dismiss();
-        DialogUtils.showShortToast(this,"网络连接错误！"+message);
+        DialogUtils.showShortToast(this, "网络连接错误！" + message);
 //        vResult.setText("请求失败："+message);
     }
 
@@ -394,12 +372,12 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
      * 合成数据和进度的回调接口，分多次回调
      *
      * @param utteranceId
-     * @param data 合成的音频数据。该音频数据是采样率为16K，2字节精度，单声道的pcm数据。
-     * @param progress 文本按字符划分的进度，比如:你好啊 进度是0-3
+     * @param data        合成的音频数据。该音频数据是采样率为16K，2字节精度，单声道的pcm数据。
+     * @param progress    文本按字符划分的进度，比如:你好啊 进度是0-3
      */
     @Override
     public void onSynthesizeDataArrived(String utteranceId, byte[] data, int progress) {
-         L.i("onSynthesizeDataArrived");
+        L.i("onSynthesizeDataArrived");
 //        mMyHandler.sendMessage(mMyHandler.obtainMessage(UI_CHANGE_SYNTHES_TEXT_SELECTION, progress, 0));
     }
 
@@ -427,11 +405,11 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
      * 播放进度回调接口，分多次回调
      *
      * @param utteranceId
-     * @param progress 文本按字符划分的进度，比如:你好啊 进度是0-3
+     * @param progress    文本按字符划分的进度，比如:你好啊 进度是0-3
      */
     @Override
     public void onSpeechProgressChanged(String utteranceId, int progress) {
-         L.i("onSpeechProgressChanged");
+        L.i("onSpeechProgressChanged");
 //        mHandler.sendMessage(mHandler.obtainMessage(UI_CHANGE_INPUT_TEXT_SELECTION, progress, 0));
     }
 
@@ -449,7 +427,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
      * 当合成或者播放过程中出错时回调此接口
      *
      * @param utteranceId
-     * @param error 包含错误码和错误信息
+     * @param error       包含错误码和错误信息
      */
     @Override
     public void onError(String utteranceId, SpeechError error) {
@@ -463,14 +441,15 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
 
     private static class MyHandler extends Handler {
         private WeakReference<TranslateActivity> activityRefefrence;
-        public MyHandler(TranslateActivity activity){
+
+        public MyHandler(TranslateActivity activity) {
             activityRefefrence = new WeakReference<TranslateActivity>(activity);
         }
 
         @Override
-        public void handleMessage(Message msg){
+        public void handleMessage(Message msg) {
             TranslateActivity activity = activityRefefrence.get();
-            if(activity != null){
+            if (activity != null) {
                 activity.print(msg);
             }
         }

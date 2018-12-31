@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gradient_toolbar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    >
+    <!--android:background="?attr/colorPrimary"-->
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_toolbar"
-        >
-        <!--android:background="?attr/colorPrimary"-->
-        <FrameLayout
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center">
-                <TextView android:id="@+id/title"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:gravity="center"
-                  android:layout_gravity="center"
-                  android:textColor="@android:color/white"
-                  android:textSize="36px"
-                  android:text="@string/app_name"
-                    />
-                <View
-                    android:id="@+id/shared_target"
-                    android:layout_width="60px"
-                    android:layout_height="60px"
-                    android:layout_centerHorizontal="true"
-                    android:transitionName="@string/transition_name"
-                    android:layout_gravity="center"
-                    android:visibility="invisible"
-                    />
-        </FrameLayout>
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            />
+
+        <View
+            android:id="@+id/shared_target"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:transitionName="@string/transition_name"
+            android:visibility="invisible"
+            />
+    </FrameLayout>
 
 </android.support.v7.widget.Toolbar>
 

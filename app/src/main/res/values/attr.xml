@@ -10,4 +10,13 @@
         <attr name="text_size" format="dimension"/>
         <attr name="text_color" format="color|reference"/>
     </declare-styleable>
+
+    <declare-styleable name="SearchView">
+        <attr name="hint" format="string|reference"/>
+        <attr name="input_type">
+            <enum name="text" value="1"/>
+            <enum name="number" value="2"/>
+            <enum name="password" value="128"/>
+        </attr>
+    </declare-styleable>
 </resources>

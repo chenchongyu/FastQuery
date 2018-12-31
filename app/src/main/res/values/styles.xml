@@ -18,7 +18,7 @@
     <style name="AppTheme" parent="AppThemeBase"/>
 
     <style name="AppThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="actionBarHeight">30px</item>
+        <item name="actionBarHeight">30dp</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="windowNoTitle">true</item>
@@ -35,23 +35,23 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginRight">10px</item>
+        <item name="android:layout_marginRight">5dp</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:background">@color/btn_success</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">35px</item>
+        <item name="android:textSize">18dp</item>
     </style>
 
     <style name="StyleSalaryInfoTitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:padding">28px</item>
+        <item name="android:padding">14dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">26px</item>
+        <item name="android:textSize">13dp</item>
     </style>
 
     <style name="StyleSalaryInfoInput">
@@ -60,5 +60,17 @@
         <item name="android:padding">28px</item>
         <item name="android:layout_toEndOf">@+id/v_salary_lable</item>
         <item name="android:layout_toRightOf">@+id/v_salary_lable</item>
+    </style>
+
+    <style name="ResultPanel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/btn_gray</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingBottom">25dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingTop">25dp</item>
+        <item name="android:visibility">gone</item>
     </style>
 </resources>

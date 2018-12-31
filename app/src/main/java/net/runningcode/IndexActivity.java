@@ -1,9 +1,11 @@
 package net.runningcode;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -51,8 +54,14 @@ import net.runningcode.utils.DialogUtils;
 import net.runningcode.utils.L;
 import net.runningcode.utils.PermissionUtils;
 import net.runningcode.utils.RecyclerViewOnItemClickListener;
+import net.runningcode.utils.ThreadPool;
 import net.runningcode.view.RecycleViewItemDecoration;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +71,6 @@ import static net.runningcode.net.FastJsonRequest.getNewInstance;
 /**
  * Created by Administrator on 2016/1/15.
  * // TODO: 2017/1/19
- * 1、身份证查询接口失效，改用阿凡达接口
  * 2、增加常用地市工资计算
  * 3、消息通知，弹出提示
  */
@@ -70,7 +78,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         AMapLocationListener, NativeAdListener, RecyclerViewOnItemClickListener {
     private final static int ELEMENT_SIZE = 8;
     private static final int REQUEST_CODE_READ_PHONE = 101;
-    private TextView vWeather, vTemperature, vCity, vDate, vWD, vAir;
+    private TextView vWeather, vTemperature, vCity, vDate, vWD, vAir, vNotice;
     private ImageView vWeatherIcon, vWeatherBg;
     private RelativeLayout vContent;
     private RecyclerView vTable;
@@ -86,13 +94,35 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
     private NativeAdView ad;
+    private MyHandler mHandler;
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<IndexActivity> mActivityReference;
+
+        public MyHandler(IndexActivity activity) {
+            mActivityReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            IndexActivity mActivity = mActivityReference.get();
+
+            if (mActivity != null) {
+                switch (msg.what) {
+                    case 1:
+                        String cityCode = (String) msg.obj;
+                        mActivity.getWeather(cityCode);
+                        break;
+                }
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-//        L.i("设备ID:"+CommonUtil.getDeviceInfo(this));
         initView();
-
+        mHandler = new MyHandler(this);
     }
 
 
@@ -100,6 +130,8 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         toolbar.setNavigationIcon(null);
         vContent = $(R.id.v_content);
 
+
+        vNotice = $(R.id.v_notice);
         vWeather = $(R.id.v_weather_text);
         vWeatherIcon = $(R.id.v_weather_icon);
         vTemperature = $(R.id.v_temperature);
@@ -120,10 +152,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
 
         initData();
         setToolBarColor(R.drawable.gradient_toolbar);
-        setStatusBarColor(R.color.colorPrimaryDark);
 
-        L.i("version===============:" + Build.VERSION.SDK_INT);
-//        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
         try {
             initAD();
         } catch (Exception e) {
@@ -131,6 +160,17 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         }
 //        }
 
+        PermissionUtils.checkAndRequestPermission(this, new PermissionUtils.OnPermissionGrantCallback() {
+            @Override
+            public void onGranted(String[] permissions) {
+
+            }
+
+            @Override
+            public void onDenied(String[] strings) {
+
+            }
+        }, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE});
     }
 
 
@@ -150,20 +190,19 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         map.put(R.drawable.icon_translate, "翻译");
         map.put(R.drawable.icon_num, "数字转大写");
         map.put(R.drawable.icon_salary, "工资计算");
-        map.put(R.drawable.icon_url, "短链接");
+//        map.put(R.drawable.icon_url, "短链接");
         map.put(R.drawable.icon_feedback, "吐槽反馈");
-//        map.put(R.drawable.icon_bank,"吐槽反馈");
 
         list = new ArrayList<>(ELEMENT_SIZE);
         list.add(R.drawable.icon_phone);
-        list.add(R.drawable.icon_id);
-//        list.add(R.drawable.icon_weather);
         list.add(R.drawable.icon_lottery);
         list.add(R.drawable.icon_express);
+        list.add(R.drawable.icon_id);
+//        list.add(R.drawable.icon_weather);
         list.add(R.drawable.icon_translate);
         list.add(R.drawable.icon_num);
         list.add(R.drawable.icon_salary);
-        list.add(R.drawable.icon_url);
+//        list.add(R.drawable.icon_url);
         list.add(R.drawable.icon_feedback);
 //        list.add(R.drawable.icon_bank);
 
@@ -223,9 +262,59 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         mLocationClient.startLocation();
     }
 
-    private void getWeather() {
-        FastJsonRequest request = getNewInstance(URLConstant.API_GET_WEATHER);
-        request.add("cityname", city);
+    private void getCityCode() {
+        ThreadPool.submit(new Runnable() {
+            @Override
+            public void run() {
+
+                Message msg = mHandler.obtainMessage();
+                msg.what = 1;
+                try {
+                    msg.obj = readCityData();
+                    mHandler.sendMessage(msg);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    private String readCityData() throws IOException {
+        BufferedReader reader = null;
+        StringBuilder fileContent = new StringBuilder();
+        String cityCode = "";
+        try {
+            InputStream in = getAssets().open("city.json");
+            InputStreamReader is = new InputStreamReader(in, "UTF-8");
+            reader = new BufferedReader(is);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                fileContent.append(line);
+            }
+            L.i("fileContent:" + fileContent.toString());
+
+            JSONArray jsonArray = JSONObject.parseArray(fileContent.toString());
+            JSONObject json;
+            for (int i = 0, j = jsonArray.size(); i < j; i++) {
+                json = (JSONObject) jsonArray.get(i);
+                if (TextUtils.equals(city, json.getString("city_name"))) {
+                    cityCode = json.getString("city_code");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+
+        return cityCode;
+    }
+
+    private void getWeather(String code) {
+        FastJsonRequest request = getNewInstance(URLConstant.API_GET_WEATHER + code);
 
         CallServer.getRequestInstance().add(this, request, this, true, true);
     }
@@ -253,6 +342,11 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         return R.layout.activity_index;
     }
 
+    @Override
+    protected int getStatusBarColor() {
+        return R.color.colorPrimaryDark;
+    }
+
 
     @Override
     public void onSucceed(int what, Response<JSON> response) {
@@ -262,52 +356,44 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
             DialogUtils.showLongToast(this, "获取天气信息失败！");
             return;
         }
-        switch (what) {
-            case URLConstant.API_GET_WEATHER_WHAT:
-                setWeather(result);
-                break;
-            case URLConstant.API_GET_IP_WHAT:
-                getWeather();
-                break;
-        }
+        setWeather(result);
 
     }
 
     private void setWeather(JSONObject result) {
-        if (result.getIntValue("error_code") != 0) {
-            final String reason = result.getString("reason");
+        if (result.getIntValue("status") != 200) {
+            final String reason = result.getString("message");
 
             vWeather.setText(TextUtils.isEmpty(reason) ? "获取天气信息失败" : reason);
             return;
         }
-        JSONObject data = result.getJSONObject("result");
+        JSONObject data = result.getJSONObject("data");
         if (data == null) {
-            final String reason = result.getString("reason");
+            final String reason = result.getString("message");
 
             vWeather.setText(TextUtils.isEmpty(reason) ? "获取天气信息失败" : reason);
             return;
         }
-        JSONObject realtime = data.getJSONObject("realtime");
-        JSONObject pm25 = data.getJSONObject("pm25").getJSONObject("pm25");
-        if (realtime != null) {
-            JSONObject weather = realtime.getJSONObject("weather");
-            JSONObject wd = realtime.getJSONObject("wind");
-            String wdStr = wd.getString("direct") + " " + wd.getString("power");
+        int pm25 = data.getIntValue("pm25");
+        JSONArray forecast = data.getJSONArray("forecast");
+        if (forecast != null && !forecast.isEmpty()) {
+            //取出第一条数据（今天）
+            JSONObject today = (JSONObject) forecast.get(0);
+            String wdStr = today.getString("fx") + " " + today.getString("fl");
             vWD.setText(wdStr);
             final String du = getString(R.string.du);
-            if (weather != null) {
-                final String text = weather.getString("temperature") + du + "c";
-                final String weatherString = weather.getString("info");
-                vTemperature.setText(text);
-                vWeather.setText(weatherString);
-                int drawble = CommonUtil.getDrawbleByWeather(weatherString);
-                vWeatherIcon.setImageResource(drawble);
-                vWeatherBg.setImageResource(CommonUtil.getBgDrawbleByWeather(weatherString));
-            }
 
+            final String text = data.getString("wendu") + du + "c";
+            final String weatherString = today.getString("type");
+            vTemperature.setText(text);
+            vWeather.setText(weatherString);
+            int drawble = CommonUtil.getDrawbleByWeather(weatherString);
+            vWeatherIcon.setImageResource(drawble);
+            vWeatherBg.setImageResource(CommonUtil.getBgDrawbleByWeather(weatherString));
+            vNotice.setText(today.getString("notice"));
         }
 
-        String text = "空气" + pm25.getString("quality") + "(" + pm25.getString("pm25") + ")";
+        String text = "空气" + data.getString("quality") + "(" + pm25 + ")";
         vAir.setText(text);
     }
 
@@ -339,7 +425,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
                 String fullname = amapLocation.getCity();
                 city = amapLocation.getCity().substring(0, fullname.length() - 1);
                 vCity.setText(city);//城市信息
-                getWeather();
+                getCityCode();
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 L.e("location Error, ErrCode:"

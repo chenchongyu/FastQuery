@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,25 +12,25 @@
         android:gravity="center_vertical"
         >
         <TextView
-            android:layout_width="154px"
+            android:layout_width="77dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/v_time"
-            android:text="2016-03-30 12:24:12"
-            android:textSize="24px"
+            android:textSize="12dp"
+            tools:text="2016-03-30 12:24:12"
             />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="18px"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="9dp"
             android:orientation="vertical">
             <View
                 android:id="@+id/v_line_up"
-                android:layout_width="3px"
-                android:layout_height="52px"
+                android:layout_width="2dp"
+                android:layout_height="26dp"
                 android:background="@color/bg_gray_dark"/>
             <ImageView
                 android:id="@+id/v_type"
@@ -37,22 +38,22 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_time"/>
             <View android:id="@+id/v_line_down"
-                android:layout_width="3px"
-                android:layout_height="52px"
+                android:layout_width="2dp"
+                android:layout_height="26dp"
                 android:background="@color/bg_gray_dark"/>
         </LinearLayout>
         <TextView
             android:id="@+id/v_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="18px"
-            android:text="到北京了"
-            android:textSize="26px"
+            android:paddingRight="9dp"
+            android:textSize="13sp"
+            tools:text="到北京了"
             />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3px"
+        android:layout_height="2dp"
         android:background="@color/bg_gray"/>
 </LinearLayout>

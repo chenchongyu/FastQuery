@@ -17,14 +17,13 @@ import net.runningcode.net.HttpListener;
 import net.runningcode.utils.DialogUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/4/6.
  */
 
-public class ShortUrlActivity extends BasicActivity implements HttpListener{
+public class ShortUrlActivity extends BasicActivity implements HttpListener {
     @BindView(R.id.v_url)
     EditText mVUrl;
     @BindView(R.id.v_gen)
@@ -35,7 +34,8 @@ public class ShortUrlActivity extends BasicActivity implements HttpListener{
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        ButterKnife.bind(this);
+        initToolbar(R.drawable.icon_url);
+        setTitle("短链接");
     }
 
     @Override
@@ -43,21 +43,32 @@ public class ShortUrlActivity extends BasicActivity implements HttpListener{
         return R.layout.activity_short_url;
     }
 
+    @Override
+    protected int getStatusBarColor() {
+        return R.color.item_blue;
+    }
+
+    protected void setupWindowAnimations() {
+//        interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in);
+        setupEnterAnimations(R.drawable.gradient_toolbar);
+        setupExitAnimations();
+    }
+
     @OnClick(R.id.v_gen)
     public void onViewClicked() {
         String url = mVUrl.getText().toString();
-        if (TextUtils.isEmpty(url)){
-            DialogUtils.showShortToast(this,"不填网址你生成个毛线？");
+        if (TextUtils.isEmpty(url)) {
+            DialogUtils.showShortToast(this, "不填网址你生成个毛线？");
             return;
         }
-        if (!url.startsWith("http://")){
-            url = "http://"+url;
+        if (!url.startsWith("http://")) {
+            url = "http://" + url;
         }
         FastJsonRequest request = new FastJsonRequest(URLConstant.API_GET_SHORT_URL);
-        request.add("url",url);
-        request.add("type","1");
+        request.add("url", url);
+        request.add("type", "1");
 
-        CallServer.getRequestInstance().add(this,request,this,true,true);
+        CallServer.getRequestInstance().add(this, request, this, true, true);
     }
 
     @Override

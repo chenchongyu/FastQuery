@@ -1,112 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical" >
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="15dp"
+              android:background="#fff"
+              android:orientation="vertical">
 
-    <RelativeLayout android:id="@+id/reveal_root"
+    <RelativeLayout
+        android:id="@+id/reveal_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="45px"
-        android:orientation="horizontal">
-        <ImageView android:id="@+id/v_scan"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/v_scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="58px"
+            android:layout_marginTop="10dp"
             android:src="@drawable/icon_scan2"
             />
-        <EditText android:id="@+id/v_no"
+
+        <net.runningcode.view.SearchView
+            android:id="@+id/v_searchview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="24px"
-            android:hint="请输入快递单号"
-            android:gravity="center_vertical"
-            android:textColor="@color/colorPrimaryGreen"
-            android:textSize="28px"
-            android:background="@null"
-            android:drawablePadding="3dp"
-            android:textCursorDrawable="@null"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="11dp"
             android:layout_toRightOf="@+id/v_scan"
-            android:layout_toLeftOf="@+id/v_query"
-            android:layout_marginLeft="22px"
-            android:inputType="textAutoComplete"
-            android:imeOptions="actionSearch"
+            app:hint="请输入快递单号"
+            app:input_type="number"
             />
-        <ImageView android:id="@+id/v_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="24px"
-            android:src="@drawable/icon_clear"
-            android:layout_toLeftOf="@+id/view"
-            android:visibility="gone"
-            />
-        <View
-            android:id="@+id/view"
-            android:layout_width="1px"
-            android:layout_height="30px"
-            android:layout_marginRight="24px"
-            android:layout_toLeftOf="@+id/v_query"
-            android:background="#cdccd1"
-            android:visibility="gone"/>
 
         <ListView
             android:id="@+id/v_nos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/v_no"
-            android:layout_alignLeft="@id/v_no"
-            android:layout_alignRight="@id/v_query"
+            android:layout_alignLeft="@id/v_searchview"
+            android:layout_alignRight="@id/v_searchview"
+            android:layout_below="@id/v_searchview"
             android:divider="@color/bg_gray_dark"
-            android:dividerHeight="3px"
+            android:dividerHeight="1dp"
             android:visibility="gone"
-            ></ListView>
-
-        <ImageView android:id="@+id/v_query"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginRight="28dp"
-                   android:src="@drawable/icon_query"
-                   android:layout_alignParentTop="true"
-                   android:layout_alignParentRight="true"
-                   android:layout_alignParentEnd="true"
-                   android:layout_marginEnd="28dp"/>
+            />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/v_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="32px"
-        android:paddingTop="34px"
-        android:paddingBottom="34px"
-        android:layout_marginTop="24px"
+        android:layout_marginTop="12dp"
         android:background="#f2f2f2"
+        android:paddingBottom="17dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="17dp"
         android:visibility="gone"
         >
-        <ImageView android:id="@+id/v_logo"
-            android:layout_width="84px"
-            android:layout_height="84px"
-            android:layout_marginRight="40px"/>
-        <TextView android:id="@+id/v_express_name"
+
+        <ImageView
+            android:id="@+id/v_logo"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/v_express_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/v_logo"
             android:textColor="@color/black"
-            android:textSize="36px"
+            android:textSize="18sp"
             />
-        <TextView android:id="@+id/v_express_tel"
+
+        <TextView
+            android:id="@+id/v_express_tel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/v_logo"
             android:layout_below="@id/v_express_name"
-            android:layout_marginTop="26px"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@id/v_logo"
+            android:layout_toRightOf="@id/v_logo"
             android:textColor="@color/colorPrimaryGreen"
-            android:textSize="36px"
-            android:inputType="phone"
-            android:layout_toRightOf="@id/v_logo"/>
+            android:textSize="18sp"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

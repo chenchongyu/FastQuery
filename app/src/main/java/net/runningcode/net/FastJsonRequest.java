@@ -41,18 +41,17 @@ import java.util.Map;
  */
 public class FastJsonRequest extends RestRequest<JSON> {
     public int what;
+
     public FastJsonRequest(String url) {
         super(url);
-        what = URLConstant.getWhat(url);
+        Integer what = URLConstant.getWhat(url);
+        this.what = what == null ? 0 : what;
 //        addHeader("apikey", Constants.BAIDU_API_KEY);
     }
 
-    public static FastJsonRequest getNewInstance(String url){
-        FastJsonRequest fastJsonRequest = new FastJsonRequest(url);
-//        fastJsonRequest.addHeader("apikey", Constants.BAIDU_API_KEY);
-//        fastJsonRequest.add("key",Constants.AVARDA_KEY);
+    public static FastJsonRequest getNewInstance(String url) {
 
-        return fastJsonRequest;
+        return new FastJsonRequest(url);
     }
 
     public FastJsonRequest(String url, RequestMethod requestMethod) {
@@ -63,15 +62,15 @@ public class FastJsonRequest extends RestRequest<JSON> {
     @Override
     public JSON parseResponse(String url, Headers responseHeaders, byte[] responseBody) {
         String result = StringRequest.parseResponseString(url, responseHeaders, responseBody);
-        L.i("result:"+result);
+        L.i("result:" + result);
         JSON jsonObject = null;
         if (!TextUtils.isEmpty(result) && !"[]".equals(result)) {
-            if (result.startsWith("[{")){
+            if (result.startsWith("[{")) {
                 jsonObject = JSONArray.parseArray(result);
-            }else{
+            } else {
                 try {
                     jsonObject = JSON.parseObject(result);
-                }catch (Exception e){
+                } catch (Exception e) {
                     Map<String, Object> map = new HashMap<String, Object>();
                     map.put("error_code", -1);
                     map.put("url", url());
