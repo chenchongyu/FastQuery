@@ -263,8 +263,8 @@ public class ExpressActivity extends BasicActivity implements View.OnClickListen
             vExpressTel.setText(company.getString("tel"));
             list.clear();
             list.addAll(data.getJSONObject("info").getJSONArray("context"));
-            adapter.notifyItemRangeChanged(0, list.size());
-//            adapter.notifyDataSetChanged();
+//            adapter.notifyItemRangeChanged(0, list.size());
+            adapter.notifyDataSetChanged();
             L.i("logo地址：" + company.getJSONObject("icon").getString("normal"));
 
             Glide.with(this)

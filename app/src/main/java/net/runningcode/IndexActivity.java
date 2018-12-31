@@ -189,7 +189,7 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
         map.put(R.drawable.icon_express, "快递查询");
         map.put(R.drawable.icon_translate, "翻译");
         map.put(R.drawable.icon_num, "数字转大写");
-        map.put(R.drawable.icon_salary, "工资计算");
+        map.put(R.drawable.icon_salary, "薪资计算");
 //        map.put(R.drawable.icon_url, "短链接");
         map.put(R.drawable.icon_feedback, "吐槽反馈");
 

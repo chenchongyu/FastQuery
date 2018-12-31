@@ -71,6 +71,7 @@
             android:paddingLeft="50dp"
             android:textColor="@color/black"
             android:textSize="20dp"
+            android:visibility="gone"
             tools:text="生肖：牛"
             />
 
@@ -81,7 +82,7 @@
             android:layout_below="@id/v_zodiac"
             android:layout_toRightOf="@id/v_icon"
             android:paddingLeft="15dp"
-            android:paddingTop="15dp"
+            android:paddingTop="5dp"
             android:textColor="@color/black"
             android:textSize="25dp"
             />

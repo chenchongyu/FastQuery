@@ -67,7 +67,7 @@
     <string name="lottery_fc3d">福彩3D</string>
     <string name="please_enter_lottery">请输入彩票号码</string>
     
-    <string name="salary_after_tax">￥%1$.1f</string>
+    <string name="salary_after_tax">税后：￥%1$.1f</string>
     <string name="transition_name">express</string>
     <string name="zip">邮编：%1$s</string>
 </resources>
