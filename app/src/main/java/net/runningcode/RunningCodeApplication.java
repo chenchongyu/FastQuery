@@ -79,7 +79,7 @@ public class RunningCodeApplication extends Application {
         if (TextUtils.isEmpty(channel)) {
             channel = Constants.DEFAULT_CHANNEL;
         }
-        SPUtils.getInstance(null).edit().putString(Constants.KEY_CHANNEL,channel).commit();
+        SPUtils.getInstance(null).edit().putString(Constants.KEY_CHANNEL,channel).apply();
         initDb();
 //        initPush();
         if (shouldInit())

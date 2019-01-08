@@ -27,8 +27,8 @@ public class Constants {
     //测试
 //    public static final String ANWO_PUBLISHER_ID = "2b8dbd92edd74a97b3ba6b0189bef125";
     //mipush appkey
-    public static final String MI_APP_ID = "2882303761517476257";
-    public static final String MI_APP_KEY = "5741747692257";
+    public static final String MI_APP_ID = "2882303761517930138";
+    public static final String MI_APP_KEY = "5771793079138";
 
     //易源接口
     public static final String YY_APP_ID="20714";

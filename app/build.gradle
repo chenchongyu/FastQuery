@@ -13,7 +13,7 @@ android {
         versionCode 7
         versionName "1.2.5"
         flavorDimensions "6"
-        manifestPlaceholders = [ CHANNEL:"default" ]
+        manifestPlaceholders = [ CHANNEL:"default" , PKG_NAME:"net.runningcode.new"]
         ndk {
 //            abiFilters "armeabi"
         }
@@ -107,7 +107,7 @@ android{
 //            }
 //        }
         variant.outputs.all {
-            outputFileName = "FastQuery_${defaultConfig.versionName}_"+new Date()+"_${variant.productFlavors[0].name}.apk"
+            outputFileName = "FastQuery_${defaultConfig.versionName}_"+releaseTime()+"_${variant.productFlavors[0].name}.apk"
         }
 
     }

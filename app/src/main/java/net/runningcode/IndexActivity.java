@@ -65,6 +65,9 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.READ_PHONE_STATE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static net.runningcode.net.FastJsonRequest.getNewInstance;
 
 
@@ -213,13 +216,14 @@ public class IndexActivity extends BasicActivity implements View.OnClickListener
 
     private void initPosition() {
         // 先判断是否有权限。
-        if (PermissionUtils.hasPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+        if (PermissionUtils.hasPermission(this,
+                ACCESS_COARSE_LOCATION, READ_PHONE_STATE, WRITE_EXTERNAL_STORAGE)) {
             // 有权限，直接do anything.
             locatePos();
         } else {
             // 申请权限。
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    new String[]{ACCESS_COARSE_LOCATION, READ_PHONE_STATE, WRITE_EXTERNAL_STORAGE},
                     REQUEST_CODE_READ_PHONE);
         }
 
