@@ -115,7 +115,7 @@ public class SalaryUtil {
      * @return
      */
     public static double getTax(double money) {
-        if (money < 3000) {
+        if (money <= 3000) {
             return money * 0.03;
         } else if (money <= 12000) {
             return money * 0.1 - 210;

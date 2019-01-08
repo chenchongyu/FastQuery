@@ -7,10 +7,10 @@ android {
     buildToolsVersion '26.0.2'
 
     defaultConfig {
-        applicationId "net.runningcode"
+        applicationId "net.runningcode.new"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 6
+        versionCode 7
         versionName "1.2.5"
         flavorDimensions "6"
         manifestPlaceholders = [ CHANNEL:"default" ]
@@ -107,7 +107,7 @@ android{
 //            }
 //        }
         variant.outputs.all {
-            outputFileName = "FastQuery${defaultConfig.versionName}_new Data()_${variant.productFlavors[0].name}.apk"
+            outputFileName = "FastQuery_${defaultConfig.versionName}_"+new Date()+"_${variant.productFlavors[0].name}.apk"
         }
 
     }
