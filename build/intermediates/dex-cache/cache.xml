@@ -183,13 +183,13 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/didi/StudioProjects/FastQuery/app/libs/MiPush_SDK_Client_2_2_18.jar"
+        jar="/Users/didi/StudioProjects/FastQuery/app/libs/MiPush_SDK_Client_3_6_12.jar"
         jumboMode="false"
         min-sdk-version="19"
         optimize="true"
         revision="26.0.2"
-        sha1="4248cdd58eada843ff5ee443891bbb959aebe2ae">
-        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/xiaomi/release/5.jar" />
+        sha1="53f8dbe3475f83482b492a3089a45524e7b5fbe0">
+        <dex dex="/Users/didi/StudioProjects/FastQuery/app/build/intermediates/transforms/preDex/QQ/release/26.jar" />
     </item>
     <item
         is-multidex="false"

@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
@@ -84,13 +85,16 @@ public abstract class BasicActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setupWindowAnimations() {
-        L.i("setupWindowAnimations");
-        Slide slideTransition = new Slide();
-        slideTransition.setSlideEdge(Gravity.LEFT);
-        slideTransition.setDuration(500);
-        getWindow().setReenterTransition(slideTransition);
-        getWindow().setExitTransition(slideTransition);
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @NonNull
+    private Slide getSlideIn() {
+        Slide slideTransition = new Slide();
+        slideTransition.setSlideEdge(Gravity.START);
+        slideTransition.setDuration(500);
+        return slideTransition;
     }
 
     public void baseInitActionBar() {
@@ -189,9 +193,8 @@ public abstract class BasicActivity extends AppCompatActivity {
                 @Override
                 public void onTransitionStart(Transition transition) {
                     shareTarget.setAlpha(0.6F);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        transition.removeListener(this);
-                    }
+                    transition.removeListener(this);
+
 //                animateButtonsOut();
                     AnimationFactory.animateRevealHide(toolbar);
                 }
@@ -308,21 +311,13 @@ public abstract class BasicActivity extends AppCompatActivity {
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
-//		final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, true);
-//		ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
-//		startActivity(intent, transitionActivityOptions.toBundle());
     }
 
     public void startActivity(Intent intent, View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-
-            final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, false,
-                    new Pair<>(view, getString(R.string.transition_name)));
+        final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, false,
+                new Pair<>(view, getString(R.string.transition_name)));
 //		final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, true);
-            ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
-            startActivity(intent, transitionActivityOptions.toBundle());
-        } else {
-            startActivity(intent);
-        }
+        ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
+        startActivity(intent, transitionActivityOptions.toBundle());
     }
 }
