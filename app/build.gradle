@@ -3,9 +3,9 @@ apply plugin: 'realm-android'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
+
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
-
     defaultConfig {
         applicationId "net.runningcode.new"
         minSdkVersion 19
@@ -13,7 +13,7 @@ android {
         versionCode 7
         versionName "1.2.5"
         flavorDimensions "6"
-        manifestPlaceholders = [ CHANNEL:"default" , PKG_NAME:"net.runningcode.new"]
+        manifestPlaceholders = [CHANNEL: "default", PKG_NAME: "net.runningcode.new"]
         ndk {
 //            abiFilters "armeabi"
         }
@@ -32,29 +32,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     productFlavors {
 //        xiaomi {manifestPlaceholders = [ CHANNEL:"xiaomi"]}
         anzhi {}
         xiaomi {}
         wandoujia {}
         baidu {}
-        QQ{}
+        QQ {}
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [CHANNEL: name]
         }
     }
-
     sourceSets {
         main {
             java.srcDirs = ['src/main/java']//,'src/main/java-gen'
         }
     }
-
 //    dexOptions {
 //        preDexLibraries = false
 //    }
-
 }
 
 def releaseTime() {
@@ -67,7 +63,6 @@ configurations.all {
     }
 }
 dependencies {
-
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.yolanda.nohttp:nohttp:1.0.0'
     compile 'com.android.support:recyclerview-v7:23.2.1'
@@ -77,12 +72,10 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.1.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
-//    compile 'io.card:android-sdk:5.4.0' //信用卡查询
-//    compile project(':PushSDK')
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //    compile 'io.card:android-sdk:5.4.0' //信用卡查询
+    //    compile project(':PushSDK')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-
 }
 
 android{
