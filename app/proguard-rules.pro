@@ -17,85 +17,85 @@
 #}
 
 #因为使用了360加固   故先不混淆了   这样在代码出问题的时候方便查找问题
-#-ignorewarnings
-#-dontwarn org.apache.**
-#-dontwarn android.**
-#-dontwarn android.support.v4.**
-#-dontwarn com.alibaba.fastjson.**
-#-dontwarn java.nio.file.Files
-#-dontwarn java.nio.file.Path
-#-dontwarn java.nio.file.OpenOption
-#
-#-keep class com.amap.api.location.**{*;}
-#-keep class com.amap.api.fence.**{*;}
-#-keep class com.autonavi.aps.amapapi.model.**{*;}
-#
-#-keep class io.realm.annotations.RealmModule
-#-keep @io.realm.annotations.RealmModule class *
-#-keep class io.realm.internal.Keep
-#-keep @io.realm.internal.Keep class * { *; }
-#-dontwarn javax.**
-#-dontwarn io.realm.**
-###安沃
-#-dontwarn com.immersion.hapticmedia.**
-#-dontwarn com.sixth.adwoad.**
-#-keep class com.sixth.adwoad.** {*;}
-#-keepclasseswithmembernames class * {
-#native <methods>;
-#}
-###mipush
-#-keep public class * extends android.content.BroadcastReceiver
-#-keep class net.runningcode.MiPushMessageReceiver {*;}
+-ignorewarnings
+-dontwarn org.apache.**
+-dontwarn android.**
+-dontwarn android.support.v4.**
+-dontwarn com.alibaba.fastjson.**
+-dontwarn java.nio.file.Files
+-dontwarn java.nio.file.Path
+-dontwarn java.nio.file.OpenOption
+
+-keep class com.amap.api.location.**{*;}
+-keep class com.amap.api.fence.**{*;}
+-keep class com.autonavi.aps.amapapi.model.**{*;}
+
+-keep class io.realm.annotations.RealmModule
+-keep @io.realm.annotations.RealmModule class *
+-keep class io.realm.internal.Keep
+-keep @io.realm.internal.Keep class * { *; }
+-dontwarn javax.**
+-dontwarn io.realm.**
+##安沃
+-dontwarn com.immersion.hapticmedia.**
+-dontwarn com.sixth.adwoad.**
+-keep class com.sixth.adwoad.** {*;}
+-keepclasseswithmembernames class * {
+native <methods>;
+}
+##mipush
+-keep public class * extends android.content.BroadcastReceiver
+-keep class net.runningcode.MiPushMessageReceiver {*;}
 
 #保留行号的等信息方便崩溃之后还原日志
-#-renamesourcefileattribute SourceFile
-#-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
 
-##友盟
-#-keepclassmembers class * {
-#   public <init> (org.json.JSONObject);
-#}
-#-keepclassmembers enum * {
-#    public static **[] values();
-#    public static ** valueOf(java.lang.String);
-#}
-#
-#-keep public class net.runningcode.R$*{
-#    public static final int *;
-#}
-#-dontwarn com.ut.mini.**
-#-dontwarn okio.**
-#-dontwarn com.xiaomi.**
-#-dontwarn com.squareup.wire.**
-#-dontwarn android.support.v4.**
-#
-#-keepattributes *Annotation*
-#
-#-keep class android.support.v4.** { *; }
-#-keep interface android.support.v4.app.** { *; }
-#
-#-keep class okio.** {*;}
-#-keep class com.squareup.wire.** {*;}
-#
-#-keep class com.umeng.message.protobuffer.* {
-#         public <fields>;
-#         public <methods>;
-#}
-#
-#-keep class com.umeng.message.* {
-#         public <fields>;
-#         public <methods>;
-#}
-#
-#-keep class org.android.agoo.impl.* {
-#         public <fields>;
-#         public <methods>;
-#}
-#
-#-keep class org.android.agoo.service.* {*;}
-#
-#-keep class org.android.spdy.**{*;}
+#友盟
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep public class net.runningcode.R$*{
+    public static final int *;
+}
+-dontwarn com.ut.mini.**
+-dontwarn okio.**
+-dontwarn com.xiaomi.**
+-dontwarn com.squareup.wire.**
+-dontwarn android.support.v4.**
+
+-keepattributes *Annotation*
+
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.app.** { *; }
+
+-keep class okio.** {*;}
+-keep class com.squareup.wire.** {*;}
+
+-keep class com.umeng.message.protobuffer.* {
+         public <fields>;
+         public <methods>;
+}
+
+-keep class com.umeng.message.* {
+         public <fields>;
+         public <methods>;
+}
+
+-keep class org.android.agoo.impl.* {
+         public <fields>;
+         public <methods>;
+}
+
+-keep class org.android.agoo.service.* {*;}
+
+-keep class org.android.spdy.**{*;}
 #重用同一个mapping
 #-applymapping /Users/drome/Developer/mi-cashier-android/cashierbeta/build/outputs/mapping/release/mapping.txt
--applymapping /Users/didi/StudioProjects/FastQuery/app/build/outputs/apk/xiaomi/mapping/mapping.txt
+#-applymapping /Users/didi/StudioProjects/FastQuery/app/build/outputs/apk/xiaomi/mapping/mapping.txt
 

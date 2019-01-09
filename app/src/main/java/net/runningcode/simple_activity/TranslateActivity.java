@@ -2,7 +2,6 @@ package net.runningcode.simple_activity;
 
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -33,11 +32,6 @@ import net.runningcode.utils.L;
 import net.runningcode.utils.StringUtils;
 import net.runningcode.view.SearchView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.Random;
 
@@ -115,103 +109,25 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         initToolbar(R.drawable.icon_translate);
         setTitle("翻译");
 
-        initialEnv();
         initialTts();
-    }
-
-    private void initialEnv() {
-        if (mSampleDirPath == null) {
-            String sdcardPath = Environment.getExternalStorageDirectory().toString();
-            mSampleDirPath = sdcardPath + "/" + SAMPLE_DIR_NAME;
-        }
-        makeDir(mSampleDirPath);
-        copyFromAssetsToSdcard(false, SPEECH_FEMALE_MODEL_NAME, mSampleDirPath + "/" + SPEECH_FEMALE_MODEL_NAME);
-//        copyFromAssetsToSdcard(false, SPEECH_MALE_MODEL_NAME, mSampleDirPath + "/" + SPEECH_MALE_MODEL_NAME);
-        copyFromAssetsToSdcard(false, TEXT_MODEL_NAME, mSampleDirPath + "/" + TEXT_MODEL_NAME);
-        copyFromAssetsToSdcard(false, LICENSE_FILE_NAME, mSampleDirPath + "/" + LICENSE_FILE_NAME);
-        copyFromAssetsToSdcard(false, "english/" + ENGLISH_SPEECH_FEMALE_MODEL_NAME, mSampleDirPath + "/"
-                + ENGLISH_SPEECH_FEMALE_MODEL_NAME);
-        copyFromAssetsToSdcard(false, "english/" + ENGLISH_SPEECH_MALE_MODEL_NAME, mSampleDirPath + "/"
-                + ENGLISH_SPEECH_MALE_MODEL_NAME);
-        copyFromAssetsToSdcard(false, "english/" + ENGLISH_TEXT_MODEL_NAME, mSampleDirPath + "/"
-                + ENGLISH_TEXT_MODEL_NAME);
-    }
-
-    private void makeDir(String dirPath) {
-        File file = new File(dirPath);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-    }
-
-    /**
-     * 将sample工程需要的资源文件拷贝到SD卡中使用（授权文件为临时授权文件，请注册正式授权）
-     *
-     * @param isCover 是否覆盖已存在的目标文件
-     * @param source
-     * @param dest
-     */
-    private void copyFromAssetsToSdcard(boolean isCover, String source, String dest) {
-        File file = new File(dest);
-        if (isCover || (!isCover && !file.exists())) {
-            InputStream is = null;
-            FileOutputStream fos = null;
-            try {
-                is = getResources().getAssets().open(source);
-                String path = dest;
-                fos = new FileOutputStream(path);
-                byte[] buffer = new byte[1024];
-                int size = 0;
-                while ((size = is.read(buffer, 0, 1024)) >= 0) {
-                    fos.write(buffer, 0, size);
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                try {
-                    if (is != null) {
-                        is.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     private void initialTts() {
         this.mSpeechSynthesizer = SpeechSynthesizer.getInstance();
         this.mSpeechSynthesizer.setContext(this);
         this.mSpeechSynthesizer.setSpeechSynthesizerListener(this);
-        // 文本模型文件路径 (离线引擎使用)
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_TEXT_MODEL_FILE, mSampleDirPath + "/"
-                + TEXT_MODEL_NAME);
-        // 声学模型文件路径 (离线引擎使用)
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_SPEECH_MODEL_FILE, mSampleDirPath + "/"
-                + SPEECH_FEMALE_MODEL_NAME);
-
+        mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_AUDIO_ENCODE, SpeechSynthesizer.AUDIO_ENCODE_PCM);
+        mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_AUDIO_RATE, SpeechSynthesizer.AUDIO_BITRATE_PCM);
         this.mSpeechSynthesizer.setAppId(Constants.BAIDU_TTS_APP_ID);
         this.mSpeechSynthesizer.setApiKey(Constants.BAIDU_TTS_API_KEY, Constants.BAIDU_TTS_SECRET_KEY);
         // 发音人（在线引擎），可用参数为0,1,2,3。。。（服务器端会动态增加，各值含义参考文档，以文档说明为准。0--普通女声，1--普通男声，2--特别男声，3--情感男声。。。）
         this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEAKER, "3");
         // 设置Mix模式的合成策略
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_MIX_MODE, SpeechSynthesizer.MIX_MODE_DEFAULT);
+//        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_MIX_MODE, SpeechSynthesizer.MIX_MODE_DEFAULT);
         //设 置 播 放 器 的 音 频 流 类 型 ， 默 认 值 为 AudioManager.STREAM_MUSIC,AudioManager.STREAM_MUSIC 指的是用与音乐播放的音频流。
         this.mSpeechSynthesizer.setAudioStreamType(AudioManager.STREAM_SYSTEM);
         // 初始化tts
-        mSpeechSynthesizer.initTts(TtsMode.MIX);
-        // 加载离线英文资源（提供离线英文合成功能）
-        mSpeechSynthesizer.loadEnglishModel(mSampleDirPath + "/" + ENGLISH_TEXT_MODEL_NAME, mSampleDirPath
-                + "/" + ENGLISH_SPEECH_FEMALE_MODEL_NAME);
+        mSpeechSynthesizer.initTts(TtsMode.ONLINE);
 
     }
 
@@ -238,7 +154,7 @@ public class TranslateActivity extends BasicActivity implements View.OnClickList
         L.i("开始播放：" + text);
         int result = this.mSpeechSynthesizer.speak(text);
         if (result < 0) {
-            toPrint("error,please look up error code in doc or URL:http://yuyin.baidu.com/docs/tts/122 ");
+            DialogUtils.showShortToast("error,please look up error code in doc or URL:http://yuyin.baidu.com/docs/tts/122 ");
         }
     }
 
